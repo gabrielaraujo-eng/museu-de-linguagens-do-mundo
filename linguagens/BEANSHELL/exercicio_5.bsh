@@ -1,1 +1,5 @@
-void run() { }
+void run() {
+  print("Rotina executada");
+}
+
+run();

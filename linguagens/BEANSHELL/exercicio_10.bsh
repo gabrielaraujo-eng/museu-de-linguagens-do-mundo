@@ -1,1 +1,8 @@
-show();
+int first = 8;
+int second = 5;
+
+if (first >= second) {
+  print(first);
+} else {
+  print(second);
+}

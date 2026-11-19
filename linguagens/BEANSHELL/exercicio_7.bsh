@@ -1,1 +1,10 @@
-if (obj == null) return;
+void inspect(Object obj) {
+  if (obj == null) {
+    print("Objeto nulo");
+  } else {
+    print(obj);
+  }
+}
+
+inspect(null);
+inspect("BeanShell");
