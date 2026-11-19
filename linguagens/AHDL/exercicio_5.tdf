@@ -1,3 +1,10 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_5
+(
+  a, b : INPUT;
+  y : OUTPUT;
+)
+VARIABLE
+  n1, n2 : NODE;
+n1 = a;
+n2 = b;
+y = n1 AND n2;

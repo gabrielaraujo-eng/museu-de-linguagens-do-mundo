@@ -1,3 +1,12 @@
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exemplo_3
+(
+  d : INPUT;
+  q : OUTPUT;
+)
 IF d == VCC THEN
-  q = d;
+  q = VCC;
+ELSE
+  q = GND;
 END IF;

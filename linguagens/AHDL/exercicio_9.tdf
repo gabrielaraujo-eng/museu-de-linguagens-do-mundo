@@ -1,3 +1,6 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_9
+(
+  a, b : INPUT;
+  res : OUTPUT;
+)
+res = a XOR b;

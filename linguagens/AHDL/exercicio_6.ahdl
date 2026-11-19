@@ -1,1 +1,13 @@
-cnt[3..0] : COUNTER;
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exercicio_6
+(
+  enable, clock : INPUT;
+  count[3..0] : OUTPUT;
+)
+VARIABLE
+  cnt[3..0] : NODE;
+-- Exercício de barramento; uma implementação com COUNTER/DFF requer
+-- a biblioteca de primitivas disponível no projeto Quartus.
+cnt[] = count[];
+count[] = cnt[];

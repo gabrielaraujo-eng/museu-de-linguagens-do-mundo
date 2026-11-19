@@ -1,3 +1,8 @@
--- Olá Mundo em AHDL
-ENTITY hello IS
-END hello;
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exemplo_1
+(
+  status : OUTPUT;
+)
+status = VCC;
+-- AHDL não é uma aplicação: não há saída textual “Olá Mundo”.

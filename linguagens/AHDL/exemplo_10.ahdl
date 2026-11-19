@@ -1,3 +1,26 @@
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exemplo_10
+(
+  clock, reset : INPUT;
+  state_out : OUTPUT;
+)
+VARIABLE
+  state : MACHINE WITH STATES (s0, s1);
+state_out = state;
 CASE state IS
-  WHEN 0 => next = 1;
+  WHEN s0 =>
+    IF reset == VCC THEN
+      state = s0;
+    ELSE
+      state = s1;
+    END IF;
+  WHEN s1 =>
+    IF reset == VCC THEN
+      state = s0;
+    ELSE
+      state = s1;
+    END IF;
+  WHEN OTHERS =>
+    state = s0;
 END CASE;

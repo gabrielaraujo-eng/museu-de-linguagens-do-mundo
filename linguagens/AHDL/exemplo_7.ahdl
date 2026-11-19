@@ -1,1 +1,9 @@
-ASSERT (val > 5) REPORT "Erro de valor";
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exemplo_7
+(
+  val[3..0] : INPUT;
+  ok : OUTPUT;
+)
+ok = val[] > 5;
+ASSERT (val[] <= 15) REPORT "Barramento val dentro da faixa" SEVERITY INFO;

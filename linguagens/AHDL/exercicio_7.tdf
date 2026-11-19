@@ -1,3 +1,12 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_7
+(
+  d : INPUT;
+  q : OUTPUT;
+)
+VARIABLE
+  default_node : NODE;
+DEFAULTS
+  default_node = GND;
+END DEFAULTS;
+default_node = d;
+q = default_node;

@@ -1,1 +1,9 @@
-VARIABLE x : NODE;
+SUBDESIGN exemplo_2
+(
+  d[3..0] : INPUT;
+  q[3..0] : OUTPUT;
+)
+VARIABLE
+  q_node[3..0] : NODE;
+q_node[] = d[];
+q[] = q_node[];

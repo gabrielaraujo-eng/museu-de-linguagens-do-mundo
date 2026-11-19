@@ -1,1 +1,9 @@
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exercicio_8
+(
+  a[3..0] : INPUT;
+  y : OUTPUT;
+)
 CONSTANT max = 10;
+y = a[] < max;

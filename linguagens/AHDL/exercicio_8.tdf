@@ -1,3 +1,7 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_8
+(
+  a[3..0] : INPUT;
+  y : OUTPUT;
+)
+CONSTANT max = 10;
+y = a[] < max;

@@ -1,5 +1,10 @@
-IF x == VCC THEN
-  y = GND;
+SUBDESIGN exemplo_3
+(
+  d : INPUT;
+  q : OUTPUT;
+)
+IF d == VCC THEN
+  q = VCC;
 ELSE
-  y = VCC;
+  q = GND;
 END IF;

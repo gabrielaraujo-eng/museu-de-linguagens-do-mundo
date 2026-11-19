@@ -1,3 +1,6 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_3
+(
+  a, b : INPUT;
+  c : OUTPUT;
+)
+c = a AND b;

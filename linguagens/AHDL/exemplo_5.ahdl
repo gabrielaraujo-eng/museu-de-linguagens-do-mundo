@@ -1,1 +1,10 @@
-FUNCTION my_func (a, b) RETURNS (c);
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exemplo_5
+(
+  a[3..0], b[3..0] : INPUT;
+  res[3..0] : OUTPUT;
+)
+-- Em vez de um protótipo de função imperativa, este exemplo mostra uma
+-- operação parametrizada sobre barramentos.
+res[] = a[] + b[];

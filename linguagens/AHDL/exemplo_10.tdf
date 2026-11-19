@@ -1,1 +1,24 @@
--- Lógica combinacional
+SUBDESIGN exemplo_10
+(
+  clock, reset : INPUT;
+  state_out : OUTPUT;
+)
+VARIABLE
+  state : MACHINE WITH STATES (s0, s1);
+state_out = state;
+CASE state IS
+  WHEN s0 =>
+    IF reset == VCC THEN
+      state = s0;
+    ELSE
+      state = s1;
+    END IF;
+  WHEN s1 =>
+    IF reset == VCC THEN
+      state = s0;
+    ELSE
+      state = s1;
+    END IF;
+  WHEN OTHERS =>
+    state = s0;
+END CASE;

@@ -1,1 +1,8 @@
-FUNCTION soma (a, b) RETURNS (res);
+SUBDESIGN exemplo_5
+(
+  a[3..0], b[3..0] : INPUT;
+  res[3..0] : OUTPUT;
+)
+-- Em vez de um protótipo de função imperativa, este exemplo mostra uma
+-- operação parametrizada sobre barramentos.
+res[] = a[] + b[];
