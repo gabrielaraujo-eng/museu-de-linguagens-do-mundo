@@ -1,1 +1,9 @@
--- Sintaxe para sort em BASIC
+10 DIM A(3)
+20 A(1)=3: A(2)=1: A(3)=2
+30 FOR I=1 TO 2
+40 FOR J=1 TO 3-I
+50 IF A(J)>A(J+1) THEN SWAP A(J),A(J+1)
+60 NEXT J
+70 NEXT I
+80 PRINT A(1);A(2);A(3)
+90 END

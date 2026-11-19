@@ -1,2 +1,4 @@
-10 PRINT "Olá, Mundo!"
-20 END
+10 A$="LINGUAGEM"
+20 B$=LEFT$(A$,3)
+30 PRINT B$
+40 END

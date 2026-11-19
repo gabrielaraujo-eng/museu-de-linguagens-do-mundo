@@ -1,1 +1,4 @@
--- Sintaxe para list em BASIC
+10 DIM A(3)
+20 A(1)=42
+30 PRINT A(1)
+40 END

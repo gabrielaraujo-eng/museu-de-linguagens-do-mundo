@@ -1,2 +1,4 @@
-10 PRINT "Olá, Mundo!"
-20 END
+10 FOR I=1 TO 5
+20 PRINT I
+30 NEXT I
+40 END

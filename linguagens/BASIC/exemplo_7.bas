@@ -1,1 +1,5 @@
--- Sintaxe para error em BASIC
+10 ON ERROR GOTO 100
+20 ERROR 210
+30 END
+100 PRINT "Erro:"; ERR; " linha:"; ERL
+110 RESUME NEXT

@@ -1,2 +1,3 @@
 10 LET X = 42
 20 LET S$ = "BASIC"
+30 PRINT X, S$

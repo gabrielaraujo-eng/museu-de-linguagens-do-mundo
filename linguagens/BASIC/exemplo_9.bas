@@ -1,1 +1,2 @@
--- Sintaxe para math em BASIC
+10 PRINT SQR(25)
+20 END

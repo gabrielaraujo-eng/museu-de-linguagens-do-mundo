@@ -1,2 +1,4 @@
-10 PRINT "Olá, Mundo!"
-20 END
+10 LET A=12
+20 LET B=30
+30 PRINT A+B
+40 END

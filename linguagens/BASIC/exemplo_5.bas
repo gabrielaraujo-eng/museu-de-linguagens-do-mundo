@@ -1,1 +1,3 @@
 10 DEF FNADD(A, B) = A + B
+20 PRINT FNADD(2, 3)
+30 END
