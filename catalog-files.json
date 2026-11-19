@@ -2231,34 +2231,6 @@
       ],
       "other": []
     },
-    "CALCIT": {
-      "readme": "README.md",
-      "examples": [
-        "exemplo_1.cljs",
-        "exemplo_2.cljs",
-        "exemplo_3.cljs",
-        "exemplo_4.cljs",
-        "exemplo_5.cljs",
-        "exemplo_6.cljs",
-        "exemplo_7.cljs",
-        "exemplo_8.cljs",
-        "exemplo_9.cljs",
-        "exemplo_10.cljs"
-      ],
-      "exercises": [
-        "exercicio_1.cljs",
-        "exercicio_2.cljs",
-        "exercicio_3.cljs",
-        "exercicio_4.cljs",
-        "exercicio_5.cljs",
-        "exercicio_6.cljs",
-        "exercicio_7.cljs",
-        "exercicio_8.cljs",
-        "exercicio_9.cljs",
-        "exercicio_10.cljs"
-      ],
-      "other": []
-    },
     "CAP_N_PROTO": {
       "readme": "README.md",
       "examples": [
@@ -2851,7 +2823,17 @@
         "exemplo_7.cljs",
         "exemplo_8.cljs",
         "exemplo_9.cljs",
-        "exemplo_10.cljs"
+        "exemplo_10.cljs",
+        "exemplo_11.cljs",
+        "exemplo_12.cljs",
+        "exemplo_13.cljs",
+        "exemplo_14.cljs",
+        "exemplo_15.cljs",
+        "exemplo_16.cljs",
+        "exemplo_17.cljs",
+        "exemplo_18.cljs",
+        "exemplo_19.cljs",
+        "exemplo_20.cljs"
       ],
       "exercises": [
         "exercicio_1.cljs",
@@ -2863,7 +2845,17 @@
         "exercicio_7.cljs",
         "exercicio_8.cljs",
         "exercicio_9.cljs",
-        "exercicio_10.cljs"
+        "exercicio_10.cljs",
+        "exercicio_11.cljs",
+        "exercicio_12.cljs",
+        "exercicio_13.cljs",
+        "exercicio_14.cljs",
+        "exercicio_15.cljs",
+        "exercicio_16.cljs",
+        "exercicio_17.cljs",
+        "exercicio_18.cljs",
+        "exercicio_19.cljs",
+        "exercicio_20.cljs"
       ],
       "other": []
     },
