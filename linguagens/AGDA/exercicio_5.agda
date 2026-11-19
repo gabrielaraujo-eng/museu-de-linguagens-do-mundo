@@ -1,3 +1,5 @@
-module exemplo_1 where
-open import IO
-main = run (putStrLn "Olá, Mundo!")
+module exercicio_5 where
+
+-- Exercício: complete uma função polimórfica sem inspecionar o valor.
+identity : {A : Set} → A → A
+identity x = x
