@@ -1,1 +1,1 @@
-// Sintaxe para if em BEFUNGE
+0_0.@

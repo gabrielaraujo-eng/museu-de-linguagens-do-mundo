@@ -1,1 +1,1 @@
-// Sintaxe para error em BEFUNGE
+&.@

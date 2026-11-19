@@ -1,1 +1,1 @@
-// Sintaxe para string em BEFUNGE
+"alO",,,@

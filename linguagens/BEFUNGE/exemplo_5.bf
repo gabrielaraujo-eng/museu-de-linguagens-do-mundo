@@ -1,1 +1,1 @@
-// Sintaxe para func em BEFUNGE
+55:.@

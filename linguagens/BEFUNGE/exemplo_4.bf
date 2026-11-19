@@ -1,1 +1,4 @@
-// Sintaxe para loop em BEFUNGE
+>3v
+  >:.1-:v
+  |     <
+  >.@

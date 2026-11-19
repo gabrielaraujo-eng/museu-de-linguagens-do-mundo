@@ -1,1 +1,1 @@
-// Sintaxe para math em BEFUNGE
+23*.@
