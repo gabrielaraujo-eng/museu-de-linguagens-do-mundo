@@ -1,1 +1,3 @@
--- Sintaxe para string em BATCHFILE
+@echo off
+set "texto=Batch para Windows"
+echo Texto: %texto%
