@@ -1,3 +1,5 @@
 #include "aldor"
-import from TextWriter, String, Character;
-stdout << "Olá, Mundo!" << newline;
+#include "aldorio"
+
+-- Exemplo 1: texto de saida.
+stdout << "Ola, Mundo!" << newline
