@@ -1,1 +1,2 @@
-"Olá, Mundo!" print
+# Mostre uma mensagem se 5 for menor que 10.
+[ 5 10 < ] [ 'Abaixo do limite' . ] [ 'No limite ou acima' . ] ifte

@@ -1,1 +1,2 @@
-"Olá, Mundo!" print
+# Calcule 5 fatorial usando recursão linear.
+5 [ zero ] [ succ ] [ dup pred ] [ * ] linrec .

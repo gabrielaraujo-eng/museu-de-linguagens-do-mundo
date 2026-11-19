@@ -1,1 +1,2 @@
-"Olá, Mundo!" print
+# Ordene o agregado em ordem crescente.
+[ 4 1 3 ] sort .

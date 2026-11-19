@@ -1,1 +1,2 @@
--- Sintaxe para sort em AIT
+# Ordene um agregado de três números.
+[ 3 1 2 ] sort .
