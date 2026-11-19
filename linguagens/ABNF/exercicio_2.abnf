@@ -1,2 +1,3 @@
-; Defina um número de telefone
-phone = 1*DIGIT
+; Exercício: telefone simplificado; não modela separadores, país ou extensão
+digit = %x30-39
+phone = 1*digit

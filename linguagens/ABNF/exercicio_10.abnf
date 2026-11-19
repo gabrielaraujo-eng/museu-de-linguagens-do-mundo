@@ -1,2 +1,8 @@
-; Regra para URI
+; URI simplificada para exercício; não é a gramática completa de RFC 3986
+alpha = %x41-5A / %x61-7A
+digit = %x30-39
+scheme = alpha *(alpha / digit / "+" / "-" / ".")
+hier-part = 1*(%x21-39 / %x3B-5B / %x5D-7E)
+query = *(%x21-7E)
+fragment = *(%x21-7E)
 uri = scheme ":" hier-part [ "?" query ] [ "#" fragment ]

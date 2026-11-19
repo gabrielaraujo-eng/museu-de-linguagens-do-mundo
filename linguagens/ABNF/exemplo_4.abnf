@@ -1,1 +1,3 @@
+; Repetição limitada e grupo
+char = %x20-7E
 loop = 1*10(char)

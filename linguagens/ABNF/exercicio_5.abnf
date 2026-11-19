@@ -1,2 +1,3 @@
 ; Regra recursiva
+element = 1*(%x41-5A / %x61-7A)
 list = element / (element "," list)

@@ -1,1 +1,3 @@
-number = 1*DIGIT
+; Dígitos e intervalo numérico
+digit = %x30-39
+number = 1*digit

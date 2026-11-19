@@ -1,2 +1,3 @@
-; Regra para data YYYY-MM-DD
-date = 4DIGIT "-" 2DIGIT "-" 2DIGIT
+; Forma YYYY-MM-DD; não valida se o calendário é válido
+digit = %x30-39
+date = 4digit "-" 2digit "-" 2digit

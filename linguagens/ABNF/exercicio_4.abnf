@@ -1,2 +1,3 @@
-; Regra para 5 dígitos
-zip = 5DIGIT
+; Regra para exatamente 5 dígitos
+digit = %x30-39
+zip = 5digit

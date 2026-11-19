@@ -1,1 +1,3 @@
-string = 1*ALPHA
+; Caracteres alfabéticos e repetição
+alpha = %x41-5A / %x61-7A
+string = 1*alpha

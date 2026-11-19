@@ -1,2 +1,6 @@
-; Crie uma regra para um endereço de email
+; Exercício: endereço de email simplificado, não RFC 5322 completo
+alpha = %x41-5A / %x61-7A
+digit = %x30-39
+local-part = 1*(alpha / digit / "." / "-" / "_")
+domain = 1*(alpha / digit / "." / "-")
 email = local-part "@" domain
