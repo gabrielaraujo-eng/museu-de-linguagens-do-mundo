@@ -1,6 +1,7 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Olá Mundo" << std::endl;
+    // Exibe uma saudação na saída padrão.
+    std::cout << "Olá, mundo!\n";
     return 0;
 }
