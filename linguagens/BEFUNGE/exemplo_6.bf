@@ -1,1 +1,1 @@
-// Sintaxe para list em BEFUNGE
+"A"45*0p45*0g,@

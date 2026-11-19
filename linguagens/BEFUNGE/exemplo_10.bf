@@ -1,1 +1,1 @@
-// Sintaxe para sort em BEFUNGE
+0123456789.@

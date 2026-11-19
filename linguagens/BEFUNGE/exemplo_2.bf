@@ -1,1 +1,1 @@
-// Sintaxe para vars em BEFUNGE
+88+.@
