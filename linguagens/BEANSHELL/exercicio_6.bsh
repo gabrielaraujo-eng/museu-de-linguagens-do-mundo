@@ -1,1 +1,3 @@
 Map map = new HashMap();
+map.put("linguagem", "BeanShell");
+print(map.get("linguagem"));

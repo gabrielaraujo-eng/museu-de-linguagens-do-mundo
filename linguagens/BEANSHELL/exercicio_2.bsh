@@ -1,1 +1,2 @@
 boolean active = true;
+print(active);

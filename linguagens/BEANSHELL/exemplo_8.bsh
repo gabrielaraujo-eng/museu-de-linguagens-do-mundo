@@ -1,1 +1,2 @@
 String full = "Olá" + " Mundo";
+print(full);

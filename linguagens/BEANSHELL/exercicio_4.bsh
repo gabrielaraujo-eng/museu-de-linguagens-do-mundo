@@ -1,1 +1,6 @@
-while (x > 0) { x--; }
+int x = 3;
+while (x > 0) {
+  print(x);
+  x--;
+}
+print("Fim");

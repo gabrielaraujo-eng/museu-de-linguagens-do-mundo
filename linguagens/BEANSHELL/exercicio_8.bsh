@@ -1,1 +1,2 @@
-s.length();
+String s = "BeanShell";
+print(s.length());

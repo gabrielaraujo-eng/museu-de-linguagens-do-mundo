@@ -1,1 +1,6 @@
-if (active) { }
+boolean active = true;
+if (active) {
+  print("Ativo");
+} else {
+  print("Inativo");
+}
