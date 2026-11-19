@@ -1,4 +1,5 @@
-use debug::PrintTrait;
+// Exercício resolvido: imprima uma mensagem de estudo.
+#[executable]
 fn main() {
-    'Olá, Mundo!'.print();
+    println!("Estou estudando Cairo.");
 }
