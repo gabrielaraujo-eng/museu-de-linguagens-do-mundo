@@ -1,3 +1,6 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_1
+(
+  done : OUTPUT;
+)
+done = VCC;
+-- Exercício: observe que um subdesign descreve hardware, não um “Hello World”.

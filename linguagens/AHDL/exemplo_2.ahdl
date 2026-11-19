@@ -1,2 +1,11 @@
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exemplo_2
+(
+  d[3..0] : INPUT;
+  q[3..0] : OUTPUT;
+)
 VARIABLE
-  q[3..0] : NODE;
+  q_node[3..0] : NODE;
+q_node[] = d[];
+q[] = q_node[];

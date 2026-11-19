@@ -1,3 +1,26 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_10
+(
+  clock, reset : INPUT;
+  active : OUTPUT;
+)
+VARIABLE
+  s : MACHINE WITH STATES (s0, s1);
+CASE s IS
+  WHEN s0 =>
+    active = GND;
+    IF reset == VCC THEN
+      s = s0;
+    ELSE
+      s = s1;
+    END IF;
+  WHEN s1 =>
+    active = VCC;
+    IF reset == VCC THEN
+      s = s0;
+    ELSE
+      s = s1;
+    END IF;
+  WHEN OTHERS =>
+    active = GND;
+    s = s0;
+END CASE;

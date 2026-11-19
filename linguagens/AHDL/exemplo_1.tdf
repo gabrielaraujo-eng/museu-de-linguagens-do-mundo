@@ -1,3 +1,6 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exemplo_1
+(
+  status : OUTPUT;
+)
+status = VCC;
+-- AHDL não é uma aplicação: não há saída textual “Olá Mundo”.

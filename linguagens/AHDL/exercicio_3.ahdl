@@ -1,1 +1,8 @@
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exercicio_3
+(
+  a, b : INPUT;
+  c : OUTPUT;
+)
 c = a AND b;

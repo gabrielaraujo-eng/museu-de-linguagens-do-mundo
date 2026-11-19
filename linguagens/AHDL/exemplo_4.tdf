@@ -1,3 +1,8 @@
-FOR i IN 0 TO 7 GENERATE
-  reg[i].d = data[i];
+SUBDESIGN exemplo_4
+(
+  a[7..0] : INPUT;
+  b[7..0] : OUTPUT;
+)
+FOR (i) IN 0 TO 7 GENERATE
+  b[i] = a[i];
 END GENERATE;

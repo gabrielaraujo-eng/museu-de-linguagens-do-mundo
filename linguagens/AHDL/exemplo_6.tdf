@@ -1,1 +1,10 @@
--- AHDL usa barramentos (bus)
+SUBDESIGN exemplo_6
+(
+  data[7..0] : INPUT;
+  q[7..0] : OUTPUT;
+)
+VARIABLE
+  q_node[7..0] : NODE;
+q_node[] = data[];
+q[] = q_node[];
+-- Primitivas como DFF dependem da biblioteca e da versão do Quartus.

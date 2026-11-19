@@ -1,1 +1,14 @@
-DEFAULTS d = GND; END DEFAULTS;
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exercicio_7
+(
+  d : INPUT;
+  q : OUTPUT;
+)
+VARIABLE
+  default_node : NODE;
+DEFAULTS
+  default_node = GND;
+END DEFAULTS;
+default_node = d;
+q = default_node;

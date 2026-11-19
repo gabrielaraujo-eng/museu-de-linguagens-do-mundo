@@ -1,1 +1,7 @@
--- Verificação via ASSERT
+SUBDESIGN exemplo_7
+(
+  val[3..0] : INPUT;
+  ok : OUTPUT;
+)
+ok = val[] > 5;
+ASSERT (val[] <= 15) REPORT "Barramento val dentro da faixa" SEVERITY INFO;

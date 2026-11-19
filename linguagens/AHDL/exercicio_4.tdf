@@ -1,3 +1,11 @@
-SUBDESIGN hello ( ) BEGIN
-  ASSERT (1 > 0) REPORT "Olá, Mundo!" SEVERITY INFO;
-END;
+SUBDESIGN exercicio_4
+(
+  a, b : INPUT;
+  c : OUTPUT;
+)
+TABLE a, b => c;
+  0, 0 => 0;
+  0, 1 => 0;
+  1, 0 => 0;
+  1, 1 => 1;
+END TABLE;

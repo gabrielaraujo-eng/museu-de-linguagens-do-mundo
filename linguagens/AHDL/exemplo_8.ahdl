@@ -1,1 +1,9 @@
--- Strings não são comuns em HDL
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exemplo_8
+(
+  a[7..0], b[7..0] : INPUT;
+  out[7..0] : OUTPUT;
+)
+-- AHDL descreve sinais/barramentos; isto não é manipulação geral de strings.
+out[] = a[] XOR b[];

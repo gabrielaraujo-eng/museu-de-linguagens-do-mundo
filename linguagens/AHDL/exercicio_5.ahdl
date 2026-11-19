@@ -1,1 +1,12 @@
-NODE n1, n2;
+-- Cópia legada para estudo; .ahdl não é extensão oficial documentada para AHDL.
+-- O arquivo canônico do fluxo Quartus é o correspondente .tdf.
+SUBDESIGN exercicio_5
+(
+  a, b : INPUT;
+  y : OUTPUT;
+)
+VARIABLE
+  n1, n2 : NODE;
+n1 = a;
+n2 = b;
+y = n1 AND n2;
