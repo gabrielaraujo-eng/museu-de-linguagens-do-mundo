@@ -1,1 +1,2 @@
-"Olá, Mundo!" print
+# Imprima uma saudação na saída padrão.
+'Olá, Mundo!' .

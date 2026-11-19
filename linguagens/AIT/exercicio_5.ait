@@ -1,1 +1,2 @@
-"Olá, Mundo!" print
+# Defina uma palavra que calcula o cubo.
+cubo: dup dup * * ; 3 cubo .

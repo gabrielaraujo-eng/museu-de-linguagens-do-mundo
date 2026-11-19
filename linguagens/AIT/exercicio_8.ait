@@ -1,1 +1,2 @@
-"Olá, Mundo!" print
+# Imprima uma frase como literal de texto.
+'Texto de exercício.' .

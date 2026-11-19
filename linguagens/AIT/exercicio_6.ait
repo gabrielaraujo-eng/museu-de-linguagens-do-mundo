@@ -1,1 +1,2 @@
-"Olá, Mundo!" print
+# Imprima o último elemento do agregado.
+[ 4 7 9 ] last .

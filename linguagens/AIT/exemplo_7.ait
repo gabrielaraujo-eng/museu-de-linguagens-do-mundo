@@ -1,1 +1,2 @@
--- Sintaxe para error em AIT
+# Calcule 7 fatorial com linrec.
+7 [ zero ] [ succ ] [ dup pred ] [ * ] linrec .

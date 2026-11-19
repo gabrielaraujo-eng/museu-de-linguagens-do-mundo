@@ -1,1 +1,2 @@
--- Sintaxe para math em AIT
+# Calcule 2 elevado à terceira potência.
+2 3 pow .

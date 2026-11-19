@@ -1,1 +1,2 @@
--- Sintaxe para list em AIT
+# Conte os elementos do agregado.
+[ 1 2 3 ] size .

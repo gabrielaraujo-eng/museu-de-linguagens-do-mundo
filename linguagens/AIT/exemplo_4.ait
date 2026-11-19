@@ -1,1 +1,2 @@
--- Sintaxe para loop em AIT
+# Some 1 dez vezes ao valor inicial 0.
+0 10 [ 1 + ] times .

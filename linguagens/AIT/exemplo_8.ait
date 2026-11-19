@@ -1,1 +1,2 @@
--- Sintaxe para string em AIT
+# Imprima um literal de texto; o módulo replace é instável.
+'Ait representa textos literais.' .

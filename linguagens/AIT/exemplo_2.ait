@@ -1,1 +1,2 @@
-42 :x
+# Guarde o topo da pilha em uma variável e leia-o.
+42 -> x x .

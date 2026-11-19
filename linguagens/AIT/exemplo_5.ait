@@ -1,1 +1,2 @@
--- Sintaxe para func em AIT
+# Defina uma palavra que calcula o quadrado.
+quadrado: dup * ; 5 quadrado .
