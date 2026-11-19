@@ -10,7 +10,8 @@ A experiência funciona diretamente no navegador, com uma interface inspirada em
 - Busca instantânea por nome da linguagem.
 - Cards com ícone, ano de referência, quantidade de exemplos e exercícios.
 - Modal de detalhes para cada linguagem.
-- Link direto para os arquivos reais de exemplos e exercícios no GitHub.
+- Visualização no próprio site dos READMEs, exemplos e exercícios, com destaque de sintaxe e cópia do código.
+- Link opcional para abrir a pasta original da linguagem no GitHub.
 - Quantidade de exemplos e exercícios informada para cada linguagem do acervo.
 - Fundo animado com Canvas API e layout responsivo para diferentes tamanhos de tela.
 - Metadados para SEO, compartilhamento em redes sociais e indexação.
@@ -19,7 +20,9 @@ A experiência funciona diretamente no navegador, com uma interface inspirada em
 
 Cada linguagem possui uma pasta própria em [`linguagens/`](./linguagens), com arquivos de exemplos e exercícios em extensões relacionadas à linguagem. O inventário auxiliar está disponível em [`LISTA_ALFABETICA.md`](./LISTA_ALFABETICA.md).
 
-A página principal apresenta os dados do catálogo e permite abrir o acervo correspondente no GitHub. O conteúdo é estático e não depende de banco de dados ou servidor de aplicação.
+O modal de cada linguagem lista seus arquivos e carrega o conteúdo selecionado dentro do site, sem exigir que a pessoa navegue manualmente pelo repositório. O manifesto estático `catalog-files.json` é atualizado a cada publicação pelo script `scripts/generate-catalog-index.py`, sem depender da API do GitHub no navegador.
+
+O conteúdo continua estático e não depende de banco de dados ou servidor de aplicação.
 
 ## Tecnologias
 
@@ -51,7 +54,9 @@ Também é possível usar qualquer servidor HTTP estático de sua preferência. 
 ```text
 .
 ├── index.html              # Interface, estilos, dados do catálogo e lógica da aplicação
+├── catalog-files.json      # Índice estático dos arquivos disponíveis no acervo
 ├── linguagens/             # Exemplos e exercícios organizados por linguagem
+├── scripts/                # Geração do índice antes da publicação
 ├── LISTA_ALFABETICA.md     # Inventário auxiliar em ordem alfabética
 ├── og-share.png            # Imagem de compartilhamento
 ├── robots.txt               # Diretrizes para rastreadores

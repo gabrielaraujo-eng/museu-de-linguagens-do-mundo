@@ -200,6 +200,38 @@
         .modal-header { padding: 20px; border-bottom: 1px solid rgba(212,175,55,0.2); display: flex; justify-content: space-between; align-items: center; }
         .modal-body { flex: 1; padding: 30px; overflow-y: auto; }
 
+        .file-browser { display: grid; gap: 16px; }
+        .file-browser-intro { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .file-browser-intro p { color: var(--text-dim); }
+        .file-category-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+        .file-category-tab, .file-action-btn { border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 999px; padding: 8px 12px; background: rgba(212, 175, 55, 0.06); color: var(--secondary-gold); cursor: pointer; font: inherit; }
+        .file-category-tab:hover, .file-category-tab[aria-pressed="true"], .file-action-btn:hover { background: var(--primary-gold); color: var(--bg-color); }
+        .file-browser-grid { display: grid; grid-template-columns: minmax(170px, 0.8fr) minmax(0, 2fr); gap: 14px; min-height: 360px; }
+        .file-list { list-style: none; margin: 0; padding: 8px; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 14px; overflow: auto; max-height: 48vh; background: rgba(5, 5, 5, 0.45); }
+        .file-list li + li { margin-top: 5px; }
+        .file-item { width: 100%; text-align: left; overflow-wrap: anywhere; border: 1px solid transparent; border-radius: 9px; padding: 9px 10px; color: var(--text-main); background: transparent; cursor: pointer; font: inherit; font-size: 0.9rem; }
+        .file-item:hover, .file-item[aria-current="true"] { color: var(--secondary-gold); border-color: rgba(212, 175, 55, 0.35); background: rgba(212, 175, 55, 0.1); }
+        .file-preview { min-width: 0; overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 14px; background: rgba(5, 5, 5, 0.45); }
+        .file-preview-toolbar { min-height: 48px; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid rgba(212, 175, 55, 0.18); }
+        .file-preview-title { min-width: 0; overflow-wrap: anywhere; color: var(--secondary-gold); font-weight: 700; }
+        .file-preview-actions { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+        .file-action-btn { padding: 6px 10px; font-size: 0.85rem; text-decoration: none; }
+        .file-copy-status { min-height: 1.4em; padding: 4px 12px 0; color: var(--accent-cyan); font-size: 0.8rem; }
+        .file-code { flex: 1; min-height: 0; overflow: auto; margin: 0; padding: 14px; background: #0b0d12; color: #e7eaf0; font: 0.86rem/1.55 'Roboto Mono', monospace; tab-size: 4; }
+        .file-code code { white-space: pre; }
+        .file-empty { padding: 20px; border: 1px dashed rgba(212, 175, 55, 0.3); border-radius: 12px; color: var(--text-dim); }
+        .file-browser-footer { margin-top: 2px; }
+
+        @media (max-width: 700px) {
+            .modal-content { width: 96%; height: 92vh; }
+            .modal-body { padding: 16px; }
+            .file-browser-grid { grid-template-columns: 1fr; min-height: 0; }
+            .file-list { max-height: 170px; }
+            .file-code { min-height: 260px; max-height: 42vh; }
+            .file-preview-toolbar { align-items: flex-start; flex-direction: column; }
+            .file-preview-actions { flex-wrap: wrap; }
+        }
+
         @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     </style>
   <meta name="description" content="Museu digital e interativo sobre a história e a diversidade das linguagens de programação.">
@@ -250,11 +282,11 @@
         <div class="languages-grid" id="languagesGrid"></div>
     </div>
 
-    <div id="languageModal" class="modal">
+    <div id="languageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle" style="color: var(--primary-gold);">Linguagem</h2>
-                <button onclick="closeModal()" style="background:none; border:none; color:white; font-size:2em; cursor:pointer;">&times;</button>
+                <button onclick="closeModal()" aria-label="Fechar janela" style="background:none; border:none; color:white; font-size:2em; cursor:pointer;">&times;</button>
             </div>
             <div class="modal-body" id="modalBody"></div>
         </div>
@@ -3933,21 +3965,227 @@
                 grid.appendChild(card);
             });
         }
-        function openModal(language) {
-            const name = typeof language === 'string' ? language : language.name;
-            const folder = typeof language === 'string' ? language : language.folder;
-            const examples = typeof language === 'string' ? 0 : language.examples;
-            const exercises = typeof language === 'string' ? 0 : language.exercises;
-            document.getElementById('modalTitle').innerText = name;
-            document.getElementById('modalBody').innerHTML = `
-                <h3>Sobre ${name}</h3>
-                <p>Explore os arquivos reais desta linguagem no acervo do Museu.</p>
-                <p><strong>${examples}</strong> exemplos · <strong>${exercises}</strong> exercícios</p>
-                <p><a class="details-link" href="https://github.com/gabrielaraujo-eng/museu-de-linguagens-do-mundo/tree/main/linguagens/${encodeURIComponent(folder)}" target="_blank" rel="noopener noreferrer">Abrir arquivos de ${name} no GitHub ↗</a></p>
-            `;
-            document.getElementById('languageModal').style.display = 'flex';
+        let fileCatalogPromise = null;
+        let modalRequestId = 0;
+        let previewRequestId = 0;
+
+        function loadFileCatalog() {
+            if (!fileCatalogPromise) {
+                fileCatalogPromise = fetch(new URL('catalog-files.json', document.baseURI))
+                    .then((response) => {
+                        if (!response.ok) throw new Error('Não foi possível carregar a lista de arquivos.');
+                        return response.json();
+                    })
+                    .catch((error) => {
+                        fileCatalogPromise = null;
+                        throw error;
+                    });
+            }
+            return fileCatalogPromise;
         }
-        function closeModal() { document.getElementById('languageModal').style.display = 'none'; }
+
+        function makeRepositoryLink(folder) {
+            const link = document.createElement('a');
+            link.className = 'details-link';
+            link.href = `https://github.com/gabrielaraujo-eng/museu-de-linguagens-do-mundo/tree/main/linguagens/${encodeURIComponent(folder)}`;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = 'Ver pasta no GitHub ↗';
+            return link;
+        }
+
+        function showModalMessage(message, folder, requestId) {
+            if (requestId !== modalRequestId) return;
+            const body = document.getElementById('modalBody');
+            body.replaceChildren();
+            const messageElement = document.createElement('p');
+            messageElement.className = 'file-empty';
+            messageElement.setAttribute('role', 'status');
+            messageElement.textContent = message;
+            body.append(messageElement, makeRepositoryLink(folder));
+        }
+
+        function openModal(language) {
+            const requestId = ++modalRequestId;
+            const { name, folder } = language;
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+            title.textContent = name;
+            body.replaceChildren();
+            const loading = document.createElement('p');
+            loading.className = 'file-empty';
+            loading.setAttribute('role', 'status');
+            loading.textContent = 'Carregando arquivos do acervo…';
+            body.append(loading);
+            document.getElementById('languageModal').style.display = 'flex';
+
+            loadFileCatalog()
+                .then((catalog) => {
+                    if (requestId === modalRequestId) renderFileBrowser(language, catalog, requestId);
+                })
+                .catch(() => showModalMessage('Não foi possível carregar a lista agora. Tente novamente ou abra a pasta no GitHub.', folder, requestId));
+        }
+
+        function renderFileBrowser(language, catalog, requestId) {
+            const { name, folder } = language;
+            const entry = catalog.languages && catalog.languages[folder];
+            const body = document.getElementById('modalBody');
+            body.replaceChildren();
+
+            if (!entry) {
+                showModalMessage('Ainda não há arquivos indexados para esta linguagem.', folder, requestId);
+                return;
+            }
+
+            const groups = [];
+            if (entry.readme) groups.push({ id: 'readme', label: 'README', files: [entry.readme] });
+            if (entry.examples.length) groups.push({ id: 'examples', label: 'Exemplos', files: entry.examples });
+            if (entry.exercises.length) groups.push({ id: 'exercises', label: 'Exercícios', files: entry.exercises });
+            if (entry.other.length) groups.push({ id: 'other', label: 'Outros', files: entry.other });
+
+            const totalFiles = groups.reduce((total, group) => total + group.files.length, 0);
+            const browser = document.createElement('section');
+            browser.className = 'file-browser';
+            browser.setAttribute('aria-label', `Arquivos de ${name}`);
+
+            const intro = document.createElement('div');
+            intro.className = 'file-browser-intro';
+            const description = document.createElement('p');
+            description.textContent = `${totalFiles} ${totalFiles === 1 ? 'arquivo disponível' : 'arquivos disponíveis'} · abra um item para ler sem sair do Museu.`;
+            intro.append(description);
+
+            const tabs = document.createElement('div');
+            tabs.className = 'file-category-tabs';
+            tabs.setAttribute('role', 'group');
+            tabs.setAttribute('aria-label', 'Filtrar arquivos por categoria');
+
+            const layout = document.createElement('div');
+            layout.className = 'file-browser-grid';
+            const fileList = document.createElement('ul');
+            fileList.className = 'file-list';
+            fileList.setAttribute('aria-label', 'Arquivos disponíveis');
+
+            const preview = document.createElement('section');
+            preview.className = 'file-preview';
+            preview.setAttribute('aria-label', 'Prévia do arquivo selecionado');
+            const toolbar = document.createElement('div');
+            toolbar.className = 'file-preview-toolbar';
+            const fileTitle = document.createElement('span');
+            fileTitle.className = 'file-preview-title';
+            fileTitle.textContent = 'Selecione um arquivo';
+            const actions = document.createElement('div');
+            actions.className = 'file-preview-actions';
+            const copyButton = document.createElement('button');
+            copyButton.type = 'button';
+            copyButton.className = 'file-action-btn';
+            copyButton.textContent = 'Copiar código';
+            copyButton.disabled = true;
+            const openFileLink = document.createElement('a');
+            openFileLink.className = 'file-action-btn';
+            openFileLink.target = '_blank';
+            openFileLink.rel = 'noopener noreferrer';
+            openFileLink.textContent = 'Abrir arquivo ↗';
+            actions.append(copyButton, openFileLink);
+            toolbar.append(fileTitle, actions);
+
+            const copyStatus = document.createElement('p');
+            copyStatus.className = 'file-copy-status';
+            copyStatus.setAttribute('role', 'status');
+            const codeBlock = document.createElement('pre');
+            codeBlock.className = 'file-code';
+            const code = document.createElement('code');
+            codeBlock.append(code);
+            preview.append(toolbar, copyStatus, codeBlock);
+            layout.append(fileList, preview);
+
+            let activeSource = '';
+            copyButton.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(activeSource);
+                    copyStatus.textContent = 'Código copiado.';
+                } catch {
+                    copyStatus.textContent = 'Não foi possível copiar neste navegador.';
+                }
+            });
+
+            const selectFile = async (fileName) => {
+                const currentPreviewRequest = ++previewRequestId;
+                const fileUrl = new URL(`linguagens/${encodeURIComponent(folder)}/${encodeURIComponent(fileName)}`, document.baseURI);
+                fileTitle.textContent = fileName;
+                openFileLink.href = fileUrl.href;
+                copyButton.disabled = true;
+                copyStatus.textContent = '';
+                code.textContent = 'Carregando conteúdo…';
+                code.removeAttribute('data-highlighted');
+                code.className = '';
+
+                fileList.querySelectorAll('.file-item').forEach((button) => {
+                    button.setAttribute('aria-current', String(button.textContent === fileName));
+                });
+
+                try {
+                    const response = await fetch(fileUrl, { cache: 'force-cache' });
+                    if (!response.ok) throw new Error('Arquivo indisponível.');
+                    const source = await response.text();
+                    if (requestId !== modalRequestId || currentPreviewRequest !== previewRequestId) return;
+                    activeSource = source;
+                    code.textContent = source || '(Este arquivo está vazio.)';
+                    if (window.hljs && source) {
+                        if (fileName.toLowerCase().endsWith('.md')) code.className = 'language-markdown';
+                        window.hljs.highlightElement(code);
+                    }
+                    copyButton.disabled = !source;
+                } catch {
+                    if (requestId !== modalRequestId || currentPreviewRequest !== previewRequestId) return;
+                    activeSource = '';
+                    code.textContent = 'Não foi possível abrir este arquivo. Tente novamente ou use o link “Abrir arquivo”.';
+                }
+            };
+
+            const renderGroup = (group) => {
+                fileList.replaceChildren();
+                group.files.forEach((fileName, index) => {
+                    const item = document.createElement('li');
+                    const fileButton = document.createElement('button');
+                    fileButton.type = 'button';
+                    fileButton.className = 'file-item';
+                    fileButton.textContent = fileName;
+                    fileButton.setAttribute('aria-current', String(index === 0));
+                    fileButton.addEventListener('click', () => selectFile(fileName));
+                    item.append(fileButton);
+                    fileList.append(item);
+                });
+                selectFile(group.files[0]);
+            };
+
+            groups.forEach((group, index) => {
+                const tab = document.createElement('button');
+                tab.type = 'button';
+                tab.className = 'file-category-tab';
+                tab.textContent = `${group.label} (${group.files.length})`;
+                tab.setAttribute('aria-pressed', String(index === 0));
+                tab.addEventListener('click', () => {
+                    tabs.querySelectorAll('.file-category-tab').forEach((button) => button.setAttribute('aria-pressed', String(button === tab)));
+                    renderGroup(group);
+                });
+                tabs.append(tab);
+            });
+
+            const footer = document.createElement('div');
+            footer.className = 'file-browser-footer';
+            footer.append(makeRepositoryLink(folder));
+            browser.append(intro, tabs, layout, footer);
+            body.append(browser);
+
+            if (groups.length) renderGroup(groups[0]);
+            else showModalMessage('Esta pasta ainda não tem arquivos para visualizar.', folder, requestId);
+        }
+
+        function closeModal() {
+            modalRequestId += 1;
+            previewRequestId += 1;
+            document.getElementById('languageModal').style.display = 'none';
+        }
         document.getElementById('searchInput').oninput = (e) => render(e.target.value);
 
         // Fundo Animado

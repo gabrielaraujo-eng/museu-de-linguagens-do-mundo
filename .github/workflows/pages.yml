@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Generate in-site file catalog
+        run: python3 scripts/generate-catalog-index.py
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
