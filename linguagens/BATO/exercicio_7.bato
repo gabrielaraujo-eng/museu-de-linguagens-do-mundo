@@ -1,1 +1,6 @@
-isulat "Olá, Mundo!"
+# Tarefa: capture e exiba o erro de uma divisão por zero.
+simula
+  1 / 0
+agapan => pagkakamali
+  mag_print pagkakamali
+wakas

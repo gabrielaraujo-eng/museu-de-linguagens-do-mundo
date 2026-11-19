@@ -1,1 +1,2 @@
-isulat "Olá, Mundo!"
+# Tarefa: exiba uma mensagem de boas-vindas ao Bato.
+mag_print "Bem-vindo ao Bato!"

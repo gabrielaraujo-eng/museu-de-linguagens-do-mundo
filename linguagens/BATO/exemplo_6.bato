@@ -1,1 +1,3 @@
--- Sintaxe para list em BATO
+# Cria e exibe uma lista de valores.
+valores = [1, 2, 3]
+mag_print valores

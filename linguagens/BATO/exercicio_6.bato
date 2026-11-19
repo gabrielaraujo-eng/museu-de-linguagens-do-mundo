@@ -1,1 +1,3 @@
-isulat "Olá, Mundo!"
+# Tarefa: crie e exiba uma lista de frutas.
+frutas = ["manga", "santol"]
+mag_print frutas

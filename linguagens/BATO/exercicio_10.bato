@@ -1,1 +1,2 @@
-isulat "Olá, Mundo!"
+# Tarefa: ordene a lista numérica com Array#sort de Ruby.
+mag_print [5, 1, 4, 2].sort

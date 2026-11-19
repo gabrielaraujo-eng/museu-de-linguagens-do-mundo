@@ -1,1 +1,2 @@
-isulat "Olá, Mundo!"
+# Tarefa: exiba o resultado respeitando a precedência aritmética.
+mag_print 2 + 3 * 4

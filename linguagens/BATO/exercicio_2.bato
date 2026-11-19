@@ -1,1 +1,5 @@
-isulat "Olá, Mundo!"
+# Tarefa: atribua e exiba um nome e uma idade.
+nome = "Bato"
+idade = 42
+mag_print nome
+mag_print idade
