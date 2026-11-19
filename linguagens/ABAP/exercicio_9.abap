@@ -1,4 +1,5 @@
 * Exercício 9: Cálculo de área de círculo
+* Nota numérica: TYPE f é ponto flutuante e a área calculada é aproximada; não é indicação para valores financeiros.
 REPORT z_exercise_9.
 
 CONSTANTS: lc_pi TYPE f VALUE '3.14159'.

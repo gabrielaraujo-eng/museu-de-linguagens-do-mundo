@@ -1,4 +1,5 @@
 * Exercício 6: Tabela de Produtos
+* Compatibilidade: VALUE #( ... ) e DATA(...) requerem ABAP moderno; valide no release-alvo.
 REPORT z_exercise_6.
 
 TYPES: BEGIN OF ty_prod,

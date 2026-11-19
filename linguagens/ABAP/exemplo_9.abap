@@ -1,4 +1,5 @@
 * Exemplo 9: Operações Matemáticas em ABAP
+* Nota numérica: TYPE f é ponto flutuante e produz resultado aproximado; não é indicação para valores financeiros.
 REPORT z_math_operations.
 
 DATA: lv_num TYPE f VALUE 16,

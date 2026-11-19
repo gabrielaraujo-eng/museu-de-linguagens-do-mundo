@@ -1,4 +1,5 @@
 * Exercício 10: Ordenação descendente
+* Compatibilidade: VALUE #( ... ) e DATA(...) requerem ABAP moderno; valide no release-alvo.
 REPORT z_exercise_10.
 
 DATA: lt_valores TYPE TABLE OF i.

@@ -1,4 +1,5 @@
 * Exemplo 8: Manipulação de Strings em ABAP
+* Compatibilidade: DATA(...), to_upper e templates |...| requerem ABAP moderno; valide no release-alvo.
 REPORT z_string_manipulation.
 
 DATA(lv_text) = 'sap abap'.

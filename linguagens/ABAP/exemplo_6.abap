@@ -1,4 +1,5 @@
 * Exemplo 6: Tabela Interna (Coleção) em ABAP
+* Compatibilidade: VALUE #( ... ) e DATA(...) requerem ABAP moderno; valide no release-alvo.
 REPORT z_internal_tables.
 
 TYPES: BEGIN OF ty_pessoa,

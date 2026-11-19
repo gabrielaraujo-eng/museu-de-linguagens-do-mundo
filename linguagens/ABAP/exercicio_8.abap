@@ -1,4 +1,5 @@
 * Exercício 8: Inverter string
+* Compatibilidade: DATA(...) e reverse( ... ) requerem ABAP moderno; valide no release-alvo.
 REPORT z_exercise_8.
 
 DATA(lv_original) = 'ABAP'.
