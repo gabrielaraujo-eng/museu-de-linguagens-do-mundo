@@ -1,1 +1,10 @@
-"Olá, Mundo!\n"
+/* Tarefa: indique se x é maior que 10 ou não, sem usar else. Referência: */
+x = 8
+if (x > 10) {
+    "Maior que 10
+"
+}
+if (x <= 10) {
+    "Menor ou igual a 10
+"
+}

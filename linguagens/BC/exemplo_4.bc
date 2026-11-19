@@ -1,3 +1,4 @@
+/* Exibe os inteiros de 1 a 5. */
 for (i = 1; i <= 5; i++) {
     i
 }

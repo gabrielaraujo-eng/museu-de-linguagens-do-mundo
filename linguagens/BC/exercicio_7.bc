@@ -1,1 +1,10 @@
-"Olá, Mundo!\n"
+/* Tarefa: evite divisão se d for zero e informe o caso. Referência: */
+n = 18
+d = 0
+if (d != 0) {
+    n / d
+}
+if (d == 0) {
+    "Divisão evitada: divisor igual a zero.
+"
+}

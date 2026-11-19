@@ -1,1 +1,5 @@
-"Olá, Mundo!\n"
+/* Tarefa: imprima duas mensagens estáticas, sem strings em variáveis. Referência: */
+"Primeira mensagem literal.
+"
+"Segunda mensagem literal.
+"

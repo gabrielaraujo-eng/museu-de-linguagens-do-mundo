@@ -1,1 +1,5 @@
-"Olá, Mundo!\n"
+/* Tarefa: defina e chame uma função que eleva n ao quadrado. Referência: */
+define q(n) {
+    return (n * n)
+}
+q(7)

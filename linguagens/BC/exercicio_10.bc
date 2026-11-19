@@ -1,1 +1,18 @@
-"Olá, Mundo!\n"
+/* Tarefa: ordene o array em ordem crescente usando laços e trocas. Referência: */
+n = 4
+a[0] = 9
+a[1] = 3
+a[2] = 7
+a[3] = 1
+for (i = 0; i < n; i++) {
+    for (j = 0; j < n - 1 - i; j++) {
+        if (a[j] > a[j + 1]) {
+            t = a[j]
+            a[j] = a[j + 1]
+            a[j + 1] = t
+        }
+    }
+}
+for (i = 0; i < n; i++) {
+    a[i]
+}

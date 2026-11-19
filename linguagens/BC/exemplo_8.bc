@@ -1,1 +1,3 @@
-// Sintaxe para string em BC
+/* Strings são literais de saída, não variáveis ou objetos de texto. */
+"bc é uma linguagem de cálculo numérico.
+"

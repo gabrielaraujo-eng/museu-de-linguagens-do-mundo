@@ -1,1 +1,4 @@
-"Olá, Mundo!\n"
+/* Tarefa: some dois valores numéricos armazenados em variáveis. Referência: */
+x = 17
+y = 25
+x + y

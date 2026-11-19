@@ -1,1 +1,3 @@
-// Sintaxe para math em BC
+/* sqrt é padrão; scale controla a precisão fracionária do resultado. */
+scale = 4
+sqrt(2)

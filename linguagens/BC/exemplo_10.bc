@@ -1,1 +1,19 @@
-// Sintaxe para sort em BC
+/* Ordenação por trocas em array: bc não fornece um sort interno. */
+n = 5
+a[0] = 5
+a[1] = 2
+a[2] = 4
+a[3] = 1
+a[4] = 3
+for (i = 0; i < n; i++) {
+    for (j = 0; j < n - 1 - i; j++) {
+        if (a[j] > a[j + 1]) {
+            t = a[j]
+            a[j] = a[j + 1]
+            a[j + 1] = t
+        }
+    }
+}
+for (i = 0; i < n; i++) {
+    a[i]
+}
