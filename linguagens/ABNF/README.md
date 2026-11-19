@@ -1,28 +1,55 @@
 # ABNF
 
-**Ano de Criação:** 1987
+**Raízes:** RFC 733 (1977); **especificação consolidada:** RFC 5234 (2008)
 
 ## Descrição
 
-ABNF (Augmented Backus-Naur Form) é uma metalinguagem utilizada para descrever formalmente a sintaxe de protocolos de comunicação e formatos de dados. Não é uma linguagem de programação executável, mas sim uma ferramenta para definir regras gramaticais. Os exemplos abaixo ilustram a aplicação de regras ABNF para definir estruturas sintáticas.
+ABNF (Augmented Backus-Naur Form) é uma metalinguagem/notação formal para descrever a sintaxe de protocolos e formatos de dados. Não é uma linguagem de programação executável: cada arquivo deste diretório contém uma *rulelist*, isto é, um conjunto de regras que pode ser consumido por um parser ABNF.
 
-## Exemplos Inclusos
+A sintaxe básica usa `name = elements`. Regras podem combinar terminais, concatenação, alternativas (`/`), grupos, opcionais (`[ ... ]`) e repetição (`*element`, `nelement`). Valores numéricos usam `%b`, `%d` ou `%x`. A RFC 5234 define literais entre aspas como ASCII e sem distinção de maiúsculas/minúsculas; a RFC 7405 acrescenta `%s"..."` para literais sensíveis a maiúsculas/minúsculas e `%i"..."` para explicitar o comportamento insensível.
 
-Os exemplos cobrem os seguintes tópicos, adaptados para o contexto de uma metalinguagem:
+## Exemplos inclusos
 
-1. **exemplo_1.abnf** - Definição de uma regra básica (equivalente a "Olá Mundo" na definição de sintaxe)
-2. **exemplo_2.abnf** - Definição de elementos e repetições (equivalente a "Variáveis e Tipos" na definição de sintaxe)
-3. **exemplo_3.abnf** - Alternativas e grupos (equivalente a "Estruturas condicionais" na definição de sintaxe)
-4. **exemplo_4.abnf** - Repetições (equivalente a "Estruturas de repetição" na definição de sintaxe)
-5. **exemplo_5.abnf** - Regras nomeadas (equivalente a "Funções/procedimentos" na definição de sintaxe)
-6. **exemplo_6.abnf** - Sequências de elementos (equivalente a "Listas/arrays/coleções" na definição de sintaxe)
-7. **exemplo_7.abnf** - Opcionais e comentários (equivalente a "Tratamento de erros" na documentação de sintaxe)
-8. **exemplo_8.abnf** - Definição de caracteres e strings (equivalente a "Manipulação de strings" na definição de sintaxe)
-9. **exemplo_9.abnf** - Valores numéricos e intervalos (equivalente a "Operações matemáticas" na definição de sintaxe)
-10. **exemplo_10.abnf** - Regra complexa (equivalente a "Ordenação ou algoritmo clássico" na definição de sintaxe)
+1. **exemplo_1.abnf** — uma regra básica e intervalos numéricos (`%x`).
+2. **exemplo_2.abnf** — uma regra nomeada com repetição e dígitos.
+3. **exemplo_3.abnf** — alternativa entre terminais.
+4. **exemplo_4.abnf** — repetição limitada e grupo.
+5. **exemplo_5.abnf** — composição por referências a regras nomeadas.
+6. **exemplo_6.abnf** — concatenação, grupo, opcionalidade implícita e repetição.
+7. **exemplo_7.abnf** — terminal NUL; ABNF não define tratamento de erros.
+8. **exemplo_8.abnf** — caracteres alfabéticos e repetição.
+9. **exemplo_9.abnf** — dígitos e intervalo numérico.
+10. **exemplo_10.abnf** — alternativa, referência e elemento opcional.
 
-## Como Usar
+## Exercícios inclusos
 
-Navegue pelos exemplos em ordem para aprender os conceitos fundamentais de ABNF.
-Cada arquivo contém comentários explicativos em português.
-\n## Nota de Auditoria\n\nEste README e os exemplos/exercícios desta linguagem estão atualmente sob auditoria para garantir a autenticidade e correção da sintaxe. Correções estão sendo aplicadas progressivamente.\n
+Os exercícios praticam composição de regras, terminais, repetição, recursão, opcionais e intervalos. Os exercícios 1, 6, 7 e 10 são modelos simplificados: não substituem as gramáticas completas de RFC 5322, HTTP, calendários ou URI. Em particular, uma regra que reconhece a forma `YYYY-MM-DD` não verifica se a data existe.
+
+## Como validar
+
+Leia os arquivos como rulelists, não como programas. A validação correta é resolver as referências e analisar a gramática com um parser ABNF; opcionalmente, depois, aplicar entradas a uma regra inicial. Não existe um comando universal para “executar ABNF”.
+
+Neste ambiente, `abnf_check`, `abnf` e o módulo Python `abnf` podem não estar instalados. Quando o pacote Python estiver disponível, uma validação pode ser feita com a API documentada por ele:
+
+```sh
+python3 - <<'PY' linguagens/ABNF/exemplo_2.abnf
+import sys
+from abnf import Rule
+
+class FromFileRule(Rule):
+    pass
+
+FromFileRule.from_file(sys.argv[1])
+print("grammar OK:", sys.argv[1])
+PY
+```
+
+Se não houver parser instalado, faça apenas validações estáticas: cada regra deve ter a forma `nome = elementos`, referências usadas devem ser declaradas na própria rulelist (ou fornecidas explicitamente pelo parser como o conjunto core), e os arquivos devem permanecer em ASCII quando seus terminais forem literais `char-val` da ABNF base. Os arquivos deste diretório declaram localmente as regras auxiliares necessárias, salvo recursos especiais que uma ferramenta possa injetar por opção.
+
+## Referências
+
+- [RFC 5234 — Augmented BNF for Syntax Specifications: ABNF](https://www.rfc-editor.org/rfc/rfc5234)
+- [RFC 7405 — Case-Sensitive String Support in ABNF](https://www.rfc-editor.org/rfc/rfc7405)
+- [RFC 733 — Standard for the Format of ARPA Network Text Messages](https://www.rfc-editor.org/rfc/rfc733)
+- [RFC 822 — Standard for ARPA Internet Text Messages](https://www.rfc-editor.org/rfc/rfc822)
+- [Pacote Python `abnf`](https://pypi.org/project/abnf/)

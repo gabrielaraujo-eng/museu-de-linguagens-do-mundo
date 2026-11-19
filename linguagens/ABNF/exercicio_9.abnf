@@ -1,2 +1,4 @@
-; Regra para hexadecimal
-hex = 1*HEXDIG
+; Regra para hexadecimal, incluindo maiúsculas e minúsculas
+digit = %x30-39
+hexdig = digit / %x41-46 / %x61-66
+hex = 1*hexdig

@@ -1,1 +1,3 @@
+; Composição por regras nomeadas
+definition = 1*(%x41-5A / %x61-7A)
 rule = definition

@@ -1,2 +1,2 @@
-; Defina um booleano
-bool = "true" / "false"
+; Exercício: booleano exatamente em minúsculas (RFC 7405)
+bool = %s"true" / %s"false"

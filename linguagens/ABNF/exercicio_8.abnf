@@ -1,2 +1,7 @@
-; Regra para comentário
-comment = ";" *(WSP / VCHAR)
+; Modela uma linha iniciada por ponto e vírgula,
+; não um comentário ABNF do próprio arquivo (descartado pelo parser)
+sp = %x20
+htab = %x09
+wsp = sp / htab
+vchar = %x21-7E
+comment = ";" *(wsp / vchar)

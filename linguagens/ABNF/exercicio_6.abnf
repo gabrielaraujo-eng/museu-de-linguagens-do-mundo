@@ -1,2 +1,4 @@
-; Defina um cabeçalho HTTP
+; Cabeçalho genérico simplificado, não a gramática completa de HTTP
+field-name = 1*(%x41-5A / %x61-7A / %x30-39 / "-")
+field-value = *(%x20-7E)
 header = field-name ":" [ field-value ]

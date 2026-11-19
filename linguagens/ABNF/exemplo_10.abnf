@@ -1,1 +1,5 @@
+; Alternativa, referência e elemento opcional
+rule1 = "A"
+rule2 = "B"
+rule3 = "C"
 complex-rule = rule1 [ rule2 ] / rule3
