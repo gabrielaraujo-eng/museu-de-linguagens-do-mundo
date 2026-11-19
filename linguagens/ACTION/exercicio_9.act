@@ -1,1 +1,11 @@
-res = a % b
+PROC Main()
+  INT a,b,res
+  a=17
+  b=5
+  IF b=0 THEN
+    PrintE("Divisor inválido")
+  ELSE
+    res=a MOD b
+    PrintBE(res)
+  FI
+RETURN

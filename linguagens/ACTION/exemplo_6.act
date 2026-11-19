@@ -1,1 +1,6 @@
 BYTE ARRAY data(10)
+
+PROC Main()
+  data(0)=42
+  PrintBE(data(0))
+RETURN

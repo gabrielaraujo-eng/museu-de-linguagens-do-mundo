@@ -1,1 +1,5 @@
 INT ARRAY vals(5)
+
+PROC Main()
+  vals(0)=10
+RETURN

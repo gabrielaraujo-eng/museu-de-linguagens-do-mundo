@@ -1,1 +1,9 @@
-SET Error = 0
+PROC Main()
+  BYTE error
+  error=0
+  IF error=0 THEN
+    PrintE("Sem erro")
+  ELSE
+    PrintE("Erro")
+  FI
+RETURN

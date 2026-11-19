@@ -1,1 +1,3 @@
-POKE 710, 0 ; Altera cor da tela
+PROC Main()
+  Poke(710,0) ; Altera a cor da tela no Atari
+RETURN

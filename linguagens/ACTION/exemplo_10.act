@@ -1,1 +1,7 @@
-MODULE ; Definição de módulo
+MODULE ALGORITHM
+
+PROC Main()
+  PrintE("Algoritmo")
+RETURN
+
+ENDMODULE

@@ -1,1 +1,5 @@
-INT a, b
+PROC Main()
+  INT a,b
+  a=10
+  b=20
+RETURN

@@ -1,1 +1,8 @@
-s[0] = 5 ; Tamanho da string
+; Arrays ACTION! são indexados com parênteses, não colchetes.
+CHAR ARRAY s(0)="Texto"
+
+PROC Main()
+  BYTE primeiro
+  primeiro=s(0)
+  PrintBE(primeiro)
+RETURN
