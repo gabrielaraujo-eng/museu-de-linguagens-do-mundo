@@ -1,28 +1,27 @@
-# C2HS_HASKELL
+# C2HS / Haskell FFI
 
-**Ano de Criação:** 2000
+**Data de criação:** não confirmada nas fontes consultadas. O ano `2000` anteriormente indicado não tem fonte verificável; o copyright do projeto upstream começa em 1999, mas isso não estabelece sua data de criação. [1]
 
-## Descrição
+## O que esta pasta contém
 
-Esta pasta contém exemplos de código em C2HS_HASKELL, organizados de forma progressiva para facilitar o aprendizado.
+C2HS (“C to Haskell”) é uma ferramenta para gerar bindings Haskell para bibliotecas C; não é, por si só, uma linguagem de programação geral. Haskell também oferece uma Foreign Function Interface (FFI), que permite declarar chamadas a funções estrangeiras. São tecnologias relacionadas, mas não equivalentes. [1] [2] [3]
 
-## Exemplos Inclusos
+Os arquivos desta pasta têm extensão `.chs` e atualmente declaram imports FFI manuais, por exemplo `foreign import ccall`. Eles **não contêm hooks C2HS** (`{#...#}`) nem diretivas `#include`. Portanto, a extensão `.chs` e o nome da pasta não significam que essas declarações tenham sido geradas por C2HS. [2] [3]
 
-Os exemplos cobrem os seguintes tópicos:
+## Arquivos
 
-1. **exemplo_1.c2hs_haskell** - Olá Mundo
-2. **exemplo_2.c2hs_haskell** - Variáveis e Tipos
-3. **exemplo_3.c2hs_haskell** - Controle de Fluxo
-4. **exemplo_4.c2hs_haskell** - Loops (Repetições)
-5. **exemplo_5.c2hs_haskell** - Funções
-6. **exemplo_6.c2hs_haskell** - Estruturas de Dados
-7. **exemplo_7.c2hs_haskell** - Tratamento de Erros
-8. **exemplo_8.c2hs_haskell** - Manipulação de Strings
-9. **exemplo_9.c2hs_haskell** - Matemática
-10. **exemplo_10.c2hs_haskell** - Conceito Avançado / Algoritmos
+Os arquivos presentes são `exemplo_1.chs` a `exemplo_10.chs` e `exercicio_1.chs` a `exercicio_10.chs`. Eles declaram e chamam símbolos C externos, como `hello_world`, `add_numbers`, `to_uppercase` e `exercise_sort`; os nomes e assinaturas Haskell, por si sós, não provam que existam implementações C correspondentes.
 
-## Como Usar
+## Dependências e limite de validação
 
-Navegue pelos exemplos em ordem para aprender os conceitos fundamentais de C2HS_HASKELL.
-Cada arquivo contém comentários explicativos em português.
-\n## Nota de Auditoria\n\nEste README e os exemplos/exercícios desta linguagem estão atualmente sob auditoria para garantir a autenticidade e correção da sintaxe. Correções estão sendo aplicadas progressivamente.\n
+Para compilar e executar estes módulos são necessários GHC e as implementações C dos símbolos importados, além de uma configuração de build que processe `.chs` quando aplicável. Para gerar bindings com C2HS também são necessários os cabeçalhos C correspondentes e hooks que relacionem os tipos e funções C aos tipos Haskell. Esta pasta não contém cabeçalhos (`.h`), fontes C ou bibliotecas dessas funções.
+
+Sem os protótipos e contratos C, não é possível verificar a correspondência ABI dos tipos, a existência das funções, nem a propriedade e o tempo de vida de ponteiros retornados. Em particular, não se deve trocar `Int` por um tipo C específico nem liberar um `CString` retornado sem confirmar a declaração e o contrato reais. Os arquivos que usam `newCString` também precisam de esclarecimento sobre quanto tempo a função C usa o buffer de entrada; não se assume que uma chamada seja síncrona nem que o ponteiro seja retido.
+
+Por esses motivos, as declarações FFI existentes não foram alteradas. GHC, Cabal e C2HS não estavam instalados no ambiente da auditoria e, mesmo com as ferramentas, a ausência dos cabeçalhos e implementações C impediria uma compilação/linkagem funcional verificável. Não há aqui uma instrução de execução validada; primeiro é preciso fornecer as dependências C e conferir cada assinatura com seus protótipos.
+
+## Referências
+
+1. [Projeto oficial C2HS no GitHub](https://github.com/haskell/c2hs)
+2. [Manual oficial do C2HS](https://raw.githubusercontent.com/haskell/c2hs/master/doc/c2hs.xml)
+3. [Haskell 2010 Report — Foreign Function Interface](https://www.haskell.org/onlinereport/haskell2010/haskellch8.html) e [GHC User's Guide — FFI](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/ffi.html)
