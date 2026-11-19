@@ -1,1 +1,6 @@
--- Sintaxe para string em BALLERINA
+import ballerina/io;
+
+public function main() {
+    string mensagem = "Ballerina facilita integrações.";
+    io:println(mensagem);
+}
