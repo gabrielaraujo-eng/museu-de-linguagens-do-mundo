@@ -1,1 +1,3 @@
-"Olá, Mundo!\n"
+/* Tarefa: calcule sqrt(225) com quatro casas decimais. Referência: */
+scale = 4
+sqrt(225)

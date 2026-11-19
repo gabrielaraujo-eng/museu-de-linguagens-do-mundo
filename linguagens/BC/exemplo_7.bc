@@ -1,1 +1,10 @@
-// Sintaxe para error em BC
+/* Validação numérica antes de dividir; não é tratamento de exceção. */
+n = 10
+d = 0
+if (d != 0) {
+    n / d
+}
+if (d == 0) {
+    "Divisor igual a zero; divisão evitada.
+"
+}

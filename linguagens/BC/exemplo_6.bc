@@ -1,1 +1,4 @@
-// Sintaxe para list em BC
+/* Arrays unidimensionais armazenam valores numéricos. */
+a[0] = 3
+a[1] = 4
+a[0] + a[1]

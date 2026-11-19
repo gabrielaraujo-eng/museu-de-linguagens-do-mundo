@@ -1,2 +1,5 @@
+/* Variáveis numéricas: atribuições e expressões exibidas. */
 x = 42
-s = 0 /* bc não tem strings em variáveis */
+s = 0 /* acumulador numérico, não uma string */
+x
+s

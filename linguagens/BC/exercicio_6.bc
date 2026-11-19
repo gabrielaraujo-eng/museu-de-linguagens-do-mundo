@@ -1,1 +1,6 @@
-"Olá, Mundo!\n"
+/* Tarefa: calcule a média de três valores em um array numérico. Referência: */
+scale = 2
+a[0] = 2
+a[1] = 4
+a[2] = 6
+(a[0] + a[1] + a[2]) / 3

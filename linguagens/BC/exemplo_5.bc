@@ -1,3 +1,5 @@
-define soma(a, b) {
+/* Identificadores de função POSIX têm uma letra minúscula. */
+define f(a, b) {
     return (a + b)
 }
+f(2, 3)

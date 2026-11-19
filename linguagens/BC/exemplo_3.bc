@@ -1,5 +1,10 @@
+/* Duas condições independentes evitam a extensão GNU else. */
+x = 12
 if (x > 10) {
-    "Maior\n"
-} else {
-    "Menor\n"
+    "Maior que 10
+"
+}
+if (x <= 10) {
+    "Menor ou igual a 10
+"
 }
