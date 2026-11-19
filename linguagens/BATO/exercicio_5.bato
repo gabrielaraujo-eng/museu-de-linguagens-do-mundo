@@ -1,1 +1,5 @@
-isulat "Olá, Mundo!"
+# Tarefa: defina e chame um método que devolva o dobro.
+ang dobro(n)
+  ibalik n * 2
+wakas
+mag_print dobro(4)

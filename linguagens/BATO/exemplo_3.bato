@@ -1,5 +1,6 @@
+x = 11
 kapag x > 10
-    isulat "Maior"
-kundi
-    isulat "Menor"
+  mag_print "Maior"
+kung_hindi
+  mag_print "Menor ou igual"
 wakas

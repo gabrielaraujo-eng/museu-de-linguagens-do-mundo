@@ -1,1 +1,4 @@
-isulat "Olá, Mundo!"
+# Tarefa: percorra 1 a 5 e exiba o dobro de cada número.
+para_sa i na_nasa 1..5 ganito_gawin
+  mag_print i * 2
+wakas

@@ -1,1 +1,7 @@
-isulat "Olá, Mundo!"
+# Tarefa: informe se a nota atinge o limite de aprovação (6).
+nota = 8
+kapag nota >= 6
+  mag_print "Aprovado"
+kung_hindi
+  mag_print "Reprovado"
+wakas

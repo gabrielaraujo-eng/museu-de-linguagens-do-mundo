@@ -1,1 +1,2 @@
--- Sintaxe para math em BATO
+resultado = 2 + 3
+mag_print resultado

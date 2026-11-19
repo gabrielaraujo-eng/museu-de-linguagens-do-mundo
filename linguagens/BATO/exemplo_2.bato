@@ -1,2 +1,4 @@
 x = 42
 s = "Bato"
+mag_print x
+mag_print s

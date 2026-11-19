@@ -1,3 +1,4 @@
-paraan soma(a, b)
-    ibalik a + b
+ang soma(a, b)
+  ibalik a + b
 wakas
+mag_print soma(2, 3)
