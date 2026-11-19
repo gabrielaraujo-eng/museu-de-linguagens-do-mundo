@@ -1,10 +1,10 @@
-#Include 'Protheus.ch'
+#Include "Protheus.ch"
 
 User Function Vars()
     Local cTexto  := "ADVPL Protheus"
     Local nNumero := 42
     Local dData   := Date()
-    Local lLogic  := .T.
-    
+    Local lLogico := .T.
+
     Alert("Texto: " + cTexto + " Numero: " + cValToChar(nNumero))
 Return
