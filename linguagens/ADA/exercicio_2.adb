@@ -6,5 +6,5 @@ procedure Exercicio_2 is
    Soma : Integer;
 begin
    Soma := Num1 + Num2;
-   Put_Line ("A soma é: " & Integer'Image(Soma));
+   Put_Line ("A soma é: " & Integer'Image (Soma));
 end Exercicio_2;
