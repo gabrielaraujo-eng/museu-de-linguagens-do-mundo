@@ -173,7 +173,9 @@
         .language-card h3 { font-family: 'Orbitron', sans-serif; color: var(--primary-gold); }
         .details-btn { margin-top: 10px; align-self: flex-start; border: 1px solid var(--primary-gold); border-radius: 20px; padding: 8px 14px; background: var(--secondary-gold); color: #17130a; cursor: pointer; font-weight: 700; }
         .details-btn:hover { background: white; }
-        .details-link { display: inline-block; color: var(--secondary-gold); font-weight: 700; }
+        .details-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 10px 16px; border: 1px solid rgba(212, 175, 55, 0.65); border-radius: 999px; color: var(--secondary-gold); font-weight: 700; text-decoration: none; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease; }
+        .details-link:hover, .details-link:focus-visible { background: var(--primary-gold); border-color: var(--primary-gold); color: var(--bg-color); transform: translateY(-1px); }
+        .details-link:focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 3px; }
 
         .meta-tag {
             font-size: 0.7em;
@@ -3941,7 +3943,7 @@
                 <h3>Sobre ${name}</h3>
                 <p>Explore os arquivos reais desta linguagem no acervo do Museu.</p>
                 <p><strong>${examples}</strong> exemplos · <strong>${exercises}</strong> exercícios</p>
-                <p><a class="details-link" href="https://github.com/gabrielaraujo-eng/projetos/tree/main/sites/museu-de-linguagens-do-mundo/linguagens/${encodeURIComponent(folder)}" target="_blank" rel="noopener">Abrir arquivos de ${name} no GitHub ↗</a></p>
+                <p><a class="details-link" href="https://github.com/gabrielaraujo-eng/museu-de-linguagens-do-mundo/tree/main/linguagens/${encodeURIComponent(folder)}" target="_blank" rel="noopener noreferrer">Abrir arquivos de ${name} no GitHub ↗</a></p>
             `;
             document.getElementById('languageModal').style.display = 'flex';
         }
