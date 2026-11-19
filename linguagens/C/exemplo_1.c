@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
-    printf("Olá Mundo\n");
+int main(void) {
+    /* Imprime uma saudação e termina normalmente. */
+    puts("Olá, mundo!");
     return 0;
 }
