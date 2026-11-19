@@ -1,1 +1,8 @@
-WHILE a < 10 DO a == + 1 OD
+PROC Main()
+  BYTE a
+  a=0
+  WHILE a < 10 DO
+    PrintBE(a)
+    a==+1
+  OD
+RETURN

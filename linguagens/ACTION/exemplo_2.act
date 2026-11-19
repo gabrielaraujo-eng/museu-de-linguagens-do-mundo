@@ -1,1 +1,8 @@
+; Declarações com inicializador escalar ACTION!
 BYTE x=[10], y=[20]
+
+PROC Main()
+  PrintE("Variáveis inicializadas")
+  PrintBE(x)
+  PrintBE(y)
+RETURN

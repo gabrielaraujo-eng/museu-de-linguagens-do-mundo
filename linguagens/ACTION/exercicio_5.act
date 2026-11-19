@@ -1,1 +1,3 @@
-FUNC Square(INT n) RETURN (n*n)
+; Função com tipo de retorno declarado antes de FUNC.
+INT FUNC Square(INT n)
+  RETURN(n*n)

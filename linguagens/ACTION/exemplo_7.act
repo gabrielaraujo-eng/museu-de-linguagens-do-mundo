@@ -1,1 +1,9 @@
-TRAP ErrorHandler
+PROC Main()
+  BYTE divisor
+  divisor=0
+  IF divisor=0 THEN
+    PrintE("Divisão por zero")
+  ELSE
+    PrintE("Divisor seguro")
+  FI
+RETURN

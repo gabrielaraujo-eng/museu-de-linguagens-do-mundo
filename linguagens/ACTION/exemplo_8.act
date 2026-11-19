@@ -1,1 +1,5 @@
-CHAR ARRAY s = "Texto"
+STRING s="Texto"
+
+PROC Main()
+  PrintE(s)
+RETURN
