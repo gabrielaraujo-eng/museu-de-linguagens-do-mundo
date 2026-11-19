@@ -1,2 +1,2 @@
-PUT 10+20 IN x
-WRITE x
+PUT 10 + 20 IN x
+WRITE x /

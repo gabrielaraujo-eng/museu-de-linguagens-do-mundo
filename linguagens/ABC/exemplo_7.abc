@@ -1,1 +1,2 @@
+PUT 1 IN x
 CHECK x > 0

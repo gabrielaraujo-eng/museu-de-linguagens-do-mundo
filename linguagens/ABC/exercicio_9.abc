@@ -1,1 +1,2 @@
 PUT root 16 IN r
+WRITE r /

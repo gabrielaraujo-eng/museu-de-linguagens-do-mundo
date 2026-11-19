@@ -1,1 +1,4 @@
-SHARE x
+PUT 0 IN x
+HOW TO RESET:
+    SHARE x
+    PUT 0 IN x
