@@ -1,4 +1,5 @@
 * Exemplo 4: Loop (DO e WHILE) em ABAP
+* Compatibilidade: DATA(...) requer ABAP moderno; valide no release-alvo.
 REPORT z_loops.
 
 WRITE 'Loop DO:'.

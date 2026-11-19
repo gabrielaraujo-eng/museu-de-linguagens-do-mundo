@@ -1,4 +1,5 @@
 * Exemplo 10: Ordenação de Tabela Interna em ABAP
+* Compatibilidade: DATA(...) requer ABAP moderno; valide no release-alvo.
 REPORT z_sorting.
 
 DATA: lt_numeros TYPE TABLE OF i.

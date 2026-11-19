@@ -1,4 +1,5 @@
 * Exercício 3: Verificação de maioridade
+* Compatibilidade: DATA(...) requer ABAP moderno; valide no release-alvo.
 REPORT z_exercise_3.
 
 DATA(lv_idade) = 20.

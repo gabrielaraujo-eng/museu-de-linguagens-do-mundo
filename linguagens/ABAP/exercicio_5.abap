@@ -1,4 +1,5 @@
 * Exercício 5: Procedimento para somar dois números
+* Compatibilidade: DATA(...) dentro de FORM requer ABAP moderno; valide no release-alvo.
 REPORT z_exercise_5.
 
 START-OF-SELECTION.

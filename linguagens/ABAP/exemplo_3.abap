@@ -1,4 +1,5 @@
 * Exemplo 3: Estrutura condicional (IF/ELSE) em ABAP
+* Compatibilidade: DATA(...) requer ABAP moderno; valide no release-alvo.
 REPORT z_conditional.
 
 DATA(lv_valor) = 15.
