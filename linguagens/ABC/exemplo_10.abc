@@ -1,1 +1,4 @@
-SHARE x
+PUT 0 IN x
+HOW TO INCREMENT:
+    SHARE x
+    PUT x+1 IN x

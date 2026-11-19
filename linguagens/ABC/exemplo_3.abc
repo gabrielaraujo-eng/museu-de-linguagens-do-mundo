@@ -1,4 +1,6 @@
-IF x > 5:
-    WRITE "Maior"
-ELSE:
-    WRITE "Menor"
+PUT 10 IN x
+SELECT:
+    x > 5:
+        WRITE "Maior" /
+    ELSE:
+        WRITE "Menor" /

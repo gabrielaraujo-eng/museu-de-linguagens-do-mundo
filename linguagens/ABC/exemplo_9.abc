@@ -1,1 +1,4 @@
+PUT 10 IN x
+PUT 20 IN y
 PUT x + y IN z
+WRITE z /

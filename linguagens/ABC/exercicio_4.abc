@@ -1,2 +1,2 @@
 FOR i IN {1..5}:
-    WRITE i
+    WRITE i /
