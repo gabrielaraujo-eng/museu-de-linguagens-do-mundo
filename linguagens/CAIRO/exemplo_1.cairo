@@ -1,4 +1,5 @@
-use debug::PrintTrait;
+// Demonstra a impressão de texto em um programa executável.
+#[executable]
 fn main() {
-    'Olá, Mundo!'.print();
+    println!("Ola, mundo!");
 }
