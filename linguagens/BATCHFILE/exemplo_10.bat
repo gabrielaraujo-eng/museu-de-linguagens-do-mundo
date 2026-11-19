@@ -1,1 +1,6 @@
--- Sintaxe para sort em BATCHFILE
+@echo off
+(
+    echo banana
+    echo abacaxi
+    echo acerola
+) | sort

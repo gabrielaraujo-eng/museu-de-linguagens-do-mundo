@@ -1,3 +1,3 @@
 @echo off
-echo Olá, Mundo!
-pause
+rem Exercicio 6: percorra tres valores de texto com FOR.
+for %%cor in (azul verde vermelho) do echo %%cor
