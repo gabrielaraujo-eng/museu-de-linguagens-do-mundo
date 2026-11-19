@@ -1,2 +1,4 @@
-10 PRINT "Olá, Mundo!"
-20 END
+10 DIM A(3)
+20 A(1)=4: A(2)=7: A(3)=9
+30 PRINT A(2)
+40 END

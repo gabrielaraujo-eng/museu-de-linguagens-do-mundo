@@ -1,2 +1,3 @@
-10 PRINT "Olá, Mundo!"
-20 END
+10 PRINT "Ola, estudante!"
+20 PRINT "Vamos aprender BASIC."
+30 END

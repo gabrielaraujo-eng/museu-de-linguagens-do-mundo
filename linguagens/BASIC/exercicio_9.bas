@@ -1,2 +1,2 @@
-10 PRINT "Olá, Mundo!"
+10 PRINT SQR(81)
 20 END
