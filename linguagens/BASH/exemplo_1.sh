@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "Olá, Mundo!"
+# Imprime uma saudação.
+printf '%s\n' 'Olá, Mundo!'
