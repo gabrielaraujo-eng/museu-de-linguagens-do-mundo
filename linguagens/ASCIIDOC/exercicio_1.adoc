@@ -1,1 +1,41 @@
-= Hello AsciiDoc
+= Exercício 1: primeiro documento com cabeçalho completo
+Museu de Linguagens do Mundo
+:topico: documento mínimo
+:dificuldade: inicial
+
+== Enunciado
+
+Escreva um documento AsciiDoc com título de nível 0, linha de autor, dois
+atributos e dois parágrafos de corpo, cada um em uma seção própria. O arquivo
+deve converter sem avisos.
+
+== Solução
+
+A solução é este próprio arquivo. O cabeçalho ocupa as quatro primeiras linhas
+e termina na linha em branco: título, autor, `topico` e `dificuldade`.
+
+=== Primeiro parágrafo pedido
+
+Este é o primeiro parágrafo de corpo. Ele está sob uma seção `===` e cita os
+atributos declarados no cabeçalho: o tópico é {topico} e a dificuldade é
+{dificuldade}.
+
+=== Segundo parágrafo pedido
+
+Este é o segundo parágrafo de corpo. A quebra de linha usada aqui no fonte não
+aparece na saída: as duas linhas
+formam um único bloco de texto.
+
+== Conferência
+
+* [x] título de nível 0 na primeira linha
+* [x] linha de autor logo abaixo
+* [x] dois atributos declarados no cabeçalho
+* [x] dois parágrafos em seções distintas
+* [x] conversão sem avisos
+
+== Erro comum
+
+Começar o arquivo com uma linha em branco antes do título. Nesse caso o
+processador entende que não há cabeçalho e trata o `=` como texto comum, o que
+faz o documento perder título, autor e atributos.

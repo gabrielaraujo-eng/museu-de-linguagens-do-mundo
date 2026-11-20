@@ -1,1 +1,57 @@
-:author: Gabriel
+= Exercício 2: ficha catalográfica com atributos e condicionais
+Museu de Linguagens do Mundo
+:topico: atributos e condicionais
+:obra: Caderno de marcação
+:ano: 2002
+:revisao: 4
+:com-apendice:
+
+== Enunciado
+
+Monte uma ficha catalográfica em que título da obra, ano e número de revisão
+venham de atributos, e em que o apêndice só apareça quando o atributo
+`com-apendice` estiver definido. Use `ifeval` para imprimir uma observação
+quando a revisão passar de 3.
+
+== Solução: identificação
+
+A obra catalogada é _{obra}_, publicada em {ano}, na revisão {revisao}. Os três
+valores vêm de atributos declarados no cabeçalho; alterar o cabeçalho altera
+todas as ocorrências do texto de uma vez.
+
+== Solução: condicional ifdef
+
+O bloco abaixo depende da existência de `com-apendice`, que foi declarado sem
+valor no cabeçalho.
+
+ifdef::com-apendice[]
+Esta edição traz apêndice com a lista de atributos internos do processador.
+endif::[]
+
+ifndef::com-apendice[]
+Esta edição não traz apêndice.
+endif::[]
+
+== Solução: condicional ifeval
+
+ifeval::[{revisao} > 3]
+A revisão {revisao} é posterior à terceira, então o texto foi atualizado para a
+sintaxe do Asciidoctor 2.
+endif::[]
+
+== Tabela de conferência
+
+[cols="2,1", options="header"]
+|===
+| Requisito | Situação
+| Obra vinda de atributo | atendido
+| Ano vindo de atributo | atendido
+| Apêndice condicional | atendido
+| Observação por `ifeval` | atendido
+|===
+
+== Verificação sugerida
+
+Troque `:revisao: 4` por `:revisao: 2` e reconverta: a observação do `ifeval`
+desaparece. Depois remova a linha `:com-apendice:` e reconverta: o parágrafo do
+apêndice dá lugar à frase da edição sem apêndice.

@@ -1,4 +1,90 @@
-[source,python]
+= Exemplo 10: blocos compostos, callouts e imagens
+Museu de Linguagens do Mundo
+:description: Blocos de exemplo, laterais, citações, callouts e imagem em bloco
+:toc: auto
+
+== Bloco de exemplo
+
+O delimitador `====` cria um bloco de exemplo, útil para isolar um trecho do
+resto do texto. Ele aceita título na linha anterior, iniciada por ponto.
+
+.Configuração mínima para converter um arquivo
+====
+[source,sh]
 ----
-print("Code")
+asciidoctor -o /tmp/saida.html exemplo_1.adoc
 ----
+
+O comando grava o HTML em `/tmp/saida.html` e não altera o arquivo de entrada.
+====
+
+== Bloco lateral
+
+O delimitador `****` produz uma nota lateral, apresentada fora do fluxo
+principal do texto.
+
+.Histórico
+****
+AsciiDoc foi criado por Stuart Rackham em 2002 como formato de entrada para
+DocBook. O Asciidoctor, implementação em Ruby, surgiu em 2012 e hoje é a
+implementação de referência da linguagem.
+****
+
+== Citação
+
+Uma citação com atribuição usa o estilo `quote` e o delimitador `____`.
+
+[quote,Stuart Rackham,Documentação do AsciiDoc]
+____
+O texto puro é a melhor forma de armazenar documentação técnica.
+____
+
+== Bloco aberto
+
+O delimitador `--` agrupa conteúdo sem aplicar estilo próprio. Serve para
+aplicar atributos a um conjunto de parágrafos.
+
+[#bloco-aberto]
+--
+Este parágrafo e o seguinte formam um único bloco aberto, com o identificador
+`bloco-aberto` aplicado ao conjunto.
+
+A referência <<bloco-aberto>> aponta para o bloco inteiro.
+--
+
+== Listagem com callouts
+
+Dentro de um bloco de listagem, a sequência `<n>` marca um ponto comentado. As
+explicações vêm depois do bloco, na mesma ordem.
+
+[source,adoc]
+----
+= Documento de exemplo      // <1>
+:atributo: valor            // <2>
+
+Parágrafo com {atributo}.   // <3>
+----
+<1> Título de nível 0, sempre o primeiro elemento do cabeçalho.
+<2> Entrada de atributo, resolvida durante a conversão.
+<3> Referência ao atributo declarado acima.
+
+== Imagem em bloco
+
+A macro `image::` com dois dois-pontos cria uma imagem em bloco, com título e
+texto alternativo.
+
+.A marca do Asciidoctor
+image::https://asciidoctor.org/images/octocat.jpg[Octocat, 128, 128]
+
+O texto entre colchetes é o texto alternativo; os números seguintes são largura
+e altura em pixels.
+
+== Comentários de bloco
+
+Comentários de várias linhas usam `////`. Eles não chegam à saída e servem para
+documentar a estrutura do arquivo.
+
+////
+Este trecho existe apenas no fonte.
+O processador o descarta integralmente.
+////

@@ -1,2 +1,58 @@
-:x: 10
-:s: Olá
+= Exemplo 2: atributos de documento e condicionais
+Museu de Linguagens do Mundo
+:edicao: 3
+:publico: iniciante
+:mostrar-extra:
+:rascunho: false
+:versao-processador: Asciidoctor {asciidoctor-version}
+:descricao-curta: Atributos substituem texto na conversão, não em tempo de execução
+
+== Declaração e uso
+
+Atributos são declarados no cabeçalho, com `:nome: valor`, e podem ser
+declarados no corpo desde que isolados por linhas em branco. Um atributo sem
+valor, como `mostrar-extra`, existe apenas para ser testado por condicionais.
+
+Este documento está na edição {edicao} e se destina ao público {publico}. A
+descrição curta é: {descricao-curta}. O processador em uso é {versao-processador}.
+
+== Condicional ifdef
+
+O bloco abaixo só entra na saída porque o atributo `mostrar-extra` foi
+declarado, ainda que vazio.
+
+ifdef::mostrar-extra[]
+Este parágrafo aparece porque `mostrar-extra` está definido. Note que o valor
+do atributo não importa para `ifdef`: basta existir.
+endif::[]
+
+O próximo bloco é descartado, pois `apendice-tecnico` nunca foi declarado.
+
+ifdef::apendice-tecnico[]
+Este texto não chega à saída.
+endif::[]
+
+== Condicional ifndef
+
+`ifndef` faz o inverso: o conteúdo vale enquanto o atributo não existir.
+
+ifndef::apendice-tecnico[]
+Não há apêndice técnico nesta edição, então este aviso é impresso.
+endif::[]
+
+== Condicional ifeval
+
+`ifeval` compara valores numericamente. Como `edicao` vale {edicao}, a
+comparação com 2 é verdadeira.
+
+ifeval::[{edicao} > 2]
+A partir da terceira edição o documento passou a incluir exemplos de tabela.
+endif::[]
+
+== Atributos no corpo
+
+:revisor: Equipe editorial
+
+O atributo `revisor`, declarado no meio do documento, vale {revisor} daqui em
+diante. Atributos não são reavaliados: o valor usado é sempre o último
+declarado antes do ponto de leitura.

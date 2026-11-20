@@ -1,1 +1,48 @@
-. Título da Lista
+= Exercício 4: roteiro de revisão com três tipos de lista
+Museu de Linguagens do Mundo
+:topico: listas
+:dificuldade: inicial
+
+== Enunciado
+
+Escreva um roteiro de revisão de documentos que use uma lista de verificação
+para o estado das tarefas, uma lista ordenada com um nível aninhado para a
+ordem dos passos e uma lista de descrição para o vocabulário empregado.
+
+== Materiais necessários
+
+* editor de texto simples
+* processador Asciidoctor instalado
+* pasta com os arquivos `.adoc` a revisar
+* navegador para conferir o HTML gerado
+
+== Ordem dos passos
+
+. abrir o arquivo no editor
+. conferir o cabeçalho
+.. verificar se o título é de nível 0
+.. verificar se há uma linha em branco depois dos atributos
+. converter o arquivo
+. comparar a saída com o texto do fonte
+. registrar as correções aplicadas
+
+== Vocabulário do roteiro
+
+cabeçalho:: trecho inicial com título, autor e atributos
+admonição:: parágrafo rotulado por `NOTE`, `TIP`, `IMPORTANT`, `WARNING` ou `CAUTION`
+callout:: marca `<n>` dentro de uma listagem, comentada fora dela
+bloco aberto:: trecho delimitado por `--`, sem estilo próprio
+
+== Estado da revisão
+
+* [x] arquivo aberto
+* [x] cabeçalho conferido
+* [x] conversão sem avisos
+* [ ] saída comparada com o fonte
+* [ ] correções registradas
+
+== Critério de conclusão
+
+A revisão termina quando todos os itens da lista de verificação estiverem
+marcados e a conversão do arquivo terminar com código 0, sem nenhuma mensagem
+de aviso sobre sintaxe.

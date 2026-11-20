@@ -1,2 +1,60 @@
-[square]
-* One
+= Exercício 6: tabela de notas com cabeçalho e mesclagem
+Museu de Linguagens do Mundo
+:topico: tabelas
+:table-stripes: even
+
+== Enunciado
+
+Registre as notas de três turmas em uma tabela com cabeçalho, colunas
+proporcionais, notas alinhadas à direita e uma linha de total que ocupe duas
+colunas.
+
+== Solução: notas por turma
+
+[cols="2,1,>1,>1,>1", options="header"]
+|===
+| Turma | Alunos | Nota 1 | Nota 2 | Média
+| A | 12 | 7,5 | 8,0 | 7,75
+| B | 9 | 6,0 | 5,5 | 5,75
+| C | 15 | 9,0 | 8,5 | 8,75
+2+| Média geral das turmas
+| 7,50
+| 7,33
+| 7,42
+|===
+
+== Solução: legenda das colunas
+
+[cols="1,3", options="header"]
+|===
+| Coluna | Significado
+| Turma | identificador da turma
+| Alunos | quantidade de alunos avaliados
+| Nota 1 e Nota 2 | médias das duas avaliações, de 0 a 10
+| Média | média aritmética das duas notas
+|===
+
+== Solução: conteúdo composto em célula
+
+[cols="1,2a", options="header"]
+|===
+| Turma | Observações
+| B | Turma com menor média.
+. Duas notas abaixo de 6,0
+. Reposição aplicada em uma avaliação
+| C | Turma com maior média, sem pendências.
+|===
+
+== Conferência
+
+* [x] cabeçalho promovido com a opção `header`
+* [x] coluna de texto com peso maior que as numéricas
+* [x] notas alinhadas à direita com `>`
+* [x] linha de total mesclando duas colunas com `2+|`
+* [x] uma célula com conteúdo AsciiDoc, marcada por `a`
+
+== Erro comum
+
+Escrever `2+|` sem fechar a célula anterior. O AsciiDoc não exige fechar
+célula, mas o conteúdo seguinte é absorvido pela célula mesclada, e a tabela
+passa a ter menos células do que as colunas declaradas em `cols`.

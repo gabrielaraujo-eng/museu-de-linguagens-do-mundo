@@ -1,3 +1,54 @@
-ifdef::x[]
-Texto se x existe
-endif::[]
+= Exemplo 3: seções, âncoras e referências cruzadas
+Museu de Linguagens do Mundo
+:toc: left
+:toclevels: 2
+:sectnums:
+:description: Hierarquia de seções, sumário automático e xref
+
+== Níveis de seção
+
+Em um documento do tipo `article`, que é o padrão, existe um único título de
+nível 0, o título do documento. As seções começam em `==` e descem até `======`.
+
+=== Primeiro nível interno
+
+Uma seção `===` é filha da última seção `==` acima dela. A hierarquia é dada
+pela quantidade de sinais de igual, não pela indentação.
+
+==== Segundo nível interno
+
+Este nível ainda é renderizado, mas fica fora do sumário porque `toclevels`
+vale 2. O sumário automático é ativado pelo atributo `toc` no cabeçalho.
+
+== Âncoras explícitas
+
+[[secao-ancorada]]
+=== Seção com identificador escolhido a mão
+
+O bloco `\[[secao-ancorada]]` imediatamente acima do título define o
+identificador da seção. Sem ele, o processador geraria um identificador a
+partir do texto do título, o que muda ao traduzir o documento.
+
+[#ancora-em-bloco]
+=== Âncora em linha própria
+
+A forma `\[#ancora-em-bloco]` é equivalente e costuma ser usada quando o título
+já tem uma lista de atributos.
+
+== Referências cruzadas
+
+Referências internas usam a macro `xref` ou a forma abreviada entre sinais de
+menor e maior. A seção <<secao-ancorada>> foi citada pelo identificador; a
+mesma seção pode ser citada com texto próprio em
+xref:secao-ancorada[esta referência com texto].
+
+Referências entre documentos acrescentam o nome do arquivo antes do `#`:
+xref:exemplo_1.adoc#primeiro-paragrafo[o primeiro parágrafo do Exemplo 1].
+O arquivo de destino precisa existir na mesma pasta, mas o processador não
+verifica o identificador de destino na conversão para HTML.
+
+== Sumário
+
+O sumário é gerado a partir das seções, respeitando `toclevels`, e aparece à
+esquerda porque `toc` foi declarado com o valor `left`. A numeração das seções
+vem de `sectnums`, que não numera o título do documento.

@@ -1,1 +1,75 @@
-// AsciiDoc não tem loops, é marcação
+= Exemplo 4: listas não ordenadas, ordenadas e de descrição
+Museu de Linguagens do Mundo
+:description: Os quatro tipos de lista do AsciiDoc e o aninhamento
+:tags: listas, checklist, descricao
+
+== Lista não ordenada
+
+Marcadores `*` no início da linha produzem itens. O aninhamento é feito
+repetindo o marcador, e não recuando com espaços.
+
+* primeiro item
+* segundo item
+** item aninhado de segundo nível
+** outro item aninhado
+*** terceiro nível
+* terceiro item
+
+== Lista ordenada
+
+Pontos no início da linha produzem numeração automática. A numeração é
+calculada na conversão, então inserir um item no meio renumera o restante.
+
+. reunir o material
+. converter o arquivo
+.. conferir o HTML gerado
+.. conferir os avisos do processador
+. publicar
+
+== Lista de descrição
+
+Termo e definição são separados por dois dois-pontos. A definição pode começar
+na mesma linha ou na linha seguinte.
+
+cabeçalho:: bloco inicial com título, autor e atributos
+seção:: título iniciado por dois ou mais sinais de igual
+bloco:: trecho delimitado por uma linha de quatro caracteres repetidos
+
+== Lista de verificação
+
+O estilo `checklist` transforma itens em caixas marcáveis. `[x]` marca como
+concluído; `[ ]` deixa em aberto.
+
+* [x] instalar o processador
+* [x] converter o Exemplo 1
+* [ ] revisar os avisos de sintaxe
+* [ ] publicar a versão revisada
+
+== Itens com blocos anexados
+
+Um item de lista pode conter parágrafos e blocos inteiros. A linha com um único
+`+` faz a ligação entre o item e o bloco seguinte.
+
+* bloco literal dentro do item
++
+....
+saída sem interpretação de marcação
+....
+* bloco de listagem dentro do item
++
+[source,adoc]
+----
+= Título
+----
+
+== Estilos de marcador
+
+O estilo entre colchetes muda apenas a aparência do marcador, não a estrutura.
+
+[square]
+* marcador quadrado
+* segundo item
+
+[lowerroman]
+. primeiro
+. segundo

@@ -1,1 +1,47 @@
-== Nível 2
+= Exercício 8: glossário com marcas em linha
+Museu de Linguagens do Mundo
+:topico: formatação em linha
+:experimental:
+
+== Enunciado
+
+Escreva um glossário de quatro termos em que cada definição use pelo menos um
+estilo em linha, uma das definições cite uma combinação de teclas com a macro
+`kbd` e outra traga uma nota de rodapé.
+
+== Glossário
+
+Processador:: Programa que lê o arquivo `.adoc` e grava a saída em HTML,
+DocBook ou PDF. O Asciidoctor é a implementação de referência.footnote:[Existem
+implementações em Ruby, Java e Python, com pequenas diferenças de extensão.]
+
+Cabeçalho:: Bloco inicial do documento, com título de nível 0, linha de autor e
+entradas de atributo no formato `:nome: valor`.
+
+Atributo:: Valor nomeado, escrito como `{nome}` no corpo e resolvido na
+conversão. Não confundir com *variável* de linguagem de programação: o valor
+não muda durante a leitura do documento.
+
+Atalho:: Combinação de teclas para acionar um comando no editor. No editor de
+referência desta pasta, kbd:[Ctrl+S] grava o arquivo e kbd:[Ctrl+Shift+P] abre a
+paleta de comandos.
+
+== Uso das marcas
+
+O termo em negrito aparece em **negrito restrito** quando precisa manter o
+estilo dentro de outra palavra. O monoespaçado delimita nomes de arquivo, como
+`exemplo_1.adoc`, e o itálico marca termos estrangeiros, como _listing_.
+
+== Notas de conferência
+
+* [x] quatro termos definidos com `::`
+* [x] negrito, itálico e monoespaçado usados
+* [x] macro `kbd` em pelo menos uma definição
+* [x] nota de rodapé com `footnote:`
+* [x] nenhuma marca aberta sem fechamento
+
+== Erro comum
+
+Deixar um asterisco sem par no meio do parágrafo. O processador não avisa: ele
+trata o asterisco como texto comum, e o negrito simplesmente não aparece. A
+conferência é visual, na saída HTML.
