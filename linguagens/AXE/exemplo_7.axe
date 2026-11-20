@@ -1,1 +1,14 @@
-Return ; Erro/Sair
+:.EX07  Laco While e espera de tecla com getKey
+:DiagnosticOff
+:ClrHome
+:.repete enquanto a condicao for verdadeira
+:0→A
+:While A<5
+:A+1→A
+:Disp A▶Dec,i
+:End
+:"PRESSIONE CLEAR"→Str1
+:Disp Str1
+:.getKey(15) vale 1 enquanto CLEAR estiver pressionada
+:Repeat getKey(15)
+:End

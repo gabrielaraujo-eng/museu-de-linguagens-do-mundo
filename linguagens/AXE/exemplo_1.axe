@@ -1,1 +1,10 @@
-Disp "Olá Mundo"
+:.EX01  Ola mundo: estrutura minima de um programa Axe
+:.A primeira linha e um comentario que define o nome do programa compilado.
+:.Todo comando fica nas linhas seguintes, uma instrucao por linha.
+:DiagnosticOff
+:ClrHome
+:"MUSEU DE LINGUAGENS"→Str1
+:"OLA, MUNDO!"→Str2
+:Disp Str1,i
+:Disp Str2
+:Pause 1800

@@ -1,1 +1,18 @@
-sub(SQ, 5)
+:.ER05  Potencia inteira calculada por sub-rotina
+:DiagnosticOff
+:ClrHome
+:3→A
+:4→B
+:sub(POT,A,B)
+:"3 ELEVADO A 4:"→Str1
+:Disp Str1
+:Disp r₁▶Dec
+:Pause 1800
+:Lbl POT
+:.r1 e a base, r2 o expoente; r3 acumula o produto
+:1→r₃
+:For(r₄,1,r₂)
+:r₃*r₁→r₃
+:End
+:r₃→r₁
+:Return

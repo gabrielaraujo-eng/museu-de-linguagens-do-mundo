@@ -1,1 +1,14 @@
-While X<10
+:.ER04  Soma dos numeros pares de 1 a 20
+:DiagnosticOff
+:ClrHome
+:0→S
+:For(N,1,20)
+:.N^2 e o resto da divisao por 2; zero significa par
+:If N^2=0
+:S+N→S
+:End
+:End
+:"SOMA DOS PARES:"→Str1
+:Disp Str1
+:Disp S▶Dec
+:Pause 1800

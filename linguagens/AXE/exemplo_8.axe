@@ -1,1 +1,21 @@
-Copy(S1,S2,5)
+:.EX08  Strings, ponteiros e length(
+:DiagnosticOff
+:ClrHome
+:"AXE PARSER"→Str1
+:Disp Str1,i
+:.Str1 e um numero: o endereco do primeiro byte da string
+:"TAMANHO:"→Str2
+:Disp Str2
+:Disp length(Str1)▶Dec,i
+:.somar ao ponteiro anda dentro da string
+:"A PARTIR DO QUINTO:"→Str3
+:Disp Str3
+:Disp Str1+4,i
+:.{...} devolve o codigo ASCII do caractere apontado
+:"PRIMEIRO CARACTERE:"→Str4
+:Disp Str4
+:Disp {Str1}▶Char,i
+:.copia a string inteira, com o terminador, para a RAM livre
+:Copy(Str1,L₁,length(Str1)+1)
+:Disp L₁
+:Pause 1800

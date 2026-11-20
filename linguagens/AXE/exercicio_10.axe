@@ -1,1 +1,30 @@
-DirectOn
+:.ER10  Maior, menor e media de seis notas em L1
+:DiagnosticOff
+:ClrHome
+:.notas 50, 60, 70, 80, 90 e 100
+:For(A,0,5)
+:(A+5)*10→{A+L₁}
+:End
+:{L₁}→M
+:{L₁}→N
+:0→S
+:For(A,0,5)
+:{A+L₁}→V
+:S+V→S
+:If V>M
+:V→M
+:End
+:If V<N
+:V→N
+:End
+:End
+:"MAIOR:"→Str1
+:Disp Str1
+:Disp M▶Dec,i
+:"MENOR:"→Str2
+:Disp Str2
+:Disp N▶Dec,i
+:"MEDIA:"→Str3
+:Disp Str3
+:Disp S/6▶Dec
+:Pause 1800

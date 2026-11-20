@@ -1,1 +1,14 @@
-A+B→C
+:.ER09  Hipotenusa e area de um triangulo retangulo
+:DiagnosticOff
+:ClrHome
+:3→A
+:4→B
+:√((A*A)+(B*B))→H
+:(A*B)/2→R
+:"HIPOTENUSA:"→Str1
+:Disp Str1
+:Disp H▶Dec,i
+:"AREA:"→Str2
+:Disp Str2
+:Disp R▶Dec
+:Pause 1800

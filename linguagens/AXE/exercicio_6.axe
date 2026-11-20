@@ -1,1 +1,18 @@
-{L₁+1}→B
+:.ER06  Inverter um vetor de cinco posicoes em L1
+:DiagnosticOff
+:ClrHome
+:.preenche com 10, 20, 30, 40 e 50
+:For(A,0,4)
+:(A+1)*10→{A+L₁}
+:End
+:.troca as pontas: posicao 0 com 4 e posicao 1 com 3
+:For(A,0,2)
+:{A+L₁}→T
+:{4-A+L₁}→{A+L₁}
+:T→{4-A+L₁}
+:End
+:.mostra o vetor ja invertido
+:For(A,0,4)
+:Disp {A+L₁}▶Dec,i
+:End
+:Pause 1800

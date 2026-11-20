@@ -1,3 +1,21 @@
-If X>5
-Disp "Maior"
-End
+:.EX03  Selecao com If, ElseIf, Else e !If
+:DiagnosticOff
+:ClrHome
+:12→A
+:"MAIOR QUE 10"→Str1
+:"IGUAL A 10"→Str2
+:"MENOR QUE 10"→Str3
+:If A>10
+:Disp Str1
+:ElseIf A=10
+:Disp Str2
+:Else
+:Disp Str3
+:End
+:.!If executa o bloco quando a condicao e falsa
+:0→B
+:!If B
+:"B E ZERO"→Str4
+:Disp Str4
+:End
+:Pause 1800
