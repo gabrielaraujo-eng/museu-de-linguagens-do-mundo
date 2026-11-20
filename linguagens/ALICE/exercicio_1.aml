@@ -1,1 +1,12 @@
-print "Olá, Mundo!\n";
+(* exercicio_1 - saudacao personalizada.
+
+   Enunciado: defina o nome de uma pessoa e imprima
+   "Ola, <nome>! Voce esta no Alice ML." usando concatenacao de
+   strings, sem repetir o texto fixo em varias frases.
+
+   Solucao completa: *)
+
+val nome = "Marta";
+
+val saudacao = "Ol\195\161, " ^ nome ^ "! Voc\195\170 est\195\161 no Alice ML.";
+TextIO.print (saudacao ^ "\n");

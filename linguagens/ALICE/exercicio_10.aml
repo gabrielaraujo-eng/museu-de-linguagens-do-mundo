@@ -1,1 +1,35 @@
-print "Olá, Mundo!\n";
+(* exercicio_10 - ordenacao de strings com comparador.
+
+   Enunciado: ordene alfabeticamente a lista de nomes abaixo usando
+   insercao com o comparador String.compare (tipo order) e mostre a
+   lista antes e depois. Verifique o resultado com uma funcao propria
+   que confirma se a lista esta em ordem nao decrescente.
+
+   String.compare compara caractere por caractere na ordem dos codigos,
+   portanto maiusculas vem antes das minusculas: a ordem obtida e a
+   ordem ASCII, nao a ordem alfabetica que ignora caixa.
+
+   Solucao completa: *)
+
+fun inserir (x, []) = [x]
+  | inserir (x, y :: resto) =
+        (case String.compare (x, y) of
+             GREATER => y :: inserir (x, resto)
+           | _ => x :: y :: resto);
+
+fun ordenar [] = []
+  | ordenar (x :: resto) = inserir (x, ordenar resto);
+
+fun emOrdem [] = true
+  | emOrdem [_] = true
+  | emOrdem (x :: y :: resto) =
+        (case String.compare (x, y) of
+             GREATER => false
+           | _ => emOrdem (y :: resto));
+
+val nomes = ["Marta", "ana", "Bruno", "carla", "Davi"];
+val ordenados = ordenar nomes;
+
+TextIO.print ("antes:  " ^ String.concatWith ", " nomes ^ "\n");
+TextIO.print ("depois: " ^ String.concatWith ", " ordenados ^ "\n");
+TextIO.print ("em ordem? " ^ Bool.toString (emOrdem ordenados) ^ "\n");

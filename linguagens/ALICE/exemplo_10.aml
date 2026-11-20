@@ -1,1 +1,29 @@
--- Sintaxe para sort em ALICE
+(* exemplo_10.aml - ordenacao por insercao.
+
+   A estrutura List de Alice ML oferece List.sort : ('a * 'a -> order)
+   -> 'a list -> 'a list (ver manual, estrutura List). Aqui a ordenacao
+   e escrita a mao com insercao, para mostrar o algoritmo e o casamento
+   de padroes sobre listas. *)
+
+fun inserir (x, []) = [x]
+  | inserir (x, y :: resto) =
+        if x <= y then x :: y :: resto else y :: inserir (x, resto);
+
+fun ordenar [] = []
+  | ordenar (x :: resto) = inserir (x, ordenar resto);
+
+fun crescente [] = true
+  | crescente [_] = true
+  | crescente (x :: y :: resto) = x <= y andalso crescente (y :: resto);
+
+fun mostrar [] = ""
+  | mostrar [x] = Int.toString x
+  | mostrar (x :: resto) = Int.toString x ^ ", " ^ mostrar resto;
+
+val desordenada = [5, 3, 9, 1, 7, 3];
+val ordenada = ordenar desordenada;
+
+TextIO.print ("antes:  [" ^ mostrar desordenada ^ "]\n");
+TextIO.print ("depois: [" ^ mostrar ordenada ^ "]\n");
+TextIO.print ("ordenada? " ^ Bool.toString (crescente ordenada) ^ "\n");
+TextIO.print ("entrada ordenada? " ^ Bool.toString (crescente desordenada) ^ "\n");

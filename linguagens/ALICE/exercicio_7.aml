@@ -1,1 +1,24 @@
-print "Olá, Mundo!\n";
+(* exercicio_7 - excecao propria com raise e handle.
+
+   Enunciado: defina a excecao IdadeInvalida (que transporta a idade
+   recebida) e uma funcao que aceite apenas idades entre 0 e 130,
+   levantando a excecao fora desse intervalo. Trate a excecao ao
+   chamar a funcao com valores validos e invalidos.
+
+   Solucao completa: *)
+
+exception IdadeInvalida of int;
+
+fun validar idade =
+    if idade < 0 orelse idade > 130 then raise IdadeInvalida idade
+    else "idade " ^ Int.toString idade ^ " aceita";
+
+fun testar idade =
+    TextIO.print ("entrada " ^ Int.toString idade ^ ": "
+                  ^ (validar idade
+                     handle IdadeInvalida i =>
+                         "recusada, " ^ Int.toString i ^ " esta fora de 0..130") ^ "\n");
+
+testar 34;
+testar 200;
+testar (~5);

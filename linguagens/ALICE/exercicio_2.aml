@@ -1,1 +1,19 @@
-print "Olá, Mundo!\n";
+(* exercicio_2 - valores, tipos e conversao.
+
+   Enunciado: declare um nome (string) e uma idade (int anotado),
+   calcule o ano de nascimento a partir de 2026 e monte uma frase
+   com os tres valores, convertendo os inteiros com Int.toString.
+
+   Solucao completa: *)
+
+val nome : string = "Jo\195\163o";
+val idade : int = 34;
+val anoAtual = 2026;
+val nascimento = anoAtual - idade;
+
+TextIO.print (nome ^ " tem " ^ Int.toString idade
+              ^ " anos e nasceu em " ^ Int.toString nascimento ^ ".\n");
+
+(* Verificacao do tipo inferido: idade + 1 continua sendo int. *)
+val proxima = idade + 1;
+TextIO.print ("no proximo ano tera " ^ Int.toString proxima ^ " anos.\n");

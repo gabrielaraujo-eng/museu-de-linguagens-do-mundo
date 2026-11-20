@@ -1,1 +1,24 @@
--- Sintaxe para list em ALICE
+(* exemplo_6.aml - listas: construcao, cons, concatenacao e estruturas.
+
+   A lista e homogenea e imutavel; "nil" e a lista vazia e "::" e o
+   cons. A estrutura List (documentada no manual de Alice ML) oferece
+   length, map, foldl, filter, tabulate e outras operacoes. *)
+
+val numeros = [4, 8, 15, 16, 23, 42];
+val vazia : int list = nil;
+val maiores = 100 :: numeros;
+val juntas = [1, 2] @ [3, 4];
+
+(* Casamento de padroes sobre a lista. *)
+fun somar [] = 0
+  | somar (x :: resto) = x + somar resto;
+
+TextIO.print ("numeros = " ^ String.concatWith ", " (List.map Int.toString numeros) ^ "\n");
+TextIO.print ("comprimento = " ^ Int.toString (List.length numeros) ^ "\n");
+TextIO.print ("soma por recursao = " ^ Int.toString (somar numeros) ^ "\n");
+TextIO.print ("soma por List.foldl = "
+              ^ Int.toString (List.foldl (fn (n, acc) => n + acc) 0 numeros) ^ "\n");
+TextIO.print ("cabeca de maiores = " ^ Int.toString (hd maiores) ^ "\n");
+TextIO.print ("juntas = " ^ String.concatWith ", " (List.map Int.toString juntas) ^ "\n");
+TextIO.print ("vazia = " ^ String.concatWith ", " (List.map Int.toString vazia) ^ " (comprimento "
+              ^ Int.toString (List.length vazia) ^ ")\n");

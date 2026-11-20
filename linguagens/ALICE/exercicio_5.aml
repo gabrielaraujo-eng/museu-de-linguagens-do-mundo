@@ -1,1 +1,20 @@
-print "Olá, Mundo!\n";
+(* exercicio_5 - funcao sobre um par de inteiros.
+
+   Enunciado: escreva uma funcao que receba um par (a, b) e devolva a
+   media inteira, o menor e o maior valor do par. Aplique a funcao a
+   dois pares e imprima os resultados.
+
+   Solucao completa: *)
+
+fun media (a, b) = (a + b) div 2;
+fun menor (a, b) = Int.min (a, b);
+fun maior (a, b) = Int.max (a, b);
+
+fun relatar (a, b) =
+    TextIO.print ("par (" ^ Int.toString a ^ ", " ^ Int.toString b ^ "): "
+                  ^ "media " ^ Int.toString (media (a, b))
+                  ^ ", menor " ^ Int.toString (menor (a, b))
+                  ^ ", maior " ^ Int.toString (maior (a, b)) ^ "\n");
+
+relatar (10, 4);
+relatar (7, 7);

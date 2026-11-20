@@ -1,1 +1,14 @@
-print "Olá, Mundo!\n";
+(* exemplo_1.aml - saida de texto no toplevel de Alice ML.
+
+   Os arquivos desta pasta sao sequencias de frases do toplevel:
+   cada frase termina com ponto e virgula, como no manual da
+   linguagem. TextIO.print e a forma explicita de escrever na
+   saida padrao; "print" do ambiente inicial faz o mesmo. *)
+
+(* O literal de string de Standard ML admite apenas ASCII imprimivel,
+   por isso o "a" acentuado e escrito como escape decimal: \195\161
+   corresponde aos dois bytes UTF-8 de U+00E1. *)
+TextIO.print "Ol\195\161, Mundo!\n";
+
+(* print do ambiente inicial e equivalente a TextIO.print. *)
+print "Ol\195\161, Mundo!\n";

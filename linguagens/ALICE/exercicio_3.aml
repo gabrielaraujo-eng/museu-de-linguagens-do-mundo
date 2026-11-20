@@ -1,1 +1,20 @@
-print "Olá, Mundo!\n";
+(* exercicio_3 - classificacao por condicionais.
+
+   Enunciado: escreva uma funcao que receba uma nota inteira de 0 a 100
+   e devolva o conceito "A" (>= 90), "B" (>= 75), "C" (>= 60) ou "D".
+   Aplique a funcao a uma lista de notas e imprima nota e conceito.
+
+   Solucao completa: *)
+
+fun conceito nota =
+    if nota >= 90 then "A"
+    else if nota >= 75 then "B"
+    else if nota >= 60 then "C"
+    else "D";
+
+val notas = [95, 80, 61, 40];
+
+fun imprimir nota =
+    TextIO.print ("nota " ^ Int.toString nota ^ " -> conceito " ^ conceito nota ^ "\n");
+
+List.app imprimir notas;
