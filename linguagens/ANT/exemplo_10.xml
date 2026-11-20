@@ -1,1 +1,71 @@
--- Sintaxe para sort em ANT
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_10.xml - pipeline completo de build.
+
+  Reúne as tarefas centrais de um build Java real: <tstamp>, <mkdir>,
+  <javac>, <jar> com manifesto, <zip> do artefato e <exec> para rodar o
+  programa compilado. O código-fonte é gerado pelo próprio buildfile para
+  que o exemplo seja autossuficiente.
+
+  Execução: ant -f exemplo_10.xml
+-->
+<project name="exemplo-10-pipeline" default="distribuir" basedir=".">
+
+  <description>Compila, empacota em jar, compacta em zip e executa o programa.</description>
+
+  <tstamp/>
+  <property name="src.dir" location="src"/>
+  <property name="build.dir" location="build"/>
+  <property name="classes.dir" location="${build.dir}/classes"/>
+  <property name="dist.dir" location="dist"/>
+  <property name="jar.nome" value="museu-${DSTAMP}.jar"/>
+
+  <target name="limpar" description="Remove artefatos de builds anteriores">
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+  </target>
+
+  <target name="iniciar" depends="limpar" description="Cria pastas e o fonte Java">
+    <mkdir dir="${src.dir}"/>
+    <mkdir dir="${classes.dir}"/>
+    <mkdir dir="${dist.dir}"/>
+    <echo file="${src.dir}/Museu.java"><![CDATA[
+public class Museu {
+
+    public static void main(String[] args) {
+        System.out.println("Museu de Linguagens do Mundo");
+        System.out.println("Build gerado por Apache Ant");
+    }
+}
+]]></echo>
+    <echo message="Fontes preparados em ${src.dir}"/>
+  </target>
+
+  <target name="compilar" depends="iniciar" description="Compila as classes com javac">
+    <javac srcdir="${src.dir}" destdir="${classes.dir}"
+           includeantruntime="false" encoding="UTF-8" debug="true"/>
+  </target>
+
+  <target name="empacotar" depends="compilar" description="Gera o jar com manifesto">
+    <jar destfile="${dist.dir}/${jar.nome}" basedir="${classes.dir}">
+      <manifest>
+        <attribute name="Main-Class" value="Museu"/>
+        <attribute name="Implementation-Title" value="Museu de Linguagens"/>
+        <attribute name="Implementation-Version" value="${DSTAMP}"/>
+      </manifest>
+    </jar>
+    <echo message="Jar criado: ${dist.dir}/${jar.nome}"/>
+  </target>
+
+  <target name="distribuir" depends="empacotar" description="Compacta em zip e executa o jar">
+    <zip destfile="${dist.dir}/museu-${DSTAMP}.zip">
+      <fileset dir="${dist.dir}" includes="*.jar"/>
+    </zip>
+    <exec executable="java" failonerror="true">
+      <arg value="-jar"/>
+      <arg value="${dist.dir}/${jar.nome}"/>
+    </exec>
+    <echo message="Distribuição pronta em ${dist.dir}"/>
+  </target>
+
+</project>

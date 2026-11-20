@@ -1,1 +1,52 @@
--- Sintaxe para string em ANT
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_8.xml - texto e strings.
+
+  Ant não tem variáveis de texto com operadores próprios. O trabalho com
+  strings é feito por tarefas: <replace> troca tokens em arquivos,
+  <loadfile> lê um arquivo para uma propriedade, <condition> com <contains>
+  e <matches> testa o conteúdo, e <echo> interpola propriedades.
+
+  Execução: ant -f exemplo_8.xml
+-->
+<project name="exemplo-8-texto" default="processar" basedir=".">
+
+  <description>Substituição de tokens, leitura de arquivo e testes de conteúdo.</description>
+
+  <property name="texto.dir" location="texto"/>
+  <property name="modelo" location="${texto.dir}/modelo.txt"/>
+  <property name="resultado" location="${texto.dir}/resultado.txt"/>
+
+  <target name="criar-modelo" description="Cria o arquivo com tokens @...@">
+    <mkdir dir="${texto.dir}"/>
+    <echo file="${modelo}">Bem-vindo ao @MUSEU@.
+Versao do catalogo: @VERSAO@.
+Linguagem documentada: @LINGUAGEM@.</echo>
+    <echo message="Modelo criado em ${modelo}"/>
+  </target>
+
+  <target name="processar" depends="criar-modelo" description="Substitui tokens e confere o resultado">
+    <copy file="${modelo}" tofile="${resultado}" overwrite="true"/>
+    <replace file="${resultado}" token="@MUSEU@" value="Museu de Linguagens"/>
+    <replace file="${resultado}" token="@VERSAO@" value="2026"/>
+    <replace file="${resultado}" token="@LINGUAGEM@" value="Apache Ant"/>
+
+    <loadfile property="conteudo" srcFile="${resultado}"/>
+
+    <condition property="contem.museu" value="sim" else="nao">
+      <contains string="${conteudo}" substring="Museu de Linguagens"/>
+    </condition>
+    <condition property="restam.tokens" value="sim" else="nao">
+      <matches string="${conteudo}" pattern=".*@[A-Z]+@.*" singleline="true"/>
+    </condition>
+
+    <echo message="Contém o nome do museu: ${contem.museu}"/>
+    <echo message="Restaram tokens @...@: ${restam.tokens}"/>
+    <echo message="Arquivo final: ${resultado}"/>
+  </target>
+
+  <target name="limpar" description="Remove a pasta de texto">
+    <delete dir="${texto.dir}"/>
+  </target>
+
+</project>

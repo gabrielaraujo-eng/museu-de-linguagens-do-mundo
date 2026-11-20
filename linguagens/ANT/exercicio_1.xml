@@ -1,5 +1,27 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_1.xml - primeiro buildfile: dois alvos e um alvo padrão.
+
+  Exercício: um projeto chamado exercicio-1 com o alvo padrão executar, que
+  imprime uma saudação, e um alvo listar que imprime o nome do projeto e o
+  alvo padrão. A execução de "ant -f exercicio_1.xml" deve mostrar apenas a
+  saudação.
+
+  Execução: ant -f exercicio_1.xml
+-->
+<project name="exercicio-1-saudacao" default="executar" basedir=".">
+
+  <description>Saudação em um alvo padrão e informações do projeto em outro alvo.</description>
+
+  <target name="executar" description="Imprime a saudação do museu">
+    <echo message="Museu de Linguagens do Mundo"/>
+    <echo message="Pasta de Apache Ant: primeiro buildfile"/>
   </target>
+
+  <target name="listar" description="Mostra nome do projeto e alvo padrão">
+    <echo message="Projeto: ${ant.project.name}"/>
+    <echo message="Alvo padrão: ${ant.project.default-target}"/>
+    <echo message="Diretório base: ${basedir}"/>
+  </target>
+
 </project>

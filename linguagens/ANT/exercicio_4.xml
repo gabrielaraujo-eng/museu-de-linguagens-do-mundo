@@ -1,5 +1,53 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_4.xml - processar um lote de arquivos sem laço.
+
+  Exercício: criar quatro capítulos, copiar todos de uma vez para a pasta
+  lote com um único <copy> sobre <fileset>, e conferir a quantidade
+  resultante com <resourcecount>. O buildfile não contém nenhum laço,
+  porque a linguagem do Ant não os tem.
+
+  Execução: ant -f exercicio_4.xml
+-->
+<project name="exercicio-4-lote" default="processar" basedir=".">
+
+  <description>Cópia em lote com fileset e conferência da quantidade de arquivos.</description>
+
+  <property name="capitulos.dir" location="capitulos"/>
+  <property name="lote.dir" location="lote"/>
+
+  <target name="escrever-capitulos" description="Cria quatro capítulos de exemplo">
+    <mkdir dir="${capitulos.dir}"/>
+    <echo file="${capitulos.dir}/cap01.txt">Capítulo 1: as línguas e o museu.</echo>
+    <echo file="${capitulos.dir}/cap02.txt">Capítulo 2: famílias linguísticas.</echo>
+    <echo file="${capitulos.dir}/cap03.txt">Capítulo 3: escritas e alfabetos.</echo>
+    <echo file="${capitulos.dir}/cap04.txt">Capítulo 4: documentação técnica.</echo>
+    <echo message="Quatro capítulos escritos em ${capitulos.dir}"/>
   </target>
+
+  <target name="processar" depends="escrever-capitulos" description="Copia o lote e confere a contagem">
+    <mkdir dir="${lote.dir}"/>
+    <copy todir="${lote.dir}" overwrite="true">
+      <fileset dir="${capitulos.dir}" includes="cap*.txt"/>
+    </copy>
+
+    <resourcecount property="qtd.lote">
+      <fileset dir="${lote.dir}" includes="cap*.txt"/>
+    </resourcecount>
+
+    <condition property="lote.completo" value="sim" else="nao">
+      <resourcecount when="equal" count="4">
+        <fileset dir="${lote.dir}" includes="cap*.txt"/>
+      </resourcecount>
+    </condition>
+
+    <echo message="Arquivos no lote: ${qtd.lote}"/>
+    <echo message="Lote completo: ${lote.completo}"/>
+  </target>
+
+  <target name="limpar" description="Remove capítulos e lote">
+    <delete dir="${lote.dir}"/>
+    <delete dir="${capitulos.dir}"/>
+  </target>
+
 </project>

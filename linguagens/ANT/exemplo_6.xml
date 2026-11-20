@@ -1,1 +1,53 @@
--- Sintaxe para list em ANT
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_6.xml - coleções de arquivos e caminhos.
+
+  Ant não tem listas nem dicionários como tipos da linguagem. As estruturas
+  de dados são tipos do próprio Ant: <fileset> (conjunto de arquivos por
+  padrão) e <path> (lista ordenada de caminhos, com id reutilizável por
+  refid). <pathconvert> transforma um desses tipos em texto.
+
+  Execução: ant -f exemplo_6.xml
+-->
+<project name="exemplo-6-colecoes" default="listar" basedir=".">
+
+  <description>Fileset, path com refid e conversão de coleções em texto.</description>
+
+  <property name="dados.dir" location="dados"/>
+  <property name="lib.dir" location="lib"/>
+
+  <!-- Caminho nomeado: pode ser citado em qualquer tarefa com refid. -->
+  <path id="caminho.projeto">
+    <pathelement location="${dados.dir}"/>
+    <pathelement location="${lib.dir}"/>
+    <pathelement location="."/>
+  </path>
+
+  <target name="preparar" description="Cria arquivos de dados e uma biblioteca vazia">
+    <mkdir dir="${dados.dir}"/>
+    <mkdir dir="${lib.dir}"/>
+    <echo file="${dados.dir}/autores.txt">Ana, Bruno e Carla</echo>
+    <echo file="${dados.dir}/obras.txt">Três obras catalogadas</echo>
+    <echo file="${dados.dir}/notas.md">Notas de catalogação</echo>
+    <echo message="Estrutura criada em ${dados.dir} e ${lib.dir}"/>
+  </target>
+
+  <target name="listar" depends="preparar" description="Lista o conteúdo das coleções">
+    <!-- Um fileset seleciona por padrão de nome, com exclusões opcionais. -->
+    <pathconvert property="lista.textos" pathsep=" | ">
+      <fileset dir="${dados.dir}" includes="*.txt"/>
+    </pathconvert>
+
+    <!-- O path nomeado também pode ser convertido em texto. -->
+    <pathconvert property="lista.caminho" refid="caminho.projeto" pathsep=" ; "/>
+
+    <echo message="Textos: ${lista.textos}"/>
+    <echo message="Caminho do projeto: ${lista.caminho}"/>
+  </target>
+
+  <target name="limpar" description="Remove as pastas de dados e de biblioteca">
+    <delete dir="${dados.dir}"/>
+    <delete dir="${lib.dir}"/>
+  </target>
+
+</project>

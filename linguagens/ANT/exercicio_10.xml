@@ -1,5 +1,104 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_10.xml - build Java completo com cópia de documentação.
+
+  Exercício: montar o projeto do zero, compilar duas classes com <javac>,
+  empacotar em jar com manifesto, copiar a documentação para a
+  distribuição com <copy> e <fileset>, compactar tudo em zip e executar a
+  classe principal com <exec>. O alvo limpar devolve a árvore ao estado
+  inicial.
+
+  Execução: ant -f exercicio_10.xml
+-->
+<project name="exercicio-10-java" default="publicar" basedir=".">
+
+  <description>Compilação, jar com manifesto, cópia de documentação, zip e execução.</description>
+
+  <property name="fontes.dir" location="fontes"/>
+  <property name="classes.dir" location="classes"/>
+  <property name="dist.dir" location="dist"/>
+  <property name="jar.nome" value="catalogo.jar"/>
+
+  <target name="limpar" description="Remove classes e distribuição">
+    <delete dir="${classes.dir}"/>
+    <delete dir="${dist.dir}"/>
   </target>
+
+  <target name="montar" depends="limpar" description="Cria pastas, fontes e documentação">
+    <mkdir dir="${fontes.dir}"/>
+    <mkdir dir="${classes.dir}"/>
+    <mkdir dir="${dist.dir}/doc"/>
+
+    <echo file="${fontes.dir}/Catalogo.java"><![CDATA[
+import java.util.ArrayList;
+import java.util.List;
+
+public class Catalogo {
+
+    private final List<String> linguagens = new ArrayList<String>();
+
+    public void adicionar(String linguagem) {
+        linguagens.add(linguagem);
+    }
+
+    public int tamanho() {
+        return linguagens.size();
+    }
+
+    public List<String> listar() {
+        return linguagens;
+    }
+}
+]]></echo>
+
+    <echo file="${fontes.dir}/Principal.java"><![CDATA[
+public class Principal {
+
+    public static void main(String[] args) {
+        Catalogo catalogo = new Catalogo();
+        catalogo.adicionar("tupi");
+        catalogo.adicionar("guarani");
+        catalogo.adicionar("nheengatu");
+        System.out.println("Linguagens no catálogo: " + catalogo.tamanho());
+        System.out.println("Lista: " + catalogo.listar());
+    }
+}
+]]></echo>
+
+    <echo file="${dist.dir}/doc/LEIAME.txt">Catálogo de linguagens gerado por Apache Ant.</echo>
+    <echo message="Fontes e documentação preparados."/>
+  </target>
+
+  <target name="compilar" depends="montar" description="Compila as classes Java">
+    <javac srcdir="${fontes.dir}" destdir="${classes.dir}"
+           includeantruntime="false" encoding="UTF-8"/>
+    <echo message="Classes compiladas em ${classes.dir}"/>
+  </target>
+
+  <target name="empacotar" depends="compilar" description="Gera o jar com classe principal">
+    <jar destfile="${dist.dir}/${jar.nome}" basedir="${classes.dir}">
+      <manifest>
+        <attribute name="Main-Class" value="Principal"/>
+        <attribute name="Implementation-Title" value="Catalogo de Linguagens"/>
+      </manifest>
+    </jar>
+    <echo message="Jar gerado: ${dist.dir}/${jar.nome}"/>
+  </target>
+
+  <target name="publicar" depends="empacotar" description="Copia documentação, compacta e executa">
+    <copy todir="${dist.dir}/doc" overwrite="true">
+      <fileset dir="." includes="*.txt"/>
+    </copy>
+
+    <zip destfile="${dist.dir}/catalogo.zip" basedir="${dist.dir}" includes="*.jar, doc/**"/>
+
+    <exec executable="java" failonerror="true">
+      <arg value="-cp"/>
+      <arg path="${classes.dir}"/>
+      <arg value="Principal"/>
+    </exec>
+
+    <echo message="Distribuição concluída em ${dist.dir}"/>
+  </target>
+
 </project>

@@ -1,5 +1,65 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_9.xml - medir texto e arquivos sem aritmética.
+
+  Exercício: validar um identificador com pelo menos 8 caracteres usando a
+  condição <length>, medir o tamanho de uma frase e contar os arquivos de
+  uma pasta. Não há soma nem comparação entre propriedades: cada teste
+  compara um valor com um número fixo.
+
+  Atenção: if e unless dos alvos testam existência de propriedade, não o
+  valor. Por isso a condição abaixo define identificador.curto apenas quando
+  o teste é verdadeiro, e o <fail> usa if.
+
+  Execução: ant -f exercicio_9.xml
+  Com identificador curto: ant -f exercicio_9.xml -Didentificador=ant
+-->
+<project name="exercicio-9-medidas" default="avaliar" basedir=".">
+
+  <description>Tamanho de string como condição, contagem de arquivos e soma de bytes.</description>
+
+  <property name="identificador" value="museu-ant"/>
+  <property name="amostras.dir" location="amostras"/>
+
+  <!-- Só é definida quando a string tem menos de 8 caracteres. -->
+  <condition property="identificador.curto">
+    <length string="${identificador}" when="less" length="8" trim="true"/>
+  </condition>
+
+  <!-- Propriedade descritiva, sempre definida, para a mensagem final. -->
+  <condition property="identificador.estado" value="curto" else="valido">
+    <length string="${identificador}" when="less" length="8" trim="true"/>
+  </condition>
+
+  <target name="criar-amostras" description="Cria duas amostras de texto">
+    <mkdir dir="${amostras.dir}"/>
+    <echo file="${amostras.dir}/frase1.txt">A língua é um patrimônio.</echo>
+    <echo file="${amostras.dir}/frase2.txt">Documentar é preservar.</echo>
   </target>
+
+  <target name="avaliar" depends="criar-amostras" description="Mede identificador e amostras">
+    <length property="tamanho.identificador" string="${identificador}" trim="true"/>
+
+    <!-- mode="all" soma o tamanho de todos os arquivos do fileset. -->
+    <length property="bytes.amostras" mode="all">
+      <fileset dir="${amostras.dir}" includes="*.txt"/>
+    </length>
+
+    <resourcecount property="qtd.amostras">
+      <fileset dir="${amostras.dir}" includes="*.txt"/>
+    </resourcecount>
+
+    <echo message="Identificador: ${identificador} (${tamanho.identificador} caracteres)"/>
+    <echo message="Amostras: ${qtd.amostras} arquivos, ${bytes.amostras} bytes"/>
+
+    <fail if="identificador.curto"
+          message="O identificador ${identificador} é ${identificador.estado}: são necessários 8 caracteres ou mais."/>
+
+    <echo message="Identificador aceito como ${identificador.estado}."/>
+  </target>
+
+  <target name="limpar" description="Remove as amostras">
+    <delete dir="${amostras.dir}"/>
+  </target>
+
 </project>
