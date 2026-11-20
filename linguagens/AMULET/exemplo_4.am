@@ -1,1 +1,26 @@
-let rec loop n = if n > 0 then (print (show n); loop (n - 1)) else ()
+(* exemplo_4.am - Repeticao por recursao.
+
+   Amulet nao tem laco embutido. Repetir e escrever uma funcao recursiva
+   com let rec. Efeitos sequenciais (duas acoes em ordem) ficam em um
+   bloco begin ... end, separados por ponto e virgula. *)
+
+open import "prelude.ml"
+
+let rec contagem n =
+  if n > 0 then begin
+    put_line ("contagem: " ^ show n);
+    contagem (n - 1)
+  end else
+    put_line "fim da contagem"
+
+(* Recursao de cauda: o acumulador evita empilhar chamadas *)
+let rec fatorial acc n =
+  if n <= 1 then acc else fatorial (acc * n) (n - 1)
+
+let rec soma_ate acc n =
+  if n <= 0 then acc else soma_ate (acc + n) (n - 1)
+
+let () =
+  contagem 3;
+  put_line ("5! = " ^ show (fatorial 1 5));
+  put_line ("soma de 1 a 10 = " ^ show (soma_ate 0 10))

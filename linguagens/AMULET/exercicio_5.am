@@ -1,1 +1,18 @@
-print "Olá, Mundo!"
+(* exercicio_5.am - Potencia inteira com funcao curried.
+
+   Enunciado: escreva "potencia base expoente" por recursao, sem usar o
+   operador ** (que devolve float), e mostre 2^10 e 3^4. A forma com dois
+   parametros e acucar para funcoes curried. *)
+
+open import "prelude.ml"
+
+let rec potencia base expoente =
+  if expoente <= 0 then 1 else base * potencia base (expoente - 1)
+
+(* Aplicacao parcial: eleva qualquer numero ao quadrado *)
+let quadrado = potencia 2
+
+let () =
+  put_line ("2^10 = " ^ show (potencia 2 10));
+  put_line ("3^4 = " ^ show (potencia 3 4));
+  put_line ("quadrado 12 = " ^ show (quadrado 12))

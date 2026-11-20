@@ -1,1 +1,24 @@
-print "Olá, Mundo!"
+(* exercicio_6.am - Transformacao de listas.
+
+   Enunciado: partindo de [1, 2, 3, 4, 5, 6], obtenha o triplo de cada
+   elemento, mantenha apenas os impares e some o resultado. Escreva a
+   funcao de mapeamento a mao e use filter do prelude. *)
+
+open import "prelude.ml"
+
+let numeros = [1, 2, 3, 4, 5, 6]
+
+let rec triplo = function
+  | [] -> []
+  | Cons (x, resto) -> (x * 3) :: triplo resto
+
+let rec somatorio = function
+  | [] -> 0
+  | Cons (x, resto) -> x + somatorio resto
+
+let impares = filter (fun x -> x - (x // 2) * 2 == 1) (triplo numeros)
+
+let () =
+  put_line ("triplo = " ^ show (triplo numeros));
+  put_line ("impares = " ^ show impares);
+  put_line ("soma dos impares = " ^ show (somatorio impares))

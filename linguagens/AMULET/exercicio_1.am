@@ -1,1 +1,15 @@
-print "Olá, Mundo!"
+(* exercicio_1.am - Saudacao personalizada.
+
+   Enunciado: defina o nome e a cidade de uma pessoa e imprima duas
+   linhas: "Ola, <nome>!" e "Bem-vindo(a) a <cidade>.".
+   Solucao completa abaixo; o arquivo compila como modulo porque todo
+   efeito esta ligado a uma declaracao let (). *)
+
+open import "prelude.ml"
+
+let nome = "Grace Hopper"
+let cidade = "Nova York"
+
+let () =
+  put_line ("Ola, " ^ nome ^ "!");
+  put_line ("Bem-vindo(a) a " ^ cidade ^ ".")

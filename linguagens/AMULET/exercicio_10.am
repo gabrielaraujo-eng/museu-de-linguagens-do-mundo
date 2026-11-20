@@ -1,1 +1,35 @@
-print "Olá, Mundo!"
+(* exercicio_10.am - Ordenacao e extremos de uma lista.
+
+   Enunciado: ordene [9, 4, 7, 1, 8, 2] com um algoritmo de insercao
+   escrito em Amulet, confirme o resultado com a funcao sort da
+   biblioteca e imprima o menor e o maior elemento da lista ordenada. *)
+
+open import "prelude.ml"
+
+let rec insere x = function
+  | [] -> [x]
+  | Cons (y, resto) ->
+      if x <= y then x :: y :: resto else y :: insere x resto
+
+let rec ordena = function
+  | [] -> []
+  | Cons (x, resto) -> insere x (ordena resto)
+
+let dados = [9, 4, 7, 1, 8, 2]
+let ordenados = ordena dados
+
+(* Extremos sem depender de funcoes nao exportadas: escritos aqui *)
+let menor = head ordenados
+
+let rec ultimo = function
+  | [] -> 0
+  | Cons (x, []) -> x
+  | Cons (_, resto) -> ultimo resto
+
+let maior = ultimo ordenados
+
+let () =
+  put_line ("original = " ^ show dados);
+  put_line ("ordenada = " ^ show ordenados);
+  put_line ("sort = " ^ show (sort dados));
+  put_line ("menor = " ^ show menor ^ ", maior = " ^ show maior)

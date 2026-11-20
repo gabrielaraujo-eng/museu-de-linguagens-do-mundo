@@ -1,1 +1,32 @@
--- Sintaxe para list em AMULET
+(* exemplo_6.am - Listas e correspondencia de padroes.
+
+   Listas sao homogeneas e imutaveis. A forma literal e [1, 2, 3]; o
+   construtor e Cons (x, xs) e o operador x :: xs acrescenta no inicio.
+   Nos padroes usa-se Cons (x, resto), e nao a forma ::. O prelude traz
+   filter, sort, length e foldl; map nao esta no escopo, por isso a
+   funcao dobro_todos e escrita a mao. *)
+
+open import "prelude.ml"
+
+let vazia : list int = []
+let numeros = [1, 2, 3, 4, 5]
+let com_zero = 0 :: numeros
+
+let rec dobro_todos = function
+  | [] -> []
+  | Cons (x, resto) -> (x * 2) :: dobro_todos resto
+
+let rec somatorio = function
+  | [] -> 0
+  | Cons (x, resto) -> x + somatorio resto
+
+let () =
+  put_line ("vazia = " ^ show vazia);
+  put_line ("numeros = " ^ show numeros);
+  put_line ("com_zero = " ^ show com_zero);
+  put_line ("dobro = " ^ show (dobro_todos numeros));
+  put_line ("maiores que 3 = " ^ show (filter (fun x -> x > 3) numeros));
+  put_line ("soma = " ^ show (somatorio numeros));
+  put_line ("foldl = " ^ show (foldl (fun acc x -> acc + x) 0 numeros));
+  put_line ("tamanho = " ^ show (length numeros));
+  put_line ("ordenada = " ^ show (sort [5, 2, 4, 1, 3]))

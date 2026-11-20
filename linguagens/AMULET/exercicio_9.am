@@ -1,1 +1,24 @@
-print "Olá, Mundo!"
+(* exercicio_9.am - Calculos inteiros e de ponto flutuante.
+
+   Enunciado: calcule a area de um circulo de raio 2.0 com +. e *. e a
+   media inteira das notas 8, 6 e 10 com //. Os dois resultados devem
+   aparecer na saida; note que os operadores sao diferentes para cada
+   tipo. *)
+
+open import "prelude.ml"
+
+let pi = 3.14159
+let raio = 2.0
+
+let area = pi *. raio *. raio
+let perimetro = 2.0 *. pi *. raio
+
+let n1 = 8
+let n2 = 6
+let n3 = 10
+let media = (n1 + n2 + n3) // 3
+
+let () =
+  put_line ("area = " ^ show area);
+  put_line ("perimetro = " ^ show perimetro);
+  put_line ("media inteira = " ^ show media)

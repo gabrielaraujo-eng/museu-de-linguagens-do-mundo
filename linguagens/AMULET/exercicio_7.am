@@ -1,1 +1,18 @@
-print "Olá, Mundo!"
+(* exercicio_7.am - Tratamento de erro com Exception.try_.
+
+   Enunciado: use a divisao inteira do prelude (//) para calcular 12 // 3
+   e 7 // 0. Como // lanca DivideBy0 quando o divisor e zero, envolva as
+   duas chamadas em Exception.try_ e trate Some / None com match. *)
+
+open import "prelude.ml"
+
+let dividir a b = a // b
+
+let relatar descricao r =
+  match r with
+  | Some v -> put_line (descricao ^ ": " ^ show v)
+  | None -> put_line (descricao ^ ": erro de divisao por zero")
+
+let () =
+  relatar "12 // 3" (Exception.try_ (fun () -> dividir 12 3));
+  relatar "7 // 0" (Exception.try_ (fun () -> dividir 7 0))

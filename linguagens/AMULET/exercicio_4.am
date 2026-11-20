@@ -1,1 +1,13 @@
-print "Olá, Mundo!"
+(* exercicio_4.am - Soma dos numeros pares de 1 a 20.
+
+   Enunciado: sem usar laco (Amulet nao tem um), escreva uma funcao
+   recursiva de cauda que some 2 + 4 + ... + 20 e imprima o total.
+   O resultado esperado e 110. *)
+
+open import "prelude.ml"
+
+let rec soma_pares acc n =
+  if n > 20 then acc else soma_pares (acc + n) (n + 2)
+
+let () =
+  put_line ("soma dos pares de 1 a 20 = " ^ show (soma_pares 0 2))

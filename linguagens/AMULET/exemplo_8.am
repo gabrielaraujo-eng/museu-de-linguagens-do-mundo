@@ -1,1 +1,26 @@
--- Sintaxe para string em AMULET
+(* exemplo_8.am - Strings.
+
+   O literal de string usa aspas duplas. A concatenacao e o operador ^,
+   e a comparacao de igualdade e ==. show converte valores de tipos com
+   instancia show (como int e float) em string; nao existe conversao
+   implicita de numero para texto. *)
+
+open import "prelude.ml"
+
+let nome = "Amulet"
+let linguagem = "funcional"
+let versao = 1
+
+let apresentacao =
+  nome ^ " e uma linguagem " ^ linguagem ^ ", versao " ^ show versao ^ "."
+
+let () =
+  put_line apresentacao;
+  put_line ("versao seguinte: " ^ show (versao + 1));
+  begin
+    if nome == "Amulet" then
+      put_line "o nome confere"
+    else
+      put_line "nome diferente"
+  end;
+  put_line ("aspas dentro da string: \"ok\"")
