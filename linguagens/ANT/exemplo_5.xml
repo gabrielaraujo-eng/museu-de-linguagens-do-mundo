@@ -1,1 +1,52 @@
--- Sintaxe para func em ANT
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_5.xml - blocos reutilizáveis com macrodef.
+
+  Ant não tem funções. O equivalente é <macrodef>, que empacota tarefas sob
+  um nome novo e recebe parâmetros declarados em <attribute>. Dentro da
+  macro, os parâmetros são referenciados como @{nome}, e não como ${nome}.
+
+  Execução: ant -f exemplo_5.xml
+-->
+<project name="exemplo-5-macrodef" default="demonstrar" basedir=".">
+
+  <description>Macros reutilizáveis com atributos obrigatórios e com valor padrão.</description>
+
+  <property name="saida.dir" location="saida"/>
+
+  <!-- Macro com um atributo obrigatório e outro com valor padrão. -->
+  <macrodef name="saudar">
+    <attribute name="nome"/>
+    <attribute name="saudacao" default="Olá"/>
+    <sequential>
+      <echo message="@{saudacao}, @{nome}!"/>
+    </sequential>
+  </macrodef>
+
+  <!-- Macro que escreve um arquivo de uma linha, reaproveitando mkdir e echo. -->
+  <macrodef name="registrar">
+    <attribute name="arquivo"/>
+    <attribute name="texto"/>
+    <sequential>
+      <echo file="@{arquivo}" append="true">@{texto}</echo>
+    </sequential>
+  </macrodef>
+
+  <target name="demonstrar" description="Chama as macros com argumentos diferentes">
+    <mkdir dir="${saida.dir}"/>
+    <saudar nome="Museu de Linguagens"/>
+    <saudar nome="Apache Ant" saudacao="Bem-vindo"/>
+    <saudar nome="buildfile" saudacao="Até logo"/>
+
+    <!-- Três chamadas da mesma macro produzem três linhas no mesmo arquivo. -->
+    <registrar arquivo="${saida.dir}/log.txt" texto="linha 1: macro registrar"/>
+    <registrar arquivo="${saida.dir}/log.txt" texto="linha 2: macro registrar"/>
+    <registrar arquivo="${saida.dir}/log.txt" texto="linha 3: macro registrar"/>
+    <echo message="Log escrito em ${saida.dir}/log.txt"/>
+  </target>
+
+  <target name="limpar" description="Remove a pasta de saída">
+    <delete dir="${saida.dir}"/>
+  </target>
+
+</project>

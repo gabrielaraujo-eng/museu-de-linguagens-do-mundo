@@ -1,5 +1,41 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_2.xml - propriedades com valor padrão sobrescrevível.
+
+  Exercício: o buildfile define versao=1.0 e autor=Museu, mas aceita
+  sobrescrita pela linha de comando, porque propriedades passadas com -D
+  são definidas antes da leitura do buildfile. O alvo publicar escreve um
+  arquivo de identificação na pasta meta.
+
+  Execução: ant -f exercicio_2.xml
+  Com sobrescrita: ant -f exercicio_2.xml -Dversao=2.5 -Dautor=Equipe
+-->
+<project name="exercicio-2-propriedades" default="publicar" basedir=".">
+
+  <description>Propriedades padrão, sobrescrita por linha de comando e arquivo gerado.</description>
+
+  <!-- DSTAMP, TSTAMP e TODAY vêm desta tarefa. -->
+  <tstamp/>
+
+  <property name="versao" value="1.0"/>
+  <property name="autor" value="Museu de Linguagens"/>
+  <property name="meta.dir" location="meta"/>
+  <property name="identificacao" location="${meta.dir}/identificacao.txt"/>
+
+  <!-- Propriedade derivada: concatenação de valores já definidos. -->
+  <property name="assinatura" value="${autor} (versão ${versao})"/>
+
+  <target name="publicar" description="Escreve o arquivo de identificação">
+    <mkdir dir="${meta.dir}"/>
+    <echo message="Assinatura: ${assinatura}"/>
+    <echo file="${identificacao}">Projeto: ${ant.project.name}
+Assinatura: ${assinatura}
+Gerado em: ${TODAY}</echo>
+    <echo message="Arquivo escrito em ${identificacao}"/>
   </target>
+
+  <target name="limpar" description="Apaga a pasta meta">
+    <delete dir="${meta.dir}"/>
+  </target>
+
 </project>

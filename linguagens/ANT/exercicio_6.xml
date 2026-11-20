@@ -1,5 +1,46 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_6.xml - empacotar um conjunto de arquivos em zip.
+
+  Exercício: criar três verbetes em markdown, montar um zip com apenas os
+  arquivos .md da pasta verbetes e listar o conteúdo empacotado por meio de
+  <pathconvert> sobre um <fileset> com o mesmo padrão.
+
+  Execução: ant -f exercicio_6.xml
+-->
+<project name="exercicio-6-pacote" default="empacotar" basedir=".">
+
+  <description>Zip de um fileset e listagem textual do mesmo conjunto.</description>
+
+  <property name="verbetes.dir" location="verbetes"/>
+  <property name="pacote" location="dist/verbetes.zip"/>
+
+  <target name="criar-verbetes" description="Cria três verbetes e um arquivo auxiliar">
+    <mkdir dir="${verbetes.dir}"/>
+    <echo file="${verbetes.dir}/tupi.md">Verbete: tupi</echo>
+    <echo file="${verbetes.dir}/nheengatu.md">Verbete: nheengatu</echo>
+    <echo file="${verbetes.dir}/guarani.md">Verbete: guarani</echo>
+    <echo file="${verbetes.dir}/indice.tmp">Arquivo temporário, fora do pacote.</echo>
+    <echo message="Verbetes criados em ${verbetes.dir}"/>
   </target>
+
+  <target name="empacotar" depends="criar-verbetes" description="Gera o zip apenas com os .md">
+    <mkdir dir="dist"/>
+    <zip destfile="${pacote}">
+      <fileset dir="${verbetes.dir}" includes="*.md"/>
+    </zip>
+
+    <pathconvert property="lista.verbetes" pathsep=", ">
+      <fileset dir="${verbetes.dir}" includes="*.md"/>
+    </pathconvert>
+
+    <echo message="Pacote: ${pacote}"/>
+    <echo message="Conteúdo: ${lista.verbetes}"/>
+  </target>
+
+  <target name="limpar" description="Remove pacote e verbetes">
+    <delete dir="dist"/>
+    <delete dir="${verbetes.dir}"/>
+  </target>
+
 </project>

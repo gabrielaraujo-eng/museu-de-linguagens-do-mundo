@@ -1,1 +1,54 @@
--- Sintaxe para math em ANT
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_9.xml - contagens e medidas.
+
+  A linguagem de build do Ant não tem operadores aritméticos: não há soma,
+  divisão nem comparação numérica em expressões. O que existe são tarefas
+  de medição, <length> e <resourcecount>, e condições que comparam com um
+  valor fixo usando when="greater" ou when="less".
+
+  Execução: ant -f exemplo_9.xml
+-->
+<project name="exemplo-9-contagens" default="medir" basedir=".">
+
+  <description>Contagem de arquivos e soma de bytes com length e resourcecount.</description>
+
+  <property name="dados.dir" location="dados"/>
+
+  <target name="gerar" description="Cria três arquivos de amostra">
+    <mkdir dir="${dados.dir}"/>
+    <echo file="${dados.dir}/a.txt">um</echo>
+    <echo file="${dados.dir}/b.txt">dois</echo>
+    <echo file="${dados.dir}/c.txt">três</echo>
+    <echo message="Amostras criadas em ${dados.dir}"/>
+  </target>
+
+  <target name="medir" depends="gerar" description="Soma bytes e conta arquivos">
+    <!-- mode="all" soma o tamanho de todos os arquivos do fileset. -->
+    <length property="bytes.total" mode="all">
+      <fileset dir="${dados.dir}" includes="*.txt"/>
+    </length>
+
+    <!-- Tamanho de uma string literal, sem consultar o disco. -->
+    <length property="letras.palavra" string="catalogacao"/>
+
+    <resourcecount property="qtd.arquivos">
+      <fileset dir="${dados.dir}" includes="*.txt"/>
+    </resourcecount>
+
+    <!-- Comparação numérica embutida na condição, sem aritmética. -->
+    <condition property="volume" value="com conteudo" else="vazio">
+      <length file="${dados.dir}/a.txt" when="greater" length="0"/>
+    </condition>
+
+    <echo message="Arquivos: ${qtd.arquivos}"/>
+    <echo message="Bytes somados: ${bytes.total}"/>
+    <echo message="Letras em catalogacao: ${letras.palavra}"/>
+    <echo message="Primeiro arquivo: ${volume}"/>
+  </target>
+
+  <target name="limpar" description="Remove a pasta de dados">
+    <delete dir="${dados.dir}"/>
+  </target>
+
+</project>

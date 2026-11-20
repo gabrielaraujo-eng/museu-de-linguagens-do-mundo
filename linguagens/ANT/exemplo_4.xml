@@ -1,1 +1,44 @@
--- Sintaxe para loop em ANT
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_4.xml - repetição em Ant.
+
+  A linguagem de build do Ant não tem laço (for/while). A repetição é
+  expressa por coleções de recursos: um <fileset> descreve um conjunto de
+  arquivos e a tarefa (<copy>, <delete>, <zip>) aplica a operação a cada
+  membro do conjunto.
+
+  Execução: ant -f exemplo_4.xml
+-->
+<project name="exemplo-4-iteracao" default="replicar" basedir=".">
+
+  <description>Iteração sobre arquivos com fileset, no lugar de um laço explícito.</description>
+
+  <property name="origem.dir" location="origem"/>
+  <property name="destino.dir" location="destino"/>
+
+  <target name="criar-origens" description="Cria três arquivos de origem">
+    <mkdir dir="${origem.dir}"/>
+    <echo file="${origem.dir}/parte1.txt">Primeira parte do texto.</echo>
+    <echo file="${origem.dir}/parte2.txt">Segunda parte do texto.</echo>
+    <echo file="${origem.dir}/parte3.txt">Terceira parte do texto.</echo>
+    <echo message="Três arquivos criados em ${origem.dir}"/>
+  </target>
+
+  <!-- Um único comando percorre todos os arquivos que casam com o padrão. -->
+  <target name="replicar" depends="criar-origens" description="Copia cada arquivo do fileset">
+    <mkdir dir="${destino.dir}"/>
+    <copy todir="${destino.dir}" overwrite="true">
+      <fileset dir="${origem.dir}" includes="*.txt"/>
+    </copy>
+    <echo message="Arquivos replicados de ${origem.dir} para ${destino.dir}"/>
+  </target>
+
+  <!-- O mesmo fileset pode alimentar outra operação de conjunto: apagar. -->
+  <target name="limpar" depends="criar-origens" description="Apaga os arquivos do fileset">
+    <delete>
+      <fileset dir="${destino.dir}" includes="*.txt"/>
+    </delete>
+    <echo message="Arquivos de ${destino.dir} removidos"/>
+  </target>
+
+</project>

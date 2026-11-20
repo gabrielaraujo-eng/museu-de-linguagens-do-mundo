@@ -1,1 +1,52 @@
-<property name="x" value="42"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_2.xml - propriedades em Ant.
+
+  Propriedades são pares nome/valor imutáveis: a primeira definição vence e
+  as tentativas seguintes são ignoradas. Elas podem vir do buildfile, do
+  ambiente (environment) ou da linha de comando (-Dnome=valor), e são
+  expandidas com ${nome} em qualquer atributo de tarefa.
+
+  Execução: ant -f exemplo_2.xml
+-->
+<project name="exemplo-2-propriedades" default="relatar" basedir=".">
+
+  <description>Propriedades, imutabilidade, location e propriedades de ambiente.</description>
+
+  <!-- Valores fixos definidos no buildfile -->
+  <property name="aplicacao" value="museu-ant"/>
+  <property name="versao" value="1.0"/>
+
+  <!-- location converte o caminho para o formato do sistema operacional -->
+  <property name="saida.dir" location="saida"/>
+  <property name="relatorio" location="${saida.dir}/relatorio.txt"/>
+
+  <!-- Valor composto por expansão de outras propriedades -->
+  <property name="rotulo" value="${aplicacao}-${versao}"/>
+
+  <!-- Esta definição NÃO sobrescreve a anterior: propriedades são imutáveis -->
+  <property name="aplicacao" value="valor-ignorado"/>
+
+  <!-- Propriedades do ambiente do processo, acessadas com o prefixo env. -->
+  <property environment="env"/>
+  <condition property="home.exibicao" value="${env.HOME}" else="(HOME não definida)">
+    <isset property="env.HOME"/>
+  </condition>
+
+  <target name="relatar" description="Mostra as propriedades resolvidas">
+    <mkdir dir="${saida.dir}"/>
+    <echo message="Aplicação: ${aplicacao}"/>
+    <echo message="Versão: ${versao}"/>
+    <echo message="Rótulo composto: ${rotulo}"/>
+    <echo message="Pasta de saída: ${saida.dir}"/>
+    <echo message="Relatório: ${relatorio}"/>
+    <echo message="HOME: ${home.exibicao}"/>
+    <echo file="${relatorio}">${rotulo} gerado por Ant ${ant.version}</echo>
+    <echo message="Relatório escrito em ${relatorio}"/>
+  </target>
+
+  <target name="limpar" description="Apaga a pasta de saída">
+    <delete dir="${saida.dir}"/>
+  </target>
+
+</project>

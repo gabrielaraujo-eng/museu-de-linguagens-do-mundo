@@ -1,5 +1,30 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_1.xml - estrutura mínima de um buildfile Ant.
+
+  Todo buildfile tem exatamente um elemento <project> com nome, alvo padrão
+  (default) e diretório base (basedir). Os alvos (<target>) agrupam tarefas
+  (<echo>, <mkdir>, <javac> e assim por diante).
+
+  Execução: ant -f exemplo_1.xml
+-->
+<project name="exemplo-1-minimo" default="principal" basedir=".">
+
+  <description>Estrutura mínima: um projeto, um alvo padrão e duas tarefas echo.</description>
+
+  <!-- O alvo indicado em default roda quando nenhum alvo é citado na linha de comando. -->
+  <target name="principal" description="Imprime os dados básicos do projeto">
+    <echo message="Buildfile Ant em execução."/>
+    <echo message="Projeto: ${ant.project.name}"/>
+    <echo message="Alvo padrão: ${ant.project.default-target}"/>
+    <echo message="Diretório base: ${basedir}"/>
+    <echo message="Buildfile: ${ant.file}"/>
   </target>
+
+  <!-- Um segundo alvo só roda se for pedido explicitamente: ant -f exemplo_1.xml ajuda -->
+  <target name="ajuda" description="Mostra a versão do Ant e do Java em uso">
+    <echo message="Ant: ${ant.version}"/>
+    <echo message="Java: ${ant.java.version}"/>
+  </target>
+
 </project>

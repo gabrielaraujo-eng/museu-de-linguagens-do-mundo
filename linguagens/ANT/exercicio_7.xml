@@ -1,5 +1,50 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_7.xml - pré-requisitos verificados com available e fail.
+
+  Exercício: o build exige um arquivo de licença. O alvo preparar cria a
+  licença caso ela não exista; o alvo checar usa <available> e <fail> para
+  interromper o build com mensagem clara quando o pré-requisito falta. O
+  alvo simular-falha demonstra a interrupção e não faz parte do fluxo padrão.
+
+  Execução: ant -f exercicio_7.xml
+  Falha proposital: ant -f exercicio_7.xml simular-falha
+-->
+<project name="exercicio-7-pre-requisitos" default="validar" basedir=".">
+
+  <description>Verificação de arquivo obrigatório, fail condicional e falha explícita.</description>
+
+  <property name="licenca" location="LICENCA.txt"/>
+
+  <available file="${licenca}" property="licenca.existe"/>
+
+  <target name="preparar" unless="licenca.existe" description="Cria a licença se ela faltar">
+    <echo file="${licenca}">Conteúdo sob licença livre para fins educacionais.</echo>
+    <echo message="Licença criada em ${licenca}"/>
   </target>
+
+  <target name="checar" depends="preparar" description="Falha se a licença não existir">
+    <fail message="Pré-requisito ausente: ${licenca}">
+      <condition>
+        <not>
+          <available file="${licenca}"/>
+        </not>
+      </condition>
+    </fail>
+    <echo message="Pré-requisito presente: ${licenca}"/>
+  </target>
+
+  <target name="validar" depends="checar" description="Conclui a validação">
+    <echo message="Validação concluída sem erros."/>
+  </target>
+
+  <target name="simular-falha" description="Interrompe o build de propósito">
+    <echo message="A próxima tarefa interrompe o build."/>
+    <fail message="Falha proposital do alvo simular-falha."/>
+  </target>
+
+  <target name="limpar" description="Apaga a licença gerada">
+    <delete file="${licenca}"/>
+  </target>
+
 </project>

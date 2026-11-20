@@ -1,5 +1,56 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_8.xml - substituição de tokens na cópia com filterset.
+
+  Exercício: manter um modelo com marcadores @PROJETO@ e @ANO@ e gerar a
+  versão final com <copy> e <filterset>, que troca os marcadores durante a
+  cópia. O alvo conferir lê o resultado com <loadfile> e testa com <contains>
+  se a substituição funcionou.
+
+  Execução: ant -f exercicio_8.xml
+-->
+<project name="exercicio-8-filtros" default="gerar" basedir=".">
+
+  <description>Cópia com filtros de token, leitura do resultado e teste de conteúdo.</description>
+
+  <property name="modelo" location="modelos/ficha.txt"/>
+  <property name="saida.dir" location="saida"/>
+  <property name="ficha" location="${saida.dir}/ficha-final.txt"/>
+
+  <target name="criar-modelo" description="Cria o modelo com marcadores de filtro">
+    <mkdir dir="modelos"/>
+    <echo file="${modelo}">Projeto: @PROJETO@
+Ano de referência: @ANO@
+Linguagem: @LINGUAGEM@</echo>
+    <echo message="Modelo criado em ${modelo}"/>
   </target>
+
+  <target name="gerar" depends="criar-modelo" description="Gera a ficha com os tokens substituídos">
+    <mkdir dir="${saida.dir}"/>
+    <copy file="${modelo}" tofile="${ficha}" overwrite="true">
+      <filterset>
+        <filter token="PROJETO" value="Museu de Linguagens do Mundo"/>
+        <filter token="ANO" value="2026"/>
+        <filter token="LINGUAGEM" value="Apache Ant"/>
+      </filterset>
+    </copy>
+
+    <loadfile property="conteudo.ficha" srcFile="${ficha}"/>
+
+    <condition property="filtros.aplicados" value="sim" else="nao">
+      <and>
+        <contains string="${conteudo.ficha}" substring="Apache Ant"/>
+        <contains string="${conteudo.ficha}" substring="2026"/>
+      </and>
+    </condition>
+
+    <echo message="Filtros aplicados: ${filtros.aplicados}"/>
+    <echo message="Ficha gerada em ${ficha}"/>
+  </target>
+
+  <target name="limpar" description="Remove modelo e saída">
+    <delete dir="${saida.dir}"/>
+    <delete dir="modelos"/>
+  </target>
+
 </project>

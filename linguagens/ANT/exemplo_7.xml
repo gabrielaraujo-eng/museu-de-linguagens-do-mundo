@@ -1,1 +1,72 @@
--- Sintaxe para error em ANT
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_7.xml - validação e interrupção do build.
+
+  Ant não tem exceções capturáveis: a falha é um BuildException, produzida
+  por <fail> ou por qualquer tarefa com failonerror="true". O controle
+  condicional usa os atributos if e unless dos alvos, que testam se uma
+  propriedade está definida.
+
+  Execução: ant -f exemplo_7.xml
+-->
+<project name="exemplo-7-validacao" default="verificar" basedir=".">
+
+  <description>Testes de ambiente com condition, available, fail e alvos condicionais.</description>
+
+  <property name="config.dir" location="config"/>
+  <property name="config.arquivo" location="${config.dir}/museu.properties"/>
+
+  <!-- Verifica a versão do Ant que executa o build. -->
+  <condition property="ant.compativel">
+    <antversion atleast="1.9.0"/>
+  </condition>
+
+  <!-- Verifica se o arquivo de configuração já existe no disco. -->
+  <available file="${config.arquivo}" property="config.presente"/>
+
+  <!--
+    config.ausente só é definida quando a configuração falta, porque if e
+    unless testam existência de propriedade e não o valor dela.
+  -->
+  <condition property="config.ausente">
+    <not>
+      <isset property="config.presente"/>
+    </not>
+  </condition>
+
+  <!-- Propriedade apenas descritiva, para a mensagem final. -->
+  <condition property="config.estado" value="ausente" else="presente">
+    <not>
+      <isset property="config.presente"/>
+    </not>
+  </condition>
+
+  <target name="checar-ambiente" description="Falha se o Ant for antigo demais">
+    <fail unless="ant.compativel" message="É necessário Apache Ant 1.9.0 ou superior."/>
+    <echo message="Versão do Ant aceita: ${ant.version}"/>
+  </target>
+
+  <target name="criar-config" if="config.ausente" description="Cria a configuração se faltar">
+    <mkdir dir="${config.dir}"/>
+    <echo file="${config.arquivo}">tema=museu
+idioma=pt-BR</echo>
+    <echo message="Configuração criada em ${config.arquivo}"/>
+  </target>
+
+  <target name="verificar" depends="checar-ambiente, criar-config" description="Valida e relata o estado">
+    <fail message="Configuração ausente após a criação: ${config.arquivo}">
+      <condition>
+        <not>
+          <available file="${config.arquivo}"/>
+        </not>
+      </condition>
+    </fail>
+    <echo message="Estado da configuração: ${config.estado}"/>
+    <echo message="Build validado sem erros."/>
+  </target>
+
+  <target name="falhar-de-proposito" description="Exemplo de interrupção explícita">
+    <fail message="Este alvo sempre falha, por construção."/>
+  </target>
+
+</project>

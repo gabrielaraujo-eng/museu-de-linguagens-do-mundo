@@ -1,5 +1,44 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_5.xml - uma rotina reaproveitável com macrodef.
+
+  Exercício: definir a macro anotar, que recebe nivel, origem e texto,
+  formata uma linha de log e a acrescenta ao arquivo registros/eventos.log.
+  O alvo principal chama a macro três vezes com níveis diferentes,
+  mostrando que a macro substitui a ideia de função do Ant.
+
+  Execução: ant -f exercicio_5.xml
+-->
+<project name="exercicio-5-macro" default="registrar" basedir=".">
+
+  <description>Macro de log com três atributos, chamada três vezes.</description>
+
+  <property name="registros.dir" location="registros"/>
+  <property name="log" location="${registros.dir}/eventos.log"/>
+
+  <macrodef name="anotar">
+    <attribute name="nivel"/>
+    <attribute name="origem"/>
+    <attribute name="texto"/>
+    <sequential>
+      <echo file="${log}" append="true">[@{nivel}] @{origem}: @{texto}</echo>
+      <echo message="[@{nivel}] @{texto}"/>
+    </sequential>
+  </macrodef>
+
+  <target name="registrar" description="Escreve três eventos no log">
+    <mkdir dir="${registros.dir}"/>
+    <echo file="${log}">Início do registro</echo>
+
+    <anotar nivel="INFO" origem="catalogo" texto="catálogo carregado"/>
+    <anotar nivel="AVISO" origem="indice" texto="duas entradas sem tradução"/>
+    <anotar nivel="INFO" origem="build" texto="registro concluído"/>
+
+    <echo message="Log completo em ${log}"/>
   </target>
+
+  <target name="limpar" description="Apaga a pasta de registros">
+    <delete dir="${registros.dir}"/>
+  </target>
+
 </project>

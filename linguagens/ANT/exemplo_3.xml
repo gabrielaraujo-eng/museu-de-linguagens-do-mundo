@@ -1,3 +1,51 @@
-<condition property="isGreater">
-  <gt arg1="${x}" arg2="10"/>
-</condition>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exemplo_3.xml - condições, marca temporal e criação de diretórios.
+
+  <condition> define uma propriedade apenas se o teste aninhado for
+  verdadeiro; o atributo else fornece o valor alternativo. <tstamp> cria as
+  propriedades DSTAMP (aaaammdd), TSTAMP (hhmm) e TODAY (dia/mês/ano).
+
+  Execução: ant -f exemplo_3.xml
+-->
+<project name="exemplo-3-condicao" default="preparar" basedir=".">
+
+  <description>Condições com equals e isset, marca temporal e mkdir.</description>
+
+  <tstamp/>
+  <property name="build.dir" location="build"/>
+  <property name="perfil" value="desenvolvimento"/>
+
+  <!-- Igualdade de strings: define modo como depuracao ou producao -->
+  <condition property="modo" value="depuracao" else="producao">
+    <equals arg1="${perfil}" arg2="desenvolvimento" trim="true"/>
+  </condition>
+
+  <!-- Teste de existência de propriedade: a pasta do dia é criada sob build -->
+  <condition property="pasta.dia" value="${build.dir}/${DSTAMP}" else="${build.dir}/sem-data">
+    <isset property="DSTAMP"/>
+  </condition>
+
+  <!-- Conjunção de testes: as duas condições precisam ser verdadeiras -->
+  <condition property="ambiente.completo" value="sim" else="nao">
+    <and>
+      <equals arg1="${modo}" arg2="depuracao"/>
+      <isset property="pasta.dia"/>
+    </and>
+  </condition>
+
+  <target name="preparar" description="Cria as pastas de build do dia">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${pasta.dia}"/>
+    <echo message="Perfil: ${perfil} (modo ${modo})"/>
+    <echo message="Marca temporal: ${DSTAMP} ${TSTAMP} (${TODAY})"/>
+    <echo message="Pasta criada: ${pasta.dia}"/>
+    <echo message="Ambiente completo: ${ambiente.completo}"/>
+    <echo file="${pasta.dia}/marca.txt">Build de ${TODAY} às ${TSTAMP}</echo>
+  </target>
+
+  <target name="limpar" description="Remove a árvore de build">
+    <delete dir="${build.dir}"/>
+  </target>
+
+</project>

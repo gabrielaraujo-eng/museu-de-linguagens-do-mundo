@@ -1,5 +1,50 @@
-<project>
-  <target name="hello">
-    <echo message="Olá, Mundo!"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  exercicio_3.xml - controle de fluxo por propriedades.
+
+  Exercício: o alvo relatar depende de detalhar e resumir. Os dois são
+  condicionais e mutuamente exclusivos: detalhar só roda com if quando a
+  propriedade detalhado existe, e resumir só roda com unless quando ela não
+  existe. Com -Ddetalhado=true o Ant executa o primeiro e ignora o segundo.
+
+  Execução: ant -f exercicio_3.xml
+  Com detalhes: ant -f exercicio_3.xml -Ddetalhado=true
+-->
+<project name="exercicio-3-fluxo" default="relatar" basedir=".">
+
+  <description>Alvos condicionais com if e unless sobre a propriedade detalhado.</description>
+
+  <!-- Valor padrão; a linha de comando pode substituí-lo. -->
+  <property name="detalhado" value="false"/>
+
+  <!--
+    if e unless testam se a propriedade EXISTE, não o seu valor. Por isso a
+    condição abaixo só define com.detalhes quando detalhado vale true, yes ou
+    on: com o padrão false a propriedade fica indefinida e o alvo é pulado.
+  -->
+  <condition property="com.detalhes">
+    <istrue value="${detalhado}"/>
+  </condition>
+
+  <!-- A segunda condição normaliza o valor textual para o nome do modo. -->
+  <condition property="modo" value="detalhado" else="resumido">
+    <istrue value="${detalhado}"/>
+  </condition>
+
+  <target name="detalhar" if="com.detalhes" description="Roda apenas com -Ddetalhado=true">
+    <echo message="Modo ${modo}: listando cada etapa do relatório."/>
+    <echo message="Etapa 1: coleta de dados"/>
+    <echo message="Etapa 2: verificação de consistência"/>
+    <echo message="Etapa 3: escrita do relatório"/>
   </target>
+
+  <target name="resumir" unless="com.detalhes" description="Roda quando detalhado não vale true">
+    <echo message="Modo ${modo}: relatório em uma linha."/>
+    <echo message="Relatório gerado sem detalhamento."/>
+  </target>
+
+  <target name="relatar" depends="detalhar, resumir" description="Fecha o relatório">
+    <echo message="Relatório concluído no modo ${modo}."/>
+  </target>
+
 </project>
