@@ -1,1 +1,18 @@
-val x = 42;
+(* exemplo_2.aml - declaracoes val, inferencia de tipos e anotacao.
+
+   Em Alice ML (como em Standard ML) o tipo e inferido; a anotacao
+   ": int" e opcional e serve para documentar ou restringir. *)
+
+val resposta = 42;                  (* inferido: int *)
+val nome : string = "Alice";        (* anotacao explicita *)
+val pi = 3.14159;                   (* inferido: real *)
+val ativo = true;                   (* inferido: bool *)
+val par : int * string = (7, "sete");  (* tupla *)
+
+(* Int.toString converte o inteiro antes da concatenacao com ^. *)
+val frase = nome ^ " tem " ^ Int.toString resposta ^ " anos";
+TextIO.print (frase ^ "\n");
+
+TextIO.print ("pi = " ^ Real.toString pi ^ "\n");
+TextIO.print ("ativo = " ^ Bool.toString ativo ^ "\n");
+TextIO.print ("#1 par = " ^ Int.toString (#1 par) ^ ", #2 par = " ^ #2 par ^ "\n");

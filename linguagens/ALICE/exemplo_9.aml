@@ -1,1 +1,26 @@
--- Sintaxe para math em ALICE
+(* exemplo_9.aml - operacoes matematicas.
+
+   Aritmetica inteira usa div e mod; o menos unario se escreve "~".
+   "div" arredonda para baixo e "mod" acompanha esse arredondamento,
+   por isso ~17 div 5 vale ~4 e ~17 mod 5 vale 3.
+   A estrutura Math (Basis, presente no manual de Alice ML) fornece
+   sqrt, sin, cos, exp, ln e a constante pi para o tipo real. *)
+
+val a = 17;
+val b = 5;
+
+TextIO.print ("17 div 5 = " ^ Int.toString (a div b) ^ "\n");
+TextIO.print ("17 mod 5 = " ^ Int.toString (a mod b) ^ "\n");
+TextIO.print ("~17 div 5 = " ^ Int.toString (~17 div b) ^ "\n");
+
+(* Potencia inteira por recursao. *)
+fun potencia (base, 0) = 1
+  | potencia (base, exp) = base * potencia (base, exp - 1);
+
+TextIO.print ("2^10 = " ^ Int.toString (potencia (2, 10)) ^ "\n");
+
+val raio = 2.0;
+val area = Math.pi * raio * raio;
+TextIO.print ("area do circulo de raio 2.0 = " ^ Real.toString area ^ "\n");
+TextIO.print ("Math.sqrt 2.0 = " ^ Real.toString (Math.sqrt 2.0) ^ "\n");
+TextIO.print ("Real.round 3.7 = " ^ Int.toString (Real.round 3.7) ^ "\n");

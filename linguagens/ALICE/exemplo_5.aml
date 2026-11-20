@@ -1,1 +1,20 @@
+(* exemplo_5.aml - funcoes: par de argumentos, ordem superior e aplicacao.
+
+   "fun soma (a, b)" recebe uma tupla, ou seja, um unico argumento
+   que e um par de inteiros. A definicao sozinha nao produz saida:
+   e preciso aplicar a funcao. *)
+
 fun soma (a, b) = a + b;
+val total = soma (20, 22);
+TextIO.print ("soma (20, 22) = " ^ Int.toString total ^ "\n");
+
+fun dobro x = 2 * x;
+
+(* Funcao de ordem superior: recebe outra funcao como argumento. *)
+fun aplicarDuasVezes f x = f (f x);
+
+val dobrados = List.map dobro [1, 2, 3];
+TextIO.print ("List.map dobro [1, 2, 3] = "
+              ^ String.concatWith ", " (List.map Int.toString dobrados) ^ "\n");
+TextIO.print ("aplicarDuasVezes dobro 5 = "
+              ^ Int.toString (aplicarDuasVezes dobro 5) ^ "\n");

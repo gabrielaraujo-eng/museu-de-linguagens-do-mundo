@@ -1,1 +1,19 @@
-if x > 10 then print "Maior" else print "Menor";
+(* exemplo_3.aml - condicional if ... then ... else ...
+
+   A condicao deve ser bool e os dois ramos devem ter o mesmo tipo.
+   Nao existe "else if" como construcao propria: o aninhamento de
+   if dentro do else produz a mesma cadeia. *)
+
+val x = 42;
+
+val rotulo = if x > 10 then "maior que 10" else "no maximo 10";
+TextIO.print ("x = " ^ Int.toString x ^ ": " ^ rotulo ^ "\n");
+
+fun sinal n =
+    if n < 0 then "negativo"
+    else if n = 0 then "zero"
+    else "positivo";
+
+TextIO.print ("sinal 0 = " ^ sinal 0 ^ "\n");
+TextIO.print ("sinal (~7) = " ^ sinal (~7) ^ "\n");
+TextIO.print ("sinal 15 = " ^ sinal 15 ^ "\n");

@@ -1,1 +1,19 @@
-print "Olá, Mundo!\n";
+(* exercicio_6 - listas com List.filter e List.map.
+
+   Enunciado: a partir da lista de 1 a 8, selecione os numeros pares,
+   dobre cada um deles e mostre a lista original, a dos pares e a dos
+   dobrados.
+
+   Solucao completa: *)
+
+val numeros = [1, 2, 3, 4, 5, 6, 7, 8];
+
+val pares = List.filter (fn n => n mod 2 = 0) numeros;
+val dobrados = List.map (fn n => n * 2) pares;
+
+fun mostrar lista = "[" ^ String.concatWith ", " (List.map Int.toString lista) ^ "]";
+
+TextIO.print ("origem:   " ^ mostrar numeros ^ "\n");
+TextIO.print ("pares:    " ^ mostrar pares ^ "\n");
+TextIO.print ("dobrados: " ^ mostrar dobrados ^ "\n");
+TextIO.print ("quantidade de pares = " ^ Int.toString (List.length pares) ^ "\n");

@@ -1,1 +1,24 @@
--- Sintaxe para error em ALICE
+(* exemplo_7.aml - excecoes: "raise", "handle" e excecao propria.
+
+   "Div" pertence a estrutura General (documentada no manual de Alice ML).
+   Uma excecao propria e declarada com "exception" e pode carregar valor. *)
+
+exception SaldoInsuficiente of int;
+
+fun sacar (saldo, valor) =
+    if valor > saldo then raise SaldoInsuficiente (valor - saldo)
+    else saldo - valor;
+
+val ok = sacar (100, 30);
+TextIO.print ("saque de 30 sobre saldo 100: saldo final " ^ Int.toString ok ^ "\n");
+
+(* O tratador recebe o valor transportado pela excecao. *)
+val tratado =
+    sacar (100, 150)
+    handle SaldoInsuficiente falta =>
+        (TextIO.print ("saque recusado: faltam " ^ Int.toString falta ^ "\n"); 0);
+
+TextIO.print ("saque de 150 sobre saldo 100: saldo final " ^ Int.toString tratado ^ "\n");
+
+val seguro = 7 div 0 handle Div => 0;
+TextIO.print ("7 div 0 tratado = " ^ Int.toString seguro ^ "\n");

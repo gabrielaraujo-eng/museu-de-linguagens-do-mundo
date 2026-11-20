@@ -1,1 +1,23 @@
-print "Olá, Mundo!\n";
+(* exercicio_9 - aritmetica com reais.
+
+   Enunciado: calcule a hipotenusa de um triangulo retangulo de catetos
+   3.0 e 4.0 com Math.sqrt, a media de tres notas reais e a conversao de
+   25.0 graus Celsius para Fahrenheit (F = C * 9.0 / 5.0 + 32.0).
+
+   Solucao completa: *)
+
+val catetoA = 3.0;
+val catetoB = 4.0;
+
+val hipotenusa = Math.sqrt (catetoA * catetoA + catetoB * catetoB);
+TextIO.print ("hipotenusa de 3.0 e 4.0 = " ^ Real.toString hipotenusa ^ "\n");
+
+val notas = [7.5, 9.0, 6.5];
+val soma = List.foldl (fn (n, acc) => n + acc) 0.0 notas;
+val media = soma / real (List.length notas);
+TextIO.print ("media das notas = " ^ Real.toString media ^ "\n");
+
+val celsius = 25.0;
+val fahrenheit = celsius * 9.0 / 5.0 + 32.0;
+TextIO.print ("25.0 C = " ^ Real.toString fahrenheit ^ " F\n");
+TextIO.print ("media arredondada = " ^ Int.toString (Real.round media) ^ "\n");

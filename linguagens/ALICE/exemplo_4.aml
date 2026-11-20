@@ -1,1 +1,17 @@
-fun loop n = if n > 0 then (print (Int.toString n); loop (n-1)) else ();
+(* exemplo_4.aml - repeticao por recursao.
+
+   Alice ML nao tem laco imperativo no nucleo funcional: a repeticao
+   e expressa por funcoes recursivas (declaradas com "fun", que ja
+   admite recursao) e por acumuladores nas versoes recursivas de cauda. *)
+
+fun contagem 0 = TextIO.print "fim\n"
+  | contagem n = (TextIO.print (Int.toString n ^ " "); contagem (n - 1));
+
+contagem 5;
+
+(* Soma de 1 a n com acumulador: a chamada recursiva e a ultima
+   operacao, o que caracteriza recursao de cauda. *)
+fun somaAte (0, acc) = acc
+  | somaAte (n, acc) = somaAte (n - 1, acc + n);
+
+TextIO.print ("soma de 1 a 10 = " ^ Int.toString (somaAte (10, 0)) ^ "\n");

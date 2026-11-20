@@ -1,1 +1,17 @@
--- Sintaxe para string em ALICE
+(* exemplo_8.aml - strings.
+
+   Em Alice ML a string e um vetor imutavel de caracteres (tipo string,
+   equivalente a CharVector.vector). "^" concatena; a estrutura String
+   oferece size, sub, substring, str, map e concatWith. *)
+
+val nome = "Alice";
+val versao = "1.4";
+val titulo = nome ^ " ML " ^ versao;
+
+TextIO.print ("titulo = " ^ titulo ^ "\n");
+TextIO.print ("String.size titulo = " ^ Int.toString (String.size titulo) ^ "\n");
+TextIO.print ("String.substring (titulo, 0, 5) = " ^ String.substring (titulo, 0, 5) ^ "\n");
+TextIO.print ("String.map Char.toUpper titulo = " ^ String.map Char.toUpper titulo ^ "\n");
+TextIO.print ("primeira letra = " ^ String.str (String.sub (titulo, 0)) ^ "\n");
+TextIO.print ("String.concatWith \" - \" = "
+              ^ String.concatWith " - " ["funcional", "futuros", "componentes"] ^ "\n");

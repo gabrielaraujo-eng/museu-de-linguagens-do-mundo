@@ -1,1 +1,16 @@
-print "Olá, Mundo!\n";
+(* exercicio_4 - recursao com acumulador.
+
+   Enunciado: escreva uma funcao recursiva que calcule o fatorial de n
+   usando acumulador e imprima os fatoriais de 0 a 6.
+
+   Solucao completa: *)
+
+fun fatorial (0, acc) = acc
+  | fatorial (n, acc) = fatorial (n - 1, acc * n);
+
+fun fatorialDe n = fatorial (n, 1);
+
+fun imprimir n =
+    TextIO.print (Int.toString n ^ "! = " ^ Int.toString (fatorialDe n) ^ "\n");
+
+List.app imprimir [0, 1, 2, 3, 4, 5, 6];

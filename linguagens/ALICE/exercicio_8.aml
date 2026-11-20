@@ -1,1 +1,28 @@
-print "Olá, Mundo!\n";
+(* exercicio_8 - percorrer uma string caractere por caractere.
+
+   Enunciado: escreva uma funcao que conte as vogais de uma string,
+   ignorando diferencas entre maiusculas e minusculas, e aplique-a a
+   duas frases, mostrando tambem o tamanho de cada string.
+
+   Solucao completa: *)
+
+fun ehVogal c =
+    c = #"a" orelse c = #"e" orelse c = #"i" orelse c = #"o" orelse c = #"u";
+
+fun contarVogais texto =
+    let
+        val minusculas = String.map Char.toLower texto
+        fun contar i acc =
+            if i >= String.size minusculas then acc
+            else contar (i + 1)
+                       (if ehVogal (String.sub (minusculas, i)) then acc + 1 else acc)
+    in
+        contar 0 0
+    end;
+
+fun relatar texto =
+    TextIO.print ("\"" ^ texto ^ "\": " ^ Int.toString (String.size texto)
+                  ^ " caracteres, " ^ Int.toString (contarVogais texto) ^ " vogais\n");
+
+relatar "Alice ML";
+relatar "Programacao funcional em portugues";
