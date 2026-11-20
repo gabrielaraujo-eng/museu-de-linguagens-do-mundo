@@ -1,1 +1,5 @@
-func square(n) { return n * n }
+let fatorial = fn(n) { if (n < 2) { 1 } else { n * fatorial(n - 1) } };
+let fib = fn(n) { if (n < 2) { n } else { fib(n - 1) + fib(n - 2) } };
+log(fatorial(6));
+log(fib(10));
+log(fatorial(10) / fatorial(8));

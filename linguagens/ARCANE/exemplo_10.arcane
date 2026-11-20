@@ -1,1 +1,21 @@
-class MyClass { }
+let somaLista = fn(xs) { if (len(xs) == 0) { 0 } else { first(xs) + somaLista(rest(xs)) } };
+let maior = fn(xs) {
+    let passo = fn(xs, acc) {
+        if (len(xs) == 0) { acc } else { if (first(xs) > acc) { passo(rest(xs), first(xs)) } else { passo(rest(xs), acc) } }
+    };
+    passo(xs, first(xs))
+};
+let dobrar = fn(xs) {
+    let passo = fn(xs, acc) { if (len(xs) == 0) { acc } else { passo(rest(xs), push(acc, first(xs) * 2)) } };
+    passo(xs, [])
+};
+let filtrarPares = fn(xs) {
+    let passo = fn(xs, acc) {
+        if (len(xs) == 0) { acc } else { if (first(xs) / 2 * 2 == first(xs)) { passo(rest(xs), push(acc, first(xs))) } else { passo(rest(xs), acc) } }
+    };
+    passo(xs, [])
+};
+log(somaLista([1, 2, 3, 4]));
+log(maior([3, 9, 4]));
+log(dobrar([1, 2, 3, 4]));
+log(filtrarPares([1, 2, 3, 4, 5, 6]));

@@ -1,1 +1,4 @@
-print("Olá Mundo")
+let saudacao = "Ola";
+let nome = "mundo";
+log(saudacao + ", " + nome + "!");
+log("Arcane: uma linguagem, um livro, um interpretador.");

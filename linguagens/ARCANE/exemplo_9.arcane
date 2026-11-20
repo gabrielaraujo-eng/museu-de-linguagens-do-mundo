@@ -1,1 +1,9 @@
-var r = math.sqrt(16)
+let nome = "Arcane";
+log(len(nome));
+log(len(""));
+let moldura = "*** " + nome + " ***";
+log(moldura);
+let repetir = fn(texto, vezes) { if (vezes == 0) { "" } else { texto + repetir(texto, vezes - 1) } };
+log(repetir("ab", 3));
+log(len("acao"));
+log(len("ação"));

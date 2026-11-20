@@ -1,1 +1,7 @@
-if x == null { return }
+let indiceDe = fn(xs, alvo) {
+    let passo = fn(xs, i) { if (len(xs) == 0) { -1 } else { if (first(xs) == alvo) { i } else { passo(rest(xs), i + 1) } } };
+    passo(xs, 0)
+};
+log(indiceDe([5, 8, 13, 21], 13));
+log(indiceDe([5, 8, 13, 21], 21));
+log(indiceDe([5, 8, 13, 21], 99));

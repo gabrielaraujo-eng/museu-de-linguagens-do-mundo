@@ -1,1 +1,6 @@
-math.abs(-5)
+let mdc = fn(a, b) { if (b == 0) { a } else { mdc(b, a - a / b * b) } };
+let mmc = fn(a, b) { a * b / mdc(a, b) };
+log(mdc(48, 18));
+log(mdc(17, 5));
+log(mmc(4, 6));
+log(mmc(21, 6));

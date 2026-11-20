@@ -1,1 +1,8 @@
-for i in 0..10 { print(i) }
+let quadrado = fn(x) { x * x };
+let soma = fn(a, b) { return a + b; };
+let aplicar = fn(f, x) { f(x) };
+log(aplicar(quadrado, 7));
+log(soma(3, 4));
+let compor = fn(f, g) { fn(x) { f(g(x)) } };
+let mais_um = fn(x) { x + 1 };
+log(compor(quadrado, mais_um)(4));

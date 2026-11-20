@@ -1,1 +1,12 @@
-module M { }
+let notas = [7, 9, 6, 10, 8, 5];
+let soma = fn(xs) { if (len(xs) == 0) { 0 } else { first(xs) + soma(rest(xs)) } };
+let extremo = fn(xs, melhor) {
+    let passo = fn(xs, acc) { if (len(xs) == 0) { acc } else { if (melhor(first(xs), acc)) { passo(rest(xs), first(xs)) } else { passo(rest(xs), acc) } } };
+    passo(xs, first(xs))
+};
+let maiorQue = fn(a, b) { a > b };
+let menorQue = fn(a, b) { a < b };
+log(soma(notas));
+log(soma(notas) / len(notas));
+log(extremo(notas, maiorQue));
+log(extremo(notas, menorQue));

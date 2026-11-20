@@ -1,1 +1,5 @@
-var map = {id: 1}
+let inverter = fn(xs) { if (len(xs) == 0) { [] } else { push(inverter(rest(xs)), first(xs)) } };
+log(inverter([1, 2, 3, 4, 5]));
+log(inverter([10, 20]));
+log(inverter([]));
+log(inverter(inverter([7, 8, 9])));

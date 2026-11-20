@@ -1,1 +1,6 @@
-if x > 5 { print("Maior") }
+let idade = 20;
+let categoria = if (idade < 12) { "crianca" } else { if (idade < 18) { "adolescente" } else { "adulto" } };
+log(categoria);
+if (idade > 17) { log("maior de idade"); } else { log("menor de idade"); }
+log(if (0) { "zero conta como verdadeiro" } else { "zero conta como falso" });
+log(if (false) { "sim" } else { "nao" });

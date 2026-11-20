@@ -1,1 +1,5 @@
-if b { }
+let classificar = fn(n) { if (n > 0) { "positivo" } else { if (n < 0) { "negativo" } else { "zero" } } };
+log(classificar(42));
+log(classificar(-7));
+log(classificar(0));
+log(classificar(3 - 3));
