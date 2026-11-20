@@ -1,1 +1,50 @@
-_{s}_ *Mundo*
+= Exemplo 8: formatação de texto e macros em linha
+Museu de Linguagens do Mundo
+:description: Ênfase, monoespaçado, substituições tipográficas e macros
+:experimental:
+
+== Ênfase e estilos
+
+Marcação de ênfase vale dentro de uma palavra ou no meio de uma frase: um
+asterisco isolado produz *negrito*, um sublinhado produz _itálico_ e um acento
+grave produz `monoespaçado`. Para aplicar o estilo sem depender dos limites de
+palavra, use a forma restrita com dois caracteres de cada lado: **negrito
+restrito** e ``monoespaçado com espaço``.
+
+Outros estilos: ^sobrescrito^, ~subscrito~ e #texto destacado#.
+
+== Substituições tipográficas
+
+O processador troca algumas sequências por símbolos: (C) vira símbolo de
+copyright, (R) de marca registrada, (TM) de marca, -- vira travessão e ...
+vira reticências. Aspas retas em volta de palavras, como 'simples' e "duplas",
+são convertidas em aspas curvas na saída HTML.
+
+== Macros em linha
+
+A macro `kbd` marca teclas: pressione kbd:[Ctrl+C] para interromper o processo,
+ou kbd:[Ctrl+Shift+V] para colar sem formatação.
+
+A macro `footnote` cria notas de rodapé numeradas automaticamente.footnote:[A
+numeração é atribuída na ordem de aparição no documento.]
+
+Links usam a macro `link` com o endereço entre colchetes:
+link:https://docs.asciidoctor.org/[documentação do Asciidoctor]. Endereços
+entre sinais de menor e maior, como https://asciidoctor.org/, também são
+convertidos em link.
+
+Imagens em linha usam um dois-pontos:
+image:https://asciidoctor.org/images/octocat.jpg[Octocat,32,32] é uma imagem de
+32 por 32 pixels inserida no meio do parágrafo.
+
+== Passagem literal
+
+Para impedir qualquer interpretação, use a passagem em linha com `+`:
++*isto não fica em negrito*+. Para blocos inteiros existe o delimitador
+`++++`.
+
+== Combinação
+
+Os estilos podem ser combinados, mas não aninhados de forma arbitrária. Uma
+palavra em negrito e monoespaçado se escreve `*`monoespaçado`*`, e não com os
+delimitadores trocados.

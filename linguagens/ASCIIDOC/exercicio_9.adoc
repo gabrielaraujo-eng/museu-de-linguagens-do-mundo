@@ -1,1 +1,63 @@
-image::img.png[]
+= Exercício 9: relatório de medições com blocos literais
+Museu de Linguagens do Mundo
+:topico: blocos literais e notação numérica
+:temperatura-base: 20
+
+== Enunciado
+
+Registre três medições de temperatura de um equipamento, apresente os valores
+brutos em um bloco literal alinhado por colunas, calcule a média e mostre o
+resultado em uma tabela com alinhamento à direita. Escreva também a fórmula
+usada, sem depender da extensão `stem`.
+
+== Dados brutos
+
+....
+  leitura   hora    temperatura (C)
+  -------   -----   ---------------
+        1   08:00              19,5
+        2   12:00              21,0
+        3   16:00              20,5
+....
+
+== Fórmula
+
+A média aritmética simples é +media = (t1 + t2 + t3) / 3+. Com os valores
+medidos, +media = (19,5 + 21,0 + 20,5) / 3 = 20,33+.
+
+== Resultado
+
+[cols="2,>1,>1", options="header"]
+|===
+| Medição | Valor (°C) | Desvio da base (°C)
+| 1 | 19,5 | -0,5
+| 2 | 21,0 | 1,0
+| 3 | 20,5 | 0,5
+2+| Média
+| 20,33
+|===
+
+A temperatura-base declarada no cabeçalho vale {temperatura-base} °C, e os
+desvios da última coluna são calculados em relação a ela.
+
+== Listagem do procedimento
+
+[source,sh]
+----
+$ awk 'NR>4 {s+=$3; n++} END {printf "%.2f\n", s/n}' dados.txt
+20.33
+----
+
+== Conferência
+
+* [x] bloco literal com `....` preservando o alinhamento
+* [x] fórmula escrita como passagem em linha, sem `stem`
+* [x] tabela com colunas numéricas alinhadas à direita
+* [x] média conferida com o procedimento em shell
+* [x] valor da base vindo de atributo
+
+== Observação
+
+Os valores usam vírgula decimal no texto e ponto decimal na listagem do
+procedimento, porque a saída do `awk` segue a localidade do sistema. Em
+documentos técnicos, escolha uma convenção e mantenha-a em todo o arquivo.

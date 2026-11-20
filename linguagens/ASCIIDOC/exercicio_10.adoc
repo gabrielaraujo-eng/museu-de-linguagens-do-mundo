@@ -1,1 +1,80 @@
-video::vid.mp4[]
+= Exercício 10: artigo completo com blocos compostos
+Museu de Linguagens do Mundo
+:topico: blocos compostos e callouts
+:toc: auto
+:description: Artigo curto que reúne exemplo, lateral, citação e listagem comentada
+
+== Enunciado
+
+Produza um artigo curto sobre conversão de documentos que contenha um bloco de
+exemplo com título, uma nota lateral, uma citação com atribuição, uma listagem
+com três callouts e uma referência cruzada interna.
+
+== Contexto
+
+A conversão de um documento AsciiDoc é uma transformação de texto para texto:
+o fonte permanece legível, e a saída é gerada a cada execução. O artigo
+descreve o ciclo mínimo, e a seção <<ciclo>> detalha os passos.
+
+.Histórico da ferramenta
+****
+O formato nasceu em 2002, ligado ao DocBook. A implementação em Ruby surgiu em
+2012 e passou a definir, na prática, o comportamento observado pela maioria dos
+autores. A especificação da linguagem, independente de implementação, é mantida
+no projeto AsciiDoc Language.
+****
+
+== Ciclo mínimo
+
+[[ciclo]]
+.Conversão de um arquivo isolado
+====
+[source,sh]
+----
+asciidoctor -o /tmp/saida.html exemplo_10.adoc
+----
+
+O comando lê o fonte, resolve os includes e grava o HTML. Nenhum arquivo do
+diretório de origem é alterado.
+====
+
+== Listagem comentada
+
+[source,adoc]
+----
+= Título do artigo          // <1>
+:description: resumo      // <2>
+
+include::capitulo.adoc[]  // <3>
+----
+<1> Título de nível 0, único no documento.
+<2> Atributo usado por geradores de metadados e por sumários externos.
+<3> Include resolvido em tempo de conversão, antes de qualquer outra etapa.
+
+== Citação
+
+[quote,Donald Knuth,Literate Programming]
+____
+A documentação e o código devem ser tratados como partes de um mesmo todo.
+____
+
+A citação resume a motivação do formato: o texto é a fonte, e a apresentação é
+derivada dele quantas vezes for necessário.
+
+== Conferência
+
+[cols="2,1", options="header"]
+|===
+| Elemento exigido | Presente
+| Bloco de exemplo com título | sim
+| Nota lateral | sim
+| Citação com atribuição | sim
+| Listagem com callouts | sim
+| Referência cruzada interna | sim
+|===
+
+== Encerramento
+
+O artigo termina sem imagens e sem tabelas extensas, para que o foco fique nos
+blocos compostos. Os demais recursos da linguagem estão nos exemplos de 1 a 9
+desta pasta.

@@ -1,1 +1,70 @@
-1 + 1 = 2
+= Exemplo 9: blocos literais, listagens e notação numérica
+Museu de Linguagens do Mundo
+:description: Blocos pré-formatados e como escrever fórmulas sem a extensão stem
+:tags: literal, listing, notacao
+
+== Bloco literal
+
+O delimitador `....` preserva espaços, alinhamento e sinais de marcação. Nada
+dentro dele é interpretado, nem `*negrito*` nem `{atributo}`.
+
+....
+  tabela de conversão
+  ---------------------
+  celsius   fahrenheit
+       0           32,0
+      20           68,0
+     100          212,0
+....
+
+== Bloco de listagem
+
+O delimitador `----` também preserva o texto, mas recebe estilo de código na
+saída HTML. É a forma usada quando o conteúdo é um trecho de arquivo.
+
+----
+$ asciidoctor -o /tmp/saida.html exemplo_9.adoc
+$ echo $?
+0
+----
+
+== Listagem com linguagem declarada
+
+A lista de atributos antes do bloco indica a linguagem, o que permite realce
+sintático quando o realçador está disponível.
+
+[source,adoc]
+----
+= Título do documento
+:atributo: valor
+
+Parágrafo com {atributo} substituído.
+----
+
+== Fórmulas sem a extensão stem
+
+A renderização de fórmulas exige a extensão `asciidoctor-mathematical`, que não
+faz parte da instalação padrão. Sem ela, a notação é escrita como texto, em
+bloco literal ou em passagem em linha: a área do círculo é +A = pi * r^2+ e a
+relação de Einstein é +E = m * c^2+.
+
+== Números em tabela
+
+[cols="1,>1,>1", options="header"]
+|===
+| Raio (cm) | Área (cm²) | Perímetro (cm)
+| 1 | 3,14 | 6,28
+| 2 | 12,57 | 12,57
+| 5 | 78,54 | 31,42
+|===
+
+Os valores foram calculados com pi = 3,14159 e arredondados para duas casas
+decimais. A tabela é a forma recomendada de apresentar resultados numéricos em
+AsciiDoc, porque o alinhamento à direita é declarado na coluna, e não obtido com
+espaços.
+
+== Notação de unidades
+
+O texto aceita caracteres Unicode diretamente: 25 °C, 3 µm, 12 kΩ. Não há
+entidade a memorizar; basta que o arquivo esteja em UTF-8, que é o padrão do
+processador.

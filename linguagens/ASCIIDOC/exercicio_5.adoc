@@ -1,1 +1,50 @@
-link:http://google.com[Google]
+= Exercício 5: caderno montado por include
+Museu de Linguagens do Mundo
+:topico: include e composição
+:nivel: 1
+:tags: asciidoc, cabecalho, paragrafo
+
+== Enunciado
+
+Monte um caderno curto que reaproveite, sem copiar, o parágrafo-base e o trecho
+de atributos do `exemplo_1.adoc`, e que acrescente um trecho próprio. Explique
+por que o cabeçalho do arquivo incluído não vale no documento que inclui.
+
+== Solução: trecho reaproveitado do Exemplo 1
+
+include::exemplo_1.adoc[tag=paragrafo-base]
+
+== Solução: segundo trecho reaproveitado
+
+include::exemplo_1.adoc[tag=trecho-atributos]
+
+== Solução: trecho próprio
+
+Este parágrafo é o único conteúdo escrito diretamente neste arquivo. Os dois
+anteriores vêm do `exemplo_1.adoc`, inseridos antes da conversão; no fonte
+deste caderno existem apenas as duas linhas `include::`.
+
+== Por que os atributos foram redeclarados
+
+O cabeçalho do arquivo incluído não é lido: `include::` insere conteúdo de
+corpo, e as entradas de atributo do topo do arquivo incluído ficam de fora
+justamente porque a região marcada começa depois delas. Por isso `nivel` e
+`tags` foram declarados de novo no cabeçalho deste caderno; sem isso, o trecho
+incluído perderia os valores citados no texto.
+
+== Conferência
+
+[cols="2,1", options="header"]
+|===
+| Verificação | Resultado
+| Dois `include::` no fonte | sim
+| Regiões marcadas existentes no destino | sim
+| Atributos redeclarados no cabeçalho | sim
+| Conversão sem avisos | sim
+|===
+
+== Observação de manutenção
+
+Se a região `paragrafo-base` for renomeada no `exemplo_1.adoc`, a conversão
+deste exercício falha com erro de região não encontrada. É o comportamento
+desejado: o erro aparece na validação, e não como texto faltando na publicação.

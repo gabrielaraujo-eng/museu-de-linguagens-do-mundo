@@ -1,3 +1,39 @@
-= Olá Mundo
+= Exemplo 1: documento mínimo em AsciiDoc
+Museu de Linguagens do Mundo
+:description: Estrutura mínima de um documento AsciiDoc
+:tags: asciidoc, cabecalho, paragrafo
+:nivel: 1
 
-Olá Mundo!
+// Comentário de linha: o Asciidoctor descarta tudo o que vem depois de //.
+// O cabeçalho do documento vai da primeira linha até a primeira linha em
+// branco. Ele reúne o título de nível 0, a linha de autor e os atributos.
+
+[[primeiro-paragrafo]]
+== O que o cabeçalho declara
+
+Um documento AsciiDoc começa, opcionalmente, por um título de nível 0 escrito
+com um único sinal de igual. A linha seguinte, quando não começa com dois
+pontos, é a linha de autor. Depois vêm as entradas de atributo, no formato
+`:nome: valor`, e uma linha em branco encerra o cabeçalho.
+
+// tag::paragrafo-base[]
+O corpo é feito de parágrafos separados por linhas em branco. Uma quebra de
+linha dentro do parágrafo não interrompe o texto: o processador junta as linhas
+e produz um único bloco na saída. Por isso o arquivo pode ser quebrado em
+colunas estreitas sem alterar o resultado renderizado.
+// end::paragrafo-base[]
+
+== Atributos declarados neste arquivo
+
+// tag::trecho-atributos[]
+O atributo `nivel` vale {nivel} e o atributo `tags` vale {tags}. Atributos são
+substituídos no texto pela forma `{nome}` e são o único mecanismo de valor
+nomeado da linguagem: o valor é resolvido durante a conversão, nunca em tempo
+de execução.
+// end::trecho-atributos[]
+
+== O que este arquivo não tem
+
+Não há laço, função nem variável mutável. A linguagem descreve um documento; a
+execução, no sentido de repetição e cálculo, é responsabilidade do processador
+que lê o arquivo.

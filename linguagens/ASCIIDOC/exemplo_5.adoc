@@ -1,1 +1,60 @@
-include::file.adoc[]
+= Exemplo 5: composição de documentos com include
+Museu de Linguagens do Mundo
+:description: Reaproveitamento de trechos com regiões marcadas
+:nivel: 1
+:tags: asciidoc, cabecalho, paragrafo
+
+// Este arquivo inclui regiões marcadas de exemplo_1.adoc. Os dois precisam
+// estar na mesma pasta para que a conversão encontre o arquivo incluído.
+
+== Reaproveitando um trecho marcado
+
+O comando `include::` insere o conteúdo de outro arquivo antes da conversão.
+Com a opção `tag=`, apenas a região entre `// tag::nome[]` e `// end::nome[]`
+é inserida; as linhas de marcação são comentários e não chegam à saída.
+
+include::exemplo_1.adoc[tag=paragrafo-base]
+
+== O cabeçalho do arquivo incluído é ignorado
+
+Um ponto importante: atributos do arquivo incluído não são herdados pelo
+documento que inclui. Por isso `nivel` e `tags` foram declarados também no
+cabeçalho deste arquivo, e o trecho abaixo mostra os mesmos valores.
+
+include::exemplo_1.adoc[tag=trecho-atributos]
+
+== Ajuste de nível das seções incluídas
+
+Quando o arquivo incluído traz títulos, a opção `leveloffset` desloca a
+hierarquia. `leveloffset=+1` transforma seções `==` do arquivo incluído em
+`===` no documento final. Aqui não há deslocamento, porque a região incluída
+contém apenas parágrafos.
+
+[source,adoc]
+----
+[leveloffset=+1]
+\include::outro-documento.adoc[]
+----
+
+== Include com seleção de linhas
+
+Além de regiões marcadas, existe a seleção por número de linha. A forma é
+frágil, porque qualquer edição no arquivo incluído muda a numeração; prefira
+regiões marcadas.
+
+[source,adoc]
+----
+\include::exemplo_1.adoc[lines=1..4]
+----
+
+A barra invertida antes de `include` é necessária em exemplos: o processador
+resolve diretivas de include mesmo dentro de blocos de listagem, antes de
+interpretar os delimitadores. Sem a barra, a conversão tentaria ler o arquivo
+citado no exemplo.
+
+== Verificação
+
+A conversão deste arquivo só termina com código 0 se `exemplo_1.adoc` estiver
+presente e as duas regiões marcadas existirem. Um erro de include interrompe a
+conversão, ao contrário de uma referência cruzada inválida, que passa em
+silêncio.

@@ -1,1 +1,58 @@
-ifeval::[{x} > 5]
+= Exercício 3: manual com sumário e referências cruzadas
+Museu de Linguagens do Mundo
+:topico: seções, âncoras e xref
+:toc: auto
+:toclevels: 2
+:sectnums:
+
+== Enunciado
+
+Organize um manual curto com três seções de primeiro nível, uma delas com duas
+subseções, ative o sumário automático, numere as seções e ligue as seções entre
+si por referências cruzadas com identificadores explícitos.
+
+== Instalação
+
+[[instalacao]]
+=== Requisitos
+
+O manual supõe o Asciidoctor instalado. Em sistemas Debian e derivados o pacote
+se chama `asciidoctor`; a versão usada na validação desta pasta foi a 2.0.20.
+
+[[conversao]]
+=== Conversão
+
+A conversão de um arquivo isolado usa `asciidoctor` com a opção `-o` para
+escolher o arquivo de saída. O manual completo depende das duas subseções desta
+seção, e a seção de publicação cita a de conversão por meio de
+xref:conversao[referência à conversão].
+
+== Uso
+
+O uso diário resume-se a editar o fonte e reconverter. Como o AsciiDoc é texto
+puro, o controle de versão funciona sem tratamento especial, e a diferença
+entre duas revisões aparece linha a linha.
+
+== Publicação
+
+A publicação parte do resultado da seção <<instalacao>> e do passo descrito em
+xref:conversao[Conversão]. O identificador explícito evita que a referência se
+quebre quando o título for reescrito.
+
+== Conferência
+
+[cols="2,1", options="header"]
+|===
+| Item verificado | Resultado
+| Sumário automático gerado | sim
+| Seções numeradas, título não | sim
+| Três seções de primeiro nível | sim
+| Subseções em `===` sob a primeira seção | sim
+| Referências por `<<>>` e por `xref:` | sim
+|===
+
+== Nota sobre identificadores
+
+Sem o bloco `[[nome]]`, o processador gera identificadores a partir do texto do
+título. Como o texto deste manual está em português, os identificadores
+automáticos carregam acentos, o que funciona, mas é frágil em links externos.

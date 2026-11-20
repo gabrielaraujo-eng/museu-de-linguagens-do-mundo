@@ -1,1 +1,62 @@
-CAUTION: Cuidado
+= Exercício 7: guia de avisos de uma rotina de publicação
+Museu de Linguagens do Mundo
+:topico: admonições
+:icons: font
+
+== Enunciado
+
+Escreva um guia curto de publicação que use as cinco admonições, uma delas em
+forma de bloco com título e identificador, e uma delas anexada a um item de
+lista de passos.
+
+== Passos da publicação
+
+. converter todos os arquivos da pasta
++
+NOTE: a conversão de cada arquivo é independente; um erro em um arquivo não
+impede a conversão dos demais.
+. conferir a saída de cada arquivo
+. publicar o conjunto revisado
+
+== Avisos do processo
+
+NOTE: O guia descreve apenas a conversão local. A publicação em servidor segue
+outro documento.
+
+TIP: Converta com `-o /tmp/saida.html` durante a revisão. Assim o diretório de
+origem permanece limpo, sem arquivos HTML intermediários.
+
+IMPORTANT: O arquivo `README.md` desta pasta é Markdown, não AsciiDoc, e por
+isso não entra na validação por conversão.
+
+[#aviso-irreversivel]
+.WARNING: sobrescrita de saída
+[WARNING]
+====
+A opção `-o` sobrescreve o arquivo de destino sem pedir confirmação. Se o
+destino for um arquivo versionado, a versão anterior é perdida, a menos que ela
+esteja registrada no controle de versão.
+====
+
+CAUTION: `include::` com caminho absoluto funciona, mas torna o documento
+dependente da máquina de quem converte. Prefira caminhos relativos à pasta do
+arquivo.
+
+== Quadro-resumo
+
+[cols="1,2", options="header"]
+|===
+| Admonição | Uso neste guia
+| `NOTE` | informação neutra sobre o processo
+| `TIP` | sugestão de comando
+| `IMPORTANT` | exceção que muda o escopo da validação
+| `WARNING` | risco de perda de dados
+| `CAUTION` | risco de dependência de ambiente
+|===
+
+== Conferência
+
+* [x] cinco admonições usadas
+* [x] uma admonição em bloco, com título e identificador
+* [x] uma admonição anexada a item de lista com a linha `+`
+* [x] `:icons: font` declarado no cabeçalho

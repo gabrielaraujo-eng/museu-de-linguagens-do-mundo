@@ -1,2 +1,63 @@
-* Item 1
-* Item 2
+= Exemplo 6: tabelas com cabeçalho, alinhamento e células mescladas
+Museu de Linguagens do Mundo
+:description: Tabelas delimitadas por barra vertical tripla
+:table-stripes: even
+
+== Tabela com cabeçalho
+
+Uma tabela começa e termina com a linha `|===`. Cada célula começa com uma
+barra vertical. A opção `header` promove a primeira linha a cabeçalho e
+`cols` define a proporção das colunas.
+
+[cols="2,1,1", options="header"]
+|===
+| Elemento | Obrigatório | Nível
+| Título do documento | não | 0
+| Linha de autor | não | cabeçalho
+| Entrada de atributo | não | cabeçalho
+| Seção | não | 1 a 5
+|===
+
+== Alinhamento por coluna
+
+Os especificadores `<`, `^` e `>` alinham a coluna à esquerda, ao centro e à
+direita. O número antes do sinal indica o peso da coluna.
+
+[cols="1,>1,^1,>1", options="header"]
+|===
+| Item | Quantidade | Unidade | Preço
+| Parafuso | 120 | unidade | 0,45
+| Chapa | 3 | metro | 32,90
+| Tinta | 2 | litro | 18,75
+|===
+
+== Células mescladas
+
+O prefixo numérico antes do `+` mescla colunas; o prefixo com ponto mescla
+linhas. As duas formas podem ser combinadas.
+
+[cols="1,1,1", options="header"]
+|===
+| Região | Estado | Total
+2+| Sudeste
+| 42
+.2+| Sul
+| Paraná
+| 18
+| Rio Grande do Sul
+| 12
+|===
+
+== Conteúdo AsciiDoc dentro da célula
+
+O especificador `a` no início da célula faz o conteúdo ser interpretado como
+AsciiDoc, o que permite listas e ênfase dentro da tabela.
+
+[cols="1,2a", options="header"]
+|===
+| Recurso | Observação
+| Listas | Aceitam *ênfase*, `monoespaçado` e
+. itens
+. numerados
+| Blocos | Aceitam listagens e notas
+|===

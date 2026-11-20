@@ -1,1 +1,69 @@
-WARNING: Mensagem de erro
+= Exemplo 7: blocos de advertência
+Museu de Linguagens do Mundo
+:icons: font
+:description: As cinco admonições do AsciiDoc e suas formas de bloco
+:tags: admonicoes, avisos
+
+== As cinco admonições
+
+Uma admonição é um parágrafo rotulado, iniciado por uma palavra-chave seguida
+de dois-pontos. As palavras-chave são `NOTE`, `TIP`, `IMPORTANT`, `WARNING` e
+`CAUTION`, sempre em maiúsculas.
+
+NOTE: O processador não interpreta o rótulo como conteúdo: ele apenas escolhe o
+estilo do bloco na saída.
+
+TIP: Use `NOTE` para informação neutra e reserve `WARNING` para risco de perda
+de dados.
+
+IMPORTANT: A palavra-chave precisa estar no começo da linha. Se ela aparecer no
+meio do parágrafo, o texto é comum.
+
+WARNING: Um `include::` que aponta para arquivo inexistente interrompe a
+conversão com erro, e não com aviso.
+
+CAUTION: `:icons: font` troca os rótulos textuais por ícones da folha Font
+Awesome, que precisa estar disponível na página final.
+
+== Admonição em forma de bloco
+
+Para inserir vários parágrafos, listas ou listagens dentro de uma admonição,
+use o delimitador `====` com o nome da admonição entre colchetes.
+
+[NOTE]
+====
+Uma admonição em bloco aceita conteúdo composto.
+
+* primeiro ponto
+* segundo ponto
+
+E também uma listagem:
+
+[source,adoc]
+----
+NOTE: exemplo de admonição de uma linha
+----
+====
+
+== Título na admonição
+
+O título é escrito em uma linha iniciada por ponto, imediatamente antes do
+bloco.
+
+[#aviso-validacao]
+.WARNING: validação obrigatória
+[WARNING]
+====
+Todo arquivo desta pasta é convertido com `asciidoctor -o /tmp/saida.html` e
+precisa terminar com código 0 e sem avisos de sintaxe.
+====
+
+== Admonição dentro de lista
+
+A linha de ligação `+` permite anexar uma admonição a um item de lista.
+
+. converter o arquivo
+. conferir a saída
++
+NOTE: a saída HTML fica em `/tmp` durante a validação e não é versionada.
+. publicar
