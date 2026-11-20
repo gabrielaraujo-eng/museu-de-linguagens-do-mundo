@@ -1,1 +1,13 @@
-Pause
+:.ER07  Divisao protegida contra divisor zero
+:DiagnosticOff
+:ClrHome
+:84→A
+:0→B
+:If B=0
+:"DIVISAO POR ZERO"→Str1
+:Disp Str1
+:Else
+:A/B→Q
+:Disp Q▶Dec
+:End
+:Pause 1800

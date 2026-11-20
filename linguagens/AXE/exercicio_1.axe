@@ -1,1 +1,8 @@
-Output(0,0,"Hello")
+:.ER01  Saida em duas linhas na tela inicial
+:DiagnosticOff
+:ClrHome
+:"MUSEU DE LINGUAGENS"→Str1
+:"LINGUAGEM: AXE"→Str2
+:Disp Str1,i
+:Disp Str2
+:Pause 1800

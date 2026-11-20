@@ -1,1 +1,23 @@
-10→X
+:.EX02  Variaveis de 16 bits, atribuicao e ordem das operacoes
+:DiagnosticOff
+:ClrHome
+:.cada variavel de A a Z guarda um inteiro de 16 bits
+:7→A
+:5→B
+:.a avaliacao e sempre da esquerda para a direita, sem precedencia
+:A+B*2→S
+:.por isso os parenteses mudam o resultado
+:A+(B*2)→T
+:"SEM PARENTESES:"→Str1
+:"COM PARENTESES:"→Str2
+:Disp Str1
+:Disp S▶Dec,i
+:Disp Str2
+:Disp T▶Dec,i
+:.a aritmetica e modular: 65535 mais 1 volta a zero
+:65535→C
+:C+1→C
+:"VOLTA AO ZERO:"→Str3
+:Disp Str3
+:Disp C▶Dec
+:Pause 1800

@@ -1,1 +1,14 @@
-Asm(EF4A4B) ; Syscall
+:.EX10  Graficos: sprite, pixel, linha e retangulo no buffer
+:DiagnosticOff
+:.sprite 8x8 em hexadecimal: 16 digitos, dois por linha da imagem
+:[3C7EDBFFBDDB663C]→Pic1
+:ClrDraw
+:Pt-On(44,28,Pic1)
+:Pxl-On(0,0)
+:Line(0,63,95,0)
+:Rect(10,10,20,10)
+:.nada aparece antes de DispGraph, que copia o buffer para o LCD
+:DispGraph
+:Pause 1800
+:ClrDraw
+:DispGraph

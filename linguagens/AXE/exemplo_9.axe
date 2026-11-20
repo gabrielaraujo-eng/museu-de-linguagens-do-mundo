@@ -1,1 +1,22 @@
-√(16)→R
+:.EX09  Matematica inteira: raiz, resto, min, max e rand
+:DiagnosticOff
+:ClrHome
+:"RAIZ DE 144:"→Str1
+:Disp Str1
+:Disp √(144)▶Dec,i
+:.o acento circunflexo agora e o operador de resto (modulo)
+:"23 RESTO 5:"→Str2
+:Disp Str2
+:Disp 23^5▶Dec,i
+:.min( e max( recebem dois argumentos
+:"MINIMO 8,3:"→Str3
+:Disp Str3
+:Disp min(8,3)▶Dec,i
+:"MAXIMO 8,3:"→Str4
+:Disp Str4
+:Disp max(8,3)▶Dec,i
+:.rand^6 sorteia de 0 a 5; somando 1 fica de 1 a 6
+:"DADO:"→Str5
+:Disp Str5
+:Disp (rand^6)+1▶Dec
+:Pause 1800

@@ -1,1 +1,25 @@
-Data(1,2,3)→L₁
+:.EX06  Vetores de bytes na RAM livre: L1 tem 768 bytes
+:DiagnosticOff
+:ClrHome
+:.grava 0, 3, 6, 9 e 12 nos cinco primeiros bytes de L1
+:For(A,0,4)
+:A*3→{A+L₁}
+:End
+:.le de volta e soma
+:0→S
+:For(A,0,4)
+:S+{A+L₁}→S
+:End
+:"SOMA DO VETOR:"→Str1
+:Disp Str1
+:Disp S▶Dec,i
+:.{...} le um byte de 0 a 255; a forma {..}r le dois bytes
+:Data(5,2,6,11,4)→GDB1
+:0→S
+:For(A,0,4)
+:S+{A+GDB1}→S
+:End
+:"SOMA DA TABELA:"→Str2
+:Disp Str2
+:Disp S▶Dec
+:Pause 1800

@@ -1,1 +1,10 @@
-5→A
+:.ER02  Converter Celsius em Fahrenheit com inteiros
+:DiagnosticOff
+:ClrHome
+:25→C
+:.F = (C*9)/5 + 32, com parenteses por causa da ordem de avaliacao
+:(C*9)/5+32→F
+:"GRAUS F:"→Str1
+:Disp Str1
+:Disp F▶Dec
+:Pause 1800

@@ -1,1 +1,11 @@
-length(S)
+:.ER08  Comprimento de string e copia para a RAM livre
+:DiagnosticOff
+:ClrHome
+:"AXE"→Str1
+:"COMPRIMENTO:"→Str2
+:Disp Str2
+:Disp length(Str1)▶Dec,i
+:.copia tambem o terminador nulo para poder exibir a partir de L1
+:Copy(Str1,L₁,length(Str1)+1)
+:Disp L₁
+:Pause 1800

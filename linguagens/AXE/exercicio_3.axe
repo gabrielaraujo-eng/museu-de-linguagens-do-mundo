@@ -1,1 +1,15 @@
-If A=0
+:.ER03  Classificar uma nota em tres faixas
+:DiagnosticOff
+:ClrHome
+:72→N
+:If N>69
+:"APROVADO"→Str1
+:Disp Str1
+:ElseIf N>49
+:"RECUPERACAO"→Str2
+:Disp Str2
+:Else
+:"REPROVADO"→Str3
+:Disp Str3
+:End
+:Pause 1800

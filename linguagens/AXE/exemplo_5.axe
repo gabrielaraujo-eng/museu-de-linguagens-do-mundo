@@ -1,2 +1,24 @@
-Lbl SQ
-Return R₁*R₁
+:.EX05  Sub-rotinas: sub(, Lbl, Return e os argumentos r1 a r6
+:DiagnosticOff
+:ClrHome
+:.o argumento e carregado em r1 antes da chamada
+:7→A
+:sub(QUAD,A)
+:"7 AO QUADRADO:"→Str1
+:Disp Str1
+:Disp r₁▶Dec,i
+:.com dois argumentos, eles vao para r1 e r2
+:3→A
+:4→B
+:sub(SOMAQ,A,B)
+:"3 MAIS 4:"→Str2
+:Disp Str2
+:Disp r₁▶Dec
+:Pause 1800
+:.as sub-rotinas ficam depois do codigo principal
+:Lbl QUAD
+:r₁*r₁→r₁
+:Return
+:Lbl SOMAQ
+:r₁+r₂→r₁
+:Return
