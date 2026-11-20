@@ -1,1 +1,52 @@
-LogLevel warn
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exercicio_7.conf - logs separados por host e descarte de estaticos
+#
+# Tarefa: um arquivo de log por host virtual e nenhum registro para
+# imagens, alem de LogFormat com porta e tempo de resposta.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8097
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+LoadModule setenvif_module "/usr/lib/apache2/modules/mod_setenvif.so"
+ServerName linguagens.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+LogLevel notice
+
+LogFormat "%v:%p %a %t \"%m %U%q %H\" %>s %b %Dus" acervo
+
+<VirtualHost *:8097>
+    ServerName linguagens.museu.test
+    DocumentRoot "/var/www/linguagens"
+    <Directory "/var/www/linguagens">
+        Options -Indexes +FollowSymLinks
+        Require all granted
+    </Directory>
+    ErrorLog "/var/log/apache2/linguagens-error.log"
+    CustomLog "/var/log/apache2/linguagens-access.log" acervo
+</VirtualHost>
+
+<VirtualHost *:8097>
+    ServerName arquivo.museu.test
+    DocumentRoot "/var/www/arquivo"
+    <Directory "/var/www/arquivo">
+        Options -Indexes +FollowSymLinks
+        Require all granted
+    </Directory>
+    ErrorLog "/var/log/apache2/arquivo-error.log"
+
+    # Imagens e folhas de estilo nao entram no log de acesso.
+    SetEnvIf Request_URI "\.(png|jpe?g|gif|svg|css|woff2?)$" nao_registrar
+    CustomLog "/var/log/apache2/arquivo-access.log" acervo env=!nao_registrar
+</VirtualHost>

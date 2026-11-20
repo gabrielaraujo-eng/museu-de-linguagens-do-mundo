@@ -1,3 +1,43 @@
-<Macro MyMacro $arg>
-  # Definição
-</Macro>
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exemplo_5.conf - registros (logs) formatados
+#
+# LogLevel, ErrorLog, LogFormat com tempo de resposta e dois
+# CustomLog: um arquivo geral e outro apenas com erros 4xx/5xx.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8085
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+LoadModule setenvif_module "/usr/lib/apache2/modules/mod_setenvif.so"
+ServerName linguagens.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+DocumentRoot "/var/www/museu"
+
+<Directory "/var/www/museu">
+    Options -Indexes +FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+LogLevel warn
+ErrorLog "/var/log/apache2/museu-error.log"
+
+# %v = nome do host virtual, %D = microssegundos, %{User-Agent}i = cabecalho.
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %b \"%{Referrer}i\" \"%{User-Agent}i\" %Dus" detalhado
+
+CustomLog "/var/log/apache2/museu-access.log" detalhado
+
+# Segunda linha de log somente para respostas de erro do cliente/servidor.
+SetEnvIf Request_URI "^/saude$" nao_registrar
+CustomLog "/var/log/apache2/museu-erros.log" detalhado env=!nao_registrar

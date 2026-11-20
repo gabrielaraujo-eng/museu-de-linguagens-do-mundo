@@ -1,1 +1,53 @@
-Timeout 300
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exercicio_9.conf - proxy reverso para o buscador
+#
+# Tarefa: expor /busca e /api servidos por um processo local na porta
+# 8080, mantendo /estatico entregue pelo proprio Apache.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8099
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+LoadModule proxy_module "/usr/lib/apache2/modules/mod_proxy.so"
+LoadModule proxy_http_module "/usr/lib/apache2/modules/mod_proxy_http.so"
+ServerName linguagens.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+DocumentRoot "/var/www/museu"
+
+<Directory "/var/www/museu">
+    Options -Indexes +FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+# Servidor de origem, nao proxy aberto para a Internet.
+ProxyRequests Off
+ProxyPreserveHost On
+
+# Excecao: /estatico e servido localmente, nunca encaminhado.
+ProxyPass "/estatico" "!"
+
+ProxyPass "/busca" "http://127.0.0.1:8080/busca"
+ProxyPassReverse "/busca" "http://127.0.0.1:8080/busca"
+
+ProxyPass "/api" "http://127.0.0.1:8080/api"
+ProxyPassReverse "/api" "http://127.0.0.1:8080/api"
+
+# Autoriza o encaminhamento apenas para o destino interno.
+<Proxy "http://127.0.0.1:8080/*">
+    Require all granted
+</Proxy>
+
+ProxyTimeout 30
+ErrorLog "/var/log/apache2/museu-error.log"

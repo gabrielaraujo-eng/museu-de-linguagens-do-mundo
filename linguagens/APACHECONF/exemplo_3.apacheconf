@@ -1,3 +1,53 @@
-<If "-z %{QUERY_STRING}">
-  # Condição
-</If>
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exemplo_3.conf - Options e AllowOverride
+#
+# Controle de recursos por diretorio: listagem, CGI, .htaccess com
+# AllowOverride e protecao de um subdiretorio com Require all denied.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8083
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+LoadModule autoindex_module "/usr/lib/apache2/modules/mod_autoindex.so"
+ServerName linguagens.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+DocumentRoot "/var/www/museu"
+
+<Directory "/var/www/museu">
+    # Herdado pelos subdiretorios, salvo nova declaracao.
+    Options +FollowSymLinks -Indexes -ExecCGI -Includes
+    AllowOverride None
+    Require all granted
+</Directory>
+
+# Listagem permitida apenas na pasta de downloads publicos.
+<Directory "/var/www/museu/downloads">
+    Options +Indexes
+    IndexOptions FancyIndexing NameWidth=*
+    Require all granted
+</Directory>
+
+# Subdiretorio privado: negado para todos, sem autenticacao.
+<Directory "/var/www/museu/restrito">
+    Require all denied
+</Directory>
+
+# Permite que um .htaccess reescreva regras de reescrita neste ramo.
+<Directory "/var/www/museu/legado">
+    AllowOverride FileInfo
+    Require all granted
+</Directory>
+
+DirectoryIndex index.html
+ErrorLog "/var/log/apache2/museu-error.log"
