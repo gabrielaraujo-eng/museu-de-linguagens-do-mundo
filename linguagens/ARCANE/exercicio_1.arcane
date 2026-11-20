@@ -1,1 +1,4 @@
-print("Hello Arcane")
+let nome = "Marta";
+let funcao = "programadora";
+log("Nome: " + nome);
+log("Funcao: " + funcao + " (" + "Arcane" + ")");

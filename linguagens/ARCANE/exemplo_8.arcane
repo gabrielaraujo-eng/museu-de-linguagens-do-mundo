@@ -1,1 +1,7 @@
-var s = "Olá" + " Mundo"
+let criador = fn(prefixo) { fn(texto) { prefixo + texto } };
+let comOla = criador("Ola, ");
+log(comOla("mundo"));
+let somador = fn(a) { fn(b) { a + b } };
+log(somador(10)(5));
+let multiplicador = fn(a) { fn(b) { fn(c) { a * b * c } } };
+log(multiplicador(2)(3)(4));

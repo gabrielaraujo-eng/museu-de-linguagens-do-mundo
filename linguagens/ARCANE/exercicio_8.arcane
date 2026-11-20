@@ -1,1 +1,7 @@
-s.lower()
+let estoque = {"caneta": 12, "caderno": 4, "borracha": 7};
+let itens = ["caneta", "caderno", "borracha"];
+let total = fn(itens) { if (len(itens) == 0) { 0 } else { estoque[first(itens)] + total(rest(itens)) } };
+log(estoque["caneta"]);
+log(total(itens));
+log(len(itens));
+log(estoque["lapis"]);

@@ -1,1 +1,9 @@
-try { 1 / 0 } catch { print("Erro") }
+let pessoa = {"nome": "Ana", "idade": 30, "ativo": true};
+log(pessoa["nome"]);
+log(pessoa["idade"]);
+log(pessoa["ativo"]);
+let agenda = {"ana": {"ramal": 1234}, "bruno": {"ramal": 5678}};
+log(agenda["bruno"]["ramal"]);
+let campos = ["nome", "idade"];
+log(pessoa[first(campos)]);
+log(pessoa["cidade"]);

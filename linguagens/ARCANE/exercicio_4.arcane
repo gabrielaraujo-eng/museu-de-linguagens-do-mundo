@@ -1,1 +1,4 @@
-while x > 0 { x -= 1 }
+let somaPares = fn(n) { if (n < 1) { 0 } else { if (n / 2 * 2 == n) { n + somaPares(n - 1) } else { somaPares(n - 1) } } };
+log(somaPares(20));
+log(somaPares(10));
+log(somaPares(1));

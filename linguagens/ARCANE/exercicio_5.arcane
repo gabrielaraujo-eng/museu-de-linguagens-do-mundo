@@ -1,1 +1,5 @@
-func add(a, b) { return a + b }
+let potencia = fn(base, expoente) { if (expoente == 0) { 1 } else { base * potencia(base, expoente - 1) } };
+log(potencia(2, 10));
+log(potencia(3, 4));
+log(potencia(7, 0));
+log(potencia(5, 1));
