@@ -1,1 +1,17 @@
-print "Olá, Mundo!"
+(* exercicio_8.am - Montagem de strings.
+
+   Enunciado: a partir de um nome, uma idade inteira e uma cidade,
+   construa a frase "<nome>, <idade> anos, mora em <cidade>." usando
+   apenas o operador ^ e show, e imprima-a com put_line. *)
+
+open import "prelude.ml"
+
+let nome = "Alan Turing"
+let idade = 41
+let cidade = "Londres"
+
+let frase = nome ^ ", " ^ show idade ^ " anos, mora em " ^ cidade ^ "."
+
+let () =
+  put_line frase;
+  put_line ("comprimento aproximado: " ^ show (idade + 1) ^ " caracteres por palavra")

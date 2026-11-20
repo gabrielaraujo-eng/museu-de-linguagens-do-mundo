@@ -1,1 +1,25 @@
+(* exemplo_5.am - Funcoes e currying.
+
+   Toda funcao de Amulet recebe um unico parametro. A forma
+   "let soma a b = a + b" e acucar para "fun a -> fun b -> a + b",
+   ou seja, uma funcao que devolve outra funcao. Funcoes sao valores:
+   podem ser passadas como argumento e parcialmente aplicadas. *)
+
+open import "prelude.ml"
+
 let soma a b = a + b
+
+(* Aplicacao parcial: soma_cinco e uma funcao que ainda espera um numero *)
+let soma_cinco = soma 5
+
+(* Funcao que recebe outra funcao *)
+let aplica f x = f x
+
+let rec potencia base expoente =
+  if expoente <= 0 then 1 else base * potencia base (expoente - 1)
+
+let () =
+  put_line ("soma 2 3 = " ^ show (soma 2 3));
+  put_line ("soma_cinco 10 = " ^ show (soma_cinco 10));
+  put_line ("aplica quadrado 7 = " ^ show (aplica (fun x -> x * x) 7));
+  put_line ("2^10 = " ^ show (potencia 2 10))

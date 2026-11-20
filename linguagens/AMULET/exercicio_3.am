@@ -1,1 +1,20 @@
-print "Olá, Mundo!"
+(* exercicio_3.am - Classificacao de nota.
+
+   Enunciado: dada uma nota inteira, imprima "A" para nota >= 90,
+   "B" para nota >= 70, "C" para nota >= 60 e "reprovado" caso
+   contrario. Use uma cadeia de if / then / else dentro de uma funcao. *)
+
+open import "prelude.ml"
+
+let nota = 84
+
+let conceito n =
+  if n >= 90 then "A"
+  else if n >= 70 then "B"
+  else if n >= 60 then "C"
+  else "reprovado"
+
+let () =
+  put_line ("nota " ^ show nota ^ ": " ^ conceito nota);
+  put_line ("nota 95: " ^ conceito 95);
+  put_line ("nota 58: " ^ conceito 58)

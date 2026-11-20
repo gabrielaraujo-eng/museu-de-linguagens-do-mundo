@@ -1,1 +1,17 @@
-print "Olá, Mundo!"
+(* exemplo_1.am - Ola, Mundo em Amulet.
+
+   Amulet e uma linguagem funcional da familia ML. Um arquivo-fonte e um
+   modulo: no nivel superior so podem existir declaracoes, nunca uma
+   expressao solta. Por isso a saudacao aparece ligada ao padrao "()",
+   que tem tipo unit. O prelude precisa ser importado explicitamente
+   quando o arquivo e compilado; no REPL ele ja vem carregado. *)
+
+open import "prelude.ml"
+
+(* put_line escreve uma string seguida de quebra de linha. print existe,
+   mas aplica show ao valor, o que nao serve para strings. *)
+let () = put_line "Ola, Mundo!"
+
+let () =
+  put_line "Este arquivo foi compilado com amc.";
+  put_line "Cada linha e uma declaracao let de tipo unit."

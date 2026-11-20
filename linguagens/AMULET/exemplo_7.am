@@ -1,1 +1,23 @@
--- Sintaxe para error em AMULET
+(* exemplo_7.am - Erros e excecoes.
+
+   Amulet nao tem try/catch como sintaxe especial. A biblioteca
+   Exception (incluida no prelude) oferece throw, catch e try_.
+   Exception.try_ executa uma computacao e devolve option: Some valor
+   quando tudo corre bem e None quando uma excecao foi lancada. *)
+
+open import "prelude.ml"
+
+(* // e a divisao inteira do prelude; lanca DivideBy0 quando o divisor
+   e zero, em vez de devolver um valor arbitrario. *)
+let dividir a b = a // b
+
+let mostrar (r : option int) =
+  match r with
+  | Some v -> put_line ("resultado: " ^ show v)
+  | None -> put_line "erro capturado"
+
+let () =
+  mostrar (Exception.try_ (fun () -> dividir 10 2));
+  mostrar (Exception.try_ (fun () -> dividir 10 0));
+  (* error lanca a excecao UserError com a mensagem dada *)
+  mostrar (Exception.try_ (fun () -> error "falha proposital"))

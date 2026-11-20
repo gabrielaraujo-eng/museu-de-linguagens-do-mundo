@@ -1,1 +1,30 @@
--- Sintaxe para math em AMULET
+(* exemplo_9.am - Matematica com int e float.
+
+   Amulet nao sobrecarrega literais nem operadores numericos: existem
+   dois conjuntos. Para int: + - * e // (divisao inteira); a barra /
+   sobre inteiros devolve float. Para float: +. -. *. /. e **. para
+   exponenciacao. O operador ** tambem devolve float. *)
+
+open import "prelude.ml"
+
+let a = 7
+let b = 2
+let x = 2.5
+let y = 4.0
+
+let rec potencia base expoente =
+  if expoente <= 0 then 1 else base * potencia base (expoente - 1)
+
+let () =
+  put_line ("a + b = " ^ show (a + b));
+  put_line ("a - b = " ^ show (a - b));
+  put_line ("a * b = " ^ show (a * b));
+  put_line ("a / b = " ^ show (a / b));
+  put_line ("a // b = " ^ show (a // b));
+  put_line ("x +. y = " ^ show (x +. y));
+  put_line ("x -. y = " ^ show (x -. y));
+  put_line ("x *. y = " ^ show (x *. y));
+  put_line ("x /. y = " ^ show (x /. y));
+  put_line ("raiz de 16.0 = " ^ show (16.0 **. 0.5));
+  put_line ("2 ** 10 = " ^ show (2 ** 10));
+  put_line ("potencia 2 10 = " ^ show (potencia 2 10))

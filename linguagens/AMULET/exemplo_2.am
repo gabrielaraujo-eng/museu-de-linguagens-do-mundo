@@ -1,1 +1,31 @@
-let x = 42
+(* exemplo_2.am - Variaveis, anotacoes de tipo e inferencia.
+
+   Amulet tem tipagem estrita com inferencia: as anotacoes sao opcionais
+   e o compilador deduz o tipo quando elas faltam. Os tipos basicos
+   usados aqui sao int, float, string e bool. *)
+
+open import "prelude.ml"
+
+(* Anotacoes explicitas *)
+let idade : int = 42
+let altura : float = 1.75
+let nome : string = "Ada Lovelace"
+let programadora : bool = true
+
+(* Sem anotacao: o tipo e inferido pelo compilador *)
+let ano = 1843
+let media = 7.5
+
+(* Tuplas sao pares (o tipo usa asterisco) e registros tem campos rotulados *)
+let par : int * int = (3, 4)
+let ponto = { x = 1, y = 2 }
+
+let () =
+  put_line ("nome = " ^ nome);
+  put_line ("idade = " ^ show idade);
+  put_line ("altura = " ^ show altura);
+  put_line ("programadora = " ^ show programadora);
+  put_line ("ano = " ^ show ano);
+  put_line ("media = " ^ show media);
+  put_line ("par = " ^ show par);
+  put_line ("ponto.x = " ^ show ponto.x)

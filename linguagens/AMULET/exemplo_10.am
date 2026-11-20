@@ -1,1 +1,25 @@
--- Sintaxe para sort em AMULET
+(* exemplo_10.am - Algoritmos: ordenacao.
+
+   "sort" nao e sintaxe da linguagem. Existem duas coisas distintas:
+   a funcao sort da biblioteca de listas, trazida pelo prelude, e um
+   algoritmo escrito por nos. Abaixo as duas aparecem lado a lado. *)
+
+open import "prelude.ml"
+
+(* Insercao ordenada: devolve a lista com x na posicao correta *)
+let rec insere x = function
+  | [] -> [x]
+  | Cons (y, resto) ->
+      if x <= y then x :: y :: resto else y :: insere x resto
+
+(* Ordenacao por insercao, escrita em Amulet *)
+let rec ordena = function
+  | [] -> []
+  | Cons (x, resto) -> insere x (ordena resto)
+
+let dados = [5, 3, 8, 1, 9, 2]
+
+let () =
+  put_line ("original = " ^ show dados);
+  put_line ("ordena = " ^ show (ordena dados));
+  put_line ("sort = " ^ show (sort dados))

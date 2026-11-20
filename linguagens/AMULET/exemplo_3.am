@@ -1,1 +1,32 @@
-if x > 10 then print "Maior" else print "Menor"
+(* exemplo_3.am - Controle de fluxo com if / then / else.
+
+   if e uma expressao: os dois ramos precisam ter o mesmo tipo. Nao ha
+   comando if sem else. As comparacoes ==, <, >, <=, >= e os operadores
+   logicos &&, || e a funcao not trabalham com bool. *)
+
+open import "prelude.ml"
+
+let numero = 42
+let idade = 17
+
+let classificacao n =
+  if n > 0 then "positivo"
+  else if n < 0 then "negativo"
+  else "zero"
+
+let () =
+  put_line ("42 e " ^ classificacao numero);
+  put_line ("-7 e " ^ classificacao (0 - 7));
+  put_line ("0 e " ^ classificacao 0);
+  begin
+    if idade >= 18 && numero > 0 then
+      put_line "maior de idade"
+    else
+      put_line "menor de idade"
+  end;
+  begin
+    if not (idade >= 18) || numero == 0 then
+      put_line "a disjuncao vale"
+    else
+      put_line "a disjuncao nao vale"
+  end

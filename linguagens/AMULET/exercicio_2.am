@@ -1,1 +1,14 @@
-print "Olá, Mundo!"
+(* exercicio_2.am - Conversao de temperatura.
+
+   Enunciado: converta 25.0 graus Celsius para Fahrenheit usando a
+   formula F = C *. 9.0 /. 5.0 +. 32.0. Use anotacao de tipo float e
+   mostre o resultado com duas casas implicitas pelo show. *)
+
+open import "prelude.ml"
+
+let celsius : float = 25.0
+let fahrenheit : float = celsius *. 9.0 /. 5.0 +. 32.0
+
+let () =
+  put_line (show celsius ^ " C = " ^ show fahrenheit ^ " F");
+  put_line ("em Kelvin: " ^ show (celsius +. 273.15) ^ " K")
