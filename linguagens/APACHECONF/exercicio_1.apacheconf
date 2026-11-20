@@ -1,1 +1,41 @@
-ServerName localhost
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exercicio_1.conf - publicar a documentacao do museu
+#
+# Tarefa: servir /var/www/museu/docs com index.html, sem listagem e
+# com pagina 404 propria. Resolucao comentada abaixo.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8091
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+ServerName docs.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+DocumentRoot "/var/www/museu/docs"
+
+<Directory "/var/www/museu/docs">
+    # Documentacao e estatica: sem CGI, sem Includes, sem listagem.
+    Options -Indexes -ExecCGI -Includes +FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+DirectoryIndex index.html
+
+# Pagina de erro propria para recursos inexistentes.
+ErrorDocument 404 "/404.html"
+ErrorDocument 403 "/403.html"
+
+ErrorLog "/var/log/apache2/docs-error.log"
+LogFormat "%h %t \"%r\" %>s %b" comum
+CustomLog "/var/log/apache2/docs-access.log" comum

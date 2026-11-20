@@ -1,2 +1,41 @@
-# Olá Mundo em Apache Config
-Redirect 301 /hello /world
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exemplo_1.conf - site estatico minimo
+#
+# Um unico servidor servindo um diretorio: DocumentRoot, <Directory>,
+# Require all granted e DirectoryIndex.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8081
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+ServerName linguagens.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+DocumentRoot "/var/www/museu"
+
+# Diretiva de secao: aplica-se ao diretorio e a todos os subdiretorios.
+<Directory "/var/www/museu">
+    # Sem listagem automatica; segue links simbolicos.
+    Options -Indexes +FollowSymLinks
+    # .htaccess desativado: toda a configuracao vive neste arquivo.
+    AllowOverride None
+    # Apache 2.4: autorizacao explicita (o antigo "Order/Allow" e 2.2).
+    Require all granted
+</Directory>
+
+# Ordem de busca quando a URL aponta para um diretorio.
+DirectoryIndex index.html index.htm
+
+ErrorLog "/var/log/apache2/museu-error.log"
+LogFormat "%h %l %u %t \"%r\" %>s %b" comum
+CustomLog "/var/log/apache2/museu-access.log" comum

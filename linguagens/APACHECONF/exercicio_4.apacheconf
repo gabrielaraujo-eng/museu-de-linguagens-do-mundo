@@ -1,1 +1,46 @@
-Listen 80
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exercicio_4.conf - migracao de URLs antigas
+#
+# Tarefa: apos reorganizar o site, manter funcionando os enderecos
+# antigos com redirecionamentos 301 e uma regra por expressao regular.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8094
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule alias_module "/usr/lib/apache2/modules/mod_alias.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+ServerName linguagens.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+DocumentRoot "/var/www/museu"
+
+<Directory "/var/www/museu">
+    Options -Indexes +FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+# Antigo indice de linguagens.
+Redirect permanent "/linguagens.html" "/linguagens/"
+
+# Antiga pasta de artigos, movida para /blog.
+Redirect 301 "/artigos" "/blog"
+
+# /blog/2019/03/ada -> /blog/ada (remove ano e mes da URL).
+RedirectMatch 301 "^/blog/([0-9]{4})/([0-9]{2})/(.+)$" "/blog/$3"
+
+# Paginas que nao existem mais: resposta 410, nao 404.
+Redirect gone "/forum"
+Redirect gone "/wiki-antiga"
+
+ErrorLog "/var/log/apache2/museu-error.log"

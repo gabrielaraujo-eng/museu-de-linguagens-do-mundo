@@ -1,3 +1,48 @@
-<Directory "/">
-  AllowOverride None
+# =====================================================================
+# Museu de Linguagens do Mundo - pasta APACHECONF
+# exercicio_3.conf - bloquear arquivos sensiveis
+#
+# Tarefa: impedir o download de .git, .env, .htaccess e dos proprios
+# .conf, mantendo o resto do site aberto.
+#
+# Teste de sintaxe:  apache2 -t -f <este arquivo>
+# Requer Apache HTTP Server 2.4 com os modulos compartilhados
+# instalados em /usr/lib/apache2/modules (padrao Debian/Ubuntu).
+# =====================================================================
+
+# --- Preambulo: permite validar este arquivo isoladamente -------
+ServerRoot "/etc/apache2"
+Listen 8093
+LoadModule mpm_event_module "/usr/lib/apache2/modules/mod_mpm_event.so"
+LoadModule authz_core_module "/usr/lib/apache2/modules/mod_authz_core.so"
+LoadModule authz_host_module "/usr/lib/apache2/modules/mod_authz_host.so"
+LoadModule dir_module "/usr/lib/apache2/modules/mod_dir.so"
+LoadModule mime_module "/usr/lib/apache2/modules/mod_mime.so"
+LoadModule alias_module "/usr/lib/apache2/modules/mod_alias.so"
+ServerName linguagens.museu.test
+ErrorLog "/var/log/apache2/apacheconf-error.log"
+# --- Fim do preambulo -------------------------------------------
+DocumentRoot "/var/www/museu"
+
+<Directory "/var/www/museu">
+    Options -Indexes +FollowSymLinks
+    AllowOverride None
+    Require all granted
 </Directory>
+
+# Qualquer arquivo com estes nomes ou extensoes e negado, em todo o site.
+<FilesMatch "(^\.git.*|\.env$|\.htaccess$|\.htpasswd$|\.conf$|\.apacheconf$|~$)">
+    Require all denied
+</FilesMatch>
+
+# Nenhum diretorio de metadados de controle de versao pode ser servido.
+<DirectoryMatch "/\.(git|svn|hg)(/|$)">
+    Require all denied
+</DirectoryMatch>
+
+# Requisicoes a estes caminhos recebem 404 em vez de 403, sem revelar
+# que o arquivo existe.
+RedirectMatch 404 "^/\.git"
+RedirectMatch 404 "^/\.env"
+
+ErrorLog "/var/log/apache2/museu-error.log"
